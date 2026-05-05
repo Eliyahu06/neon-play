@@ -40,8 +40,8 @@ function loginUser($email, $password) {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['username'] = $user['username'];
-        $message = "Connexion reussie, " . $_SESSION['username'];
+        $_SESSION['user'] = $user;
+        $message = "Connexion reussie, " . $_SESSION['user']['username'];
     } else {
         $message = "Email ou mot de passe incorrect";
     }

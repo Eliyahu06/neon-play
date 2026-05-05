@@ -6,15 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require_once 'partials/header.php'; ?>
     <h1>Bienvenue sur Neon Play</h1>
 
-    <?php if (!isset($_SESSION['username'])): ?>
-        <a href="index.php?route=login">Se connecter</a>
-        <a href="index.php?route=register">S'inscrire</a>
-    <?php else: ?>
-        <a href="index.php?route=logout">Se deconnecter</a>
-    <?php endif; ?>
-    <a href="index.php?route=articles">Voir tous les articles</a>
     <?php if (isset($_SESSION['message'])): ?>
         <p><?php echo $_SESSION['message']; ?></p>
         <?php unset($_SESSION['message']); ?>
@@ -30,5 +24,6 @@
             </article>
         <?php endforeach; ?>
     </div>
+    <?php require_once 'partials/footer.php'; ?>
 </body>
 </html>

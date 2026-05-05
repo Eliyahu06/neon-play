@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require_once 'partials/header.php'; ?>
     <form action="index.php?route=login" method="post">
         <label for="email">Email</label>
         <input type="email" id="email" name="email">
@@ -19,5 +20,6 @@
         <p><?php echo $_SESSION['message']; ?></p>
         <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
+    <?php require_once 'partials/footer.php'; ?>
 </body>
 </html>

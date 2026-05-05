@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require_once 'partials/header.php'; ?>
     <h1>Article</h1>
     <?php foreach ($articles as $article): ?>
         <article style="border:1px solid #ccc; padding:10px;">
@@ -23,5 +24,6 @@
         <?php endfor; ?>
     </div>
     <a href="index.php?route=home">Retour</a>
+    <?php require_once 'partials/footer.php'; ?>
 </body>
 </html>

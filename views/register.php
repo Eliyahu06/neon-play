@@ -6,6 +6,7 @@
     <title>Inscription</title>
 </head>
 <body>
+    <?php require_once 'partials/header.php'; ?>
     <form action="index.php?route=register" method="post">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" id="username" name="username">
@@ -24,5 +25,6 @@
         <p><?php echo $_SESSION['message']; ?></p>
         <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
+    <?php require_once 'partials/footer.php'; ?>
 </body>
 </html>

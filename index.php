@@ -21,6 +21,12 @@ switch ($route) {
     case 'article':
         require_once 'controllers/article.php';
         break;
+    case 'editComment':
+        require_once 'controllers/article.php';
+        break;
+    case 'deleteComment':
+        require_once 'controllers/article.php';
+        break;
     default:
         require_once 'controllers/home.php';
         break;

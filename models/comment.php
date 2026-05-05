@@ -16,7 +16,7 @@ function addComment($id_article, $id_user, $comment, $note) {
     $stmt->bindValue(':id_article', (int)$id_article, PDO::PARAM_INT);
     $stmt->bindValue(':id_user', (int)$id_user, PDO::PARAM_INT);
     $stmt->bindValue(':content', $comment, PDO::PARAM_STR);
-    $stmt->bindValue(':note', (int)$note, PDO::PARAM_INT);
+    $stmt->bindValue(':note', $note, PDO::PARAM_STR);
     $stmt->execute();
 }
 
@@ -39,7 +39,7 @@ function editComment($id, $comment, $note) {
     $stmt = $pdo->prepare("UPDATE comments SET content = :content, note = :note WHERE id_comment = :id");
     $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
     $stmt->bindValue(':content', $comment, PDO::PARAM_STR);
-    $stmt->bindValue(':note', (int)$note, PDO::PARAM_INT);
+    $stmt->bindValue(':note', $note, PDO::PARAM_STR);
     $stmt->execute();
 }
 
@@ -49,3 +49,4 @@ function deleteComment($id) {
     $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
     $stmt->execute();
 }
+

@@ -12,10 +12,11 @@
     <h1><?= htmlspecialchars($article['title']) ?></h1>
     <p><?= htmlspecialchars($article['intro']) ?></p>
     <p><?= htmlspecialchars($article['description']) ?></p>
-    <p><?= htmlspecialchars($article['note']) ?></p>
+    <p>Note du rédacteur : <?= htmlspecialchars($article['note']) ?>/10</p>
     <p><?= htmlspecialchars($article['critic']) ?></p>
     <p><?= htmlspecialchars($article['opinion']) ?></p>
     <p><?= htmlspecialchars($article['date_add']) ?></p>
+    <p>Note moyenne des lecteurs : <?= htmlspecialchars($note) ?>/10</p>
     <h2>Commentaires</h2>
     <?php foreach ($comments as $comment): ?>
         <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>

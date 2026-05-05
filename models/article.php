@@ -46,3 +46,12 @@ function getArticleById($id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function getArticleNote($id_article) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT AVG(note) FROM comments WHERE id_article = :id_article");
+    $stmt->bindValue(':id_article', (int)$id_article, PDO::PARAM_INT);
+    $stmt->execute();
+    $note = $stmt->fetchColumn();
+    return $note !== null ? round((float)$note, 2) : 0.0;
+}

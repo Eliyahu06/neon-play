@@ -56,6 +56,7 @@ if (!isset($_GET['id'])) {
     $id = (int)($_GET['id']);
     $article = getArticleById($id);
     $comments = getCommentsByArticle($id);
+    $note = getArticleNote($id);
     if (isset($_SESSION['user'])) {
         $hasCommented = hasUserCommented($id, $_SESSION['user']['id_user']);
     } else {

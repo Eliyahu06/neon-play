@@ -13,6 +13,9 @@
             <img src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" width="150px" alt="">
             <h3><?= htmlspecialchars($article['title']) ?></h3>
             <p><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?></p>
+            <p>Note du rédacteur : <?= htmlspecialchars($article['note']) ?>/10</p>
+            <?php $avgNote = getArticleNote($article['id_article']); ?>
+            <p>Note moyenne des lecteurs : <?= $avgNote !== 0.0 ? htmlspecialchars($avgNote) . '/10' : 'Aucune note' ?></p>
             <a href="index.php?route=article&id=<?= $article['id_article'] ?>">Lire la suite</a>
         </article>
     <?php endforeach; ?>

@@ -7,12 +7,14 @@
 </head>
 <body>
     <h1>Bienvenue sur Neon Play</h1>
-    <a href="index.php?route=register">S'inscrire</a>
+
     <?php if (!isset($_SESSION['username'])): ?>
         <a href="index.php?route=login">Se connecter</a>
+        <a href="index.php?route=register">S'inscrire</a>
     <?php else: ?>
         <a href="index.php?route=logout">Se deconnecter</a>
     <?php endif; ?>
+    <a href="index.php?route=articles">Voir tous les articles</a>
     <?php if (isset($_SESSION['message'])): ?>
         <p><?php echo $_SESSION['message']; ?></p>
         <?php unset($_SESSION['message']); ?>
@@ -22,7 +24,7 @@
         <?php foreach ($latestArticles as $article): ?>
             <article style="border:1px solid #ccc; padding:10px;">
                 <h3><?= htmlspecialchars($article['title']) ?></h3>
-                <p><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?>...</p>
+                <p><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?></p>
                 <a href="index.php?route=article&id=<?= $article['id_article'] ?>">Lire la suite</a>
             </article>
         <?php endforeach; ?>

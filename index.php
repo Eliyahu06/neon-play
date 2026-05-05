@@ -15,6 +15,12 @@ switch ($route) {
     case 'forgot':
         require_once 'controllers/auth.php';
         break;
+    case 'articles':
+        require_once 'controllers/article.php';
+        break;
+    case 'article':
+        require_once 'controllers/article.php';
+        break;
     default:
         require_once 'controllers/home.php';
         break;

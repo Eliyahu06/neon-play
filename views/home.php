@@ -23,6 +23,7 @@
     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;">
         <?php foreach ($latestArticles as $article): ?>
             <article style="border:1px solid #ccc; padding:10px;">
+                <img src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" width="150px" alt="">
                 <h3><?= htmlspecialchars($article['title']) ?></h3>
                 <p><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?></p>
                 <a href="index.php?route=article&id=<?= $article['id_article'] ?>">Lire la suite</a>

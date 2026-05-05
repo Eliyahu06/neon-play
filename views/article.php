@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <img src="assets/img/<?= htmlspecialchars($article['banner_img']) ?>" alt="">
+    <img src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" alt="">
     <h1><?= htmlspecialchars($article['title']) ?></h1>
     <p><?= htmlspecialchars($article['intro']) ?></p>
     <p><?= htmlspecialchars($article['description']) ?></p>

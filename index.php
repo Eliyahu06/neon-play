@@ -27,6 +27,9 @@ switch ($route) {
     case 'deleteComment':
         require_once 'controllers/article.php';
         break;
+    case 'admin':
+        require_once 'controllers/admin.php';
+        break;
     default:
         require_once 'controllers/home.php';
         break;

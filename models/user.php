@@ -41,7 +41,8 @@ function loginUser($email, $password) {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user'] = $user;
-        $message = "Connexion reussie, " . $_SESSION['user']['username'];
+        header('Location: index.php?route=home');
+        exit;
     } else {
         $message = "Email ou mot de passe incorrect";
     }
@@ -70,3 +71,19 @@ function forgotPassword($email, $answer, $password, $password_confirm){
     }
     return $message;
 } 
+
+function getAllUsers($page = 1, $limit = 8, $sort = 'date_desc', $search = '') {
+    global $pdo;
+    $offset = ($page - 1) * $limit;
+    $stmt = $pdo->prepare("SELECT * FROM users LIMIT $limit OFFSET $offset");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function countUsers($search = '') {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username LIKE :search");
+    $stmt->bindValue(':search', "%" . $search . "%", PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}

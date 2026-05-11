@@ -50,3 +50,20 @@ function deleteComment($id) {
     $stmt->execute();
 }
 
+function getAllComments($page = 1, $limit = 8, $sort = 'date_desc', $search = '') {
+    global $pdo;
+    $offset = ($page - 1) * $limit;
+    $stmt = $pdo->prepare("SELECT c.*, u.username FROM comments c JOIN users u ON c.id_user = u.id_user ORDER BY c.date_add DESC LIMIT $limit OFFSET $offset");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function countComments($search = '') {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE content LIKE :search");
+    $stmt->bindValue(':search', "%" . $search . "%", PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
+

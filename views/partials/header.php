@@ -10,5 +10,8 @@
         <?php else: ?>
             <a href="index.php?route=logout">Se deconnecter</a>
         <?php endif; ?>
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+            <a href="index.php?route=admin">Admin</a>
+        <?php endif; ?>
     </div>
 </header>

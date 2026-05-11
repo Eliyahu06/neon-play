@@ -14,9 +14,14 @@ if ($page < 1) {
 $limit = 8;
 $offset = ($page - 1) * $limit;
 
-$articles = getAllArticles($limit, $offset);
-$totalArticles = countArticles();
-$totalPages = ceil($totalArticles / $limit);
+// Tri & recherche
+    $sort = $_GET['sort'] ?? 'date_desc';
+    $search = $_GET['search'] ?? '';
+    
+    $articles = getAllArticles($limit, $offset, $sort, $search);
+    $totalArticles = countArticles($search);
+    $totalPages = ceil($totalArticles / $limit);
+    $noResults = empty($articles);
 
 // Ajout commentaire
 if (isset($_POST['bComment'])) {

@@ -15,8 +15,8 @@
     <p>Note du rédacteur : <?= htmlspecialchars($article['note']) ?>/10</p>
     <p><?= htmlspecialchars($article['critic']) ?></p>
     <p><?= htmlspecialchars($article['opinion']) ?></p>
-    <p><?= htmlspecialchars($article['date_add']) ?></p>
-    <p>Note moyenne des lecteurs : <?= htmlspecialchars($note) ?>/10</p>
+    <p>Publié le <?= htmlspecialchars(date('d/m/Y', strtotime($article['date_add']))) ?></p>
+    <p>Note moyenne des lecteurs : <?= $note !== 0.0 ? htmlspecialchars($note) . '/10' : 'Aucune note' ?></p>
     <h2>Commentaires</h2>
     <?php foreach ($comments as $comment): ?>
         <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>

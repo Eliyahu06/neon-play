@@ -1,35 +1,33 @@
 <?php
 
-$page = $_GET['page'] ?? 'articles';
-require_once 'models/article.php';
-require_once 'models/user.php';
-require_once 'models/comment.php';
+$section = $_GET['section'] ?? 'articles';
+
+$page = $_GET['page'] ?? 1;
+$limit = 8;
+$offset = ($page - 1) * $limit;
+
+$sort = $_GET['sort'] ?? 'date_desc';
+$search = $_GET['search'] ?? '';
 
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    die('Accès refusé');
+    die('accès refusé');
 }
 
-switch ($page) {
+switch ($section) {
 
     case 'articles':
-        $articles = getAllArticles(1, 0, 'date_desc', '');
-        $totalPages = ceil(countArticles('') / 8);
-        require_once 'views/admin/articles_list.php';
+        require 'controllers/admin_article.php';
         break;
 
     case 'users':
-        $users = getAllUsers(1, 0, 'date_desc', '');
-        $totalPages = ceil(countUsers('') / 8);
-        require_once 'views/admin/users_list.php';
+        require 'controllers/admin_user.php';
         break;
 
     case 'comments':
-        $comments = getAllComments(1, 0, 'date_desc', '');
-        $totalPages = ceil(countComments('') / 8);
-        require_once 'views/admin/comments_list.php';
+        require 'controllers/admin_comment.php';
         break;
 
     default:
-        require_once 'views/admin/articles_list.php';
+        require 'controllers/admin_article.php';
         break;
 }

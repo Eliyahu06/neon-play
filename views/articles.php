@@ -49,9 +49,13 @@
 <?php endif; ?>
     <div>
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="index.php?route=articles&page=<?= $i ?>&sort=<?= $_GET['sort'] ?? '' ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">
-                <?= $i ?>
-            </a>
+            <?php if ($i == $page): ?>
+                <span style="font-weight:bold;color:red;"><?= $i ?></span>
+            <?php else: ?>
+                <a href="index.php?route=articles&page=<?= $i ?>&sort=<?= $_GET['sort'] ?? '' ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">
+                    <?= $i ?>
+                </a>
+            <?php endif; ?>
         <?php endfor; ?>
     </div>
     <a href="index.php?route=home">Retour</a>

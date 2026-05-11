@@ -16,7 +16,7 @@ if (isset($_POST['bLogin'])) {
     $email = strtolower(trim($_POST['email']));
     $password = trim($_POST['password']);
     $_SESSION['message'] = loginUser($email, $password);
-    
+
     if (isset($_SESSION['username'])) {
         header("Location: index.php?route=home");
     } else {

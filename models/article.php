@@ -89,3 +89,67 @@ function getArticleNote($id_article) {
     $note = $stmt->fetchColumn();
     return $note !== null ? round((float)$note, 2) : 0.0;
 }
+
+function createArticle($title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img, $id_author) {
+    global $pdo;
+    $stmt = $pdo->prepare("INSERT INTO articles (title, intro, description, critic, note, opinion, banner_img, card_img, id_author) VALUES (:title, :intro, :description, :critic, :note, :opinion, :banner_img, :card_img, :id_author)");
+    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+    $stmt->bindValue(':intro', $intro, PDO::PARAM_STR);
+    $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+    $stmt->bindValue(':critic', $critic, PDO::PARAM_STR);
+    $stmt->bindValue(':note', $note, PDO::PARAM_STR);
+    $stmt->bindValue(':opinion', $opinion, PDO::PARAM_STR);
+    $stmt->bindValue(':banner_img', $banner_img, PDO::PARAM_STR);
+    $stmt->bindValue(':card_img', $card_img, PDO::PARAM_STR);
+    $stmt->bindValue(':id_author', $id_author, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+function updateArticle($id, $title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img) {
+    global $pdo;
+    $stmt = $pdo->prepare("UPDATE articles SET title = :title, intro = :intro, description = :description, critic = :critic, note = :note, opinion = :opinion, banner_img = :banner_img, card_img = :card_img WHERE id_article = :id");
+    $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+    $stmt->bindValue(':intro', $intro, PDO::PARAM_STR);
+    $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+    $stmt->bindValue(':critic', $critic, PDO::PARAM_STR);
+    $stmt->bindValue(':note', $note, PDO::PARAM_STR);
+    $stmt->bindValue(':opinion', $opinion, PDO::PARAM_STR);
+    $stmt->bindValue(':banner_img', $banner_img, PDO::PARAM_STR);
+    $stmt->bindValue(':card_img', $card_img, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+function deleteArticle($id) {
+    global $pdo;
+    $stmt = $pdo->prepare("DELETE FROM articles WHERE id_article = :id");
+    $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+function uploadImage($file) {
+
+    if (empty($file['name'])) {
+        return null;
+    }
+
+    $target_dir = "assets/img/";
+
+    $extension = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+
+    $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+
+    if (!in_array($extension, $allowed)) {
+        return null;
+    }
+
+    $newName = uniqid() . '.' . $extension;
+
+    $target_file = $target_dir . $newName;
+
+    if (move_uploaded_file($file["tmp_name"], $target_file)) {
+        return $newName;
+    }
+
+    return null;
+}

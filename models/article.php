@@ -127,7 +127,7 @@ function deleteArticle($id) {
     $stmt->execute();
 }
 
-function uploadImage($file) {
+function uploadImage($file, $articleTitle, $type) {
 
     if (empty($file['name'])) {
         return null;
@@ -135,7 +135,7 @@ function uploadImage($file) {
 
     $target_dir = "assets/img/";
 
-    $extension = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
 
@@ -143,13 +143,31 @@ function uploadImage($file) {
         return null;
     }
 
-    $newName = uniqid() . '.' . $extension;
+    $slug = slugify($articleTitle);
+
+    $newName = $slug . '-' . $type . '.' . $extension;
 
     $target_file = $target_dir . $newName;
 
-    if (move_uploaded_file($file["tmp_name"], $target_file)) {
+    // supprimer ancien fichier si existe
+    if (file_exists($target_file)) {
+        unlink($target_file);
+    }
+
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
         return $newName;
     }
 
     return null;
+}
+
+function slugify($text) {
+
+    $text = strtolower($text);
+
+    $text = preg_replace('/[^a-z0-9]+/', '-', $text);
+
+    $text = trim($text, '-');
+
+    return $text;
 }

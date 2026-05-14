@@ -15,7 +15,7 @@ function getLatestArticles($limit){
     return $stmt->fetchAll();
 }
 
-function getAllArticles($limit = 8, $offset = 0, $sort = 'date_desc', $search = '') {
+function getAllArticles($limit, $offset, $sort, $search) {
     global $pdo;
 
     $orderBy = '';

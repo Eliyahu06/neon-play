@@ -66,4 +66,18 @@ function countComments($search = '') {
     return $stmt->fetchColumn();
 }
 
+function getCommentsByUserId($id_user) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT c.*, a.title FROM comments c JOIN articles a ON c.id_article = a.id_article WHERE c.id_user = :id_user ORDER BY c.date_add DESC");
+    $stmt->bindValue(':id_user', (int)$id_user, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
+function countCommentsByUserId($id_user) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE id_user = :id_user");
+    $stmt->bindValue(':id_user', (int)$id_user, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}

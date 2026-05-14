@@ -61,21 +61,73 @@ function deleteComment($id) {
     return "Commentaire supprimé avec succès";
 }
 
-function getAllComments($page = 1, $limit = 8, $sort = 'date_desc', $search = '') {
+function getAllComments($limit, $offset, $sort, $search) {
     global $pdo;
-    $offset = ($page - 1) * $limit;
-    $stmt = $pdo->prepare("SELECT c.*, u.username FROM comments c JOIN users u ON c.id_user = u.id_user ORDER BY c.date_add DESC LIMIT $limit OFFSET $offset");
+
+    switch ($sort) {
+        case 'username_asc':
+            $orderBy = " username ASC";
+            break;
+        case 'username_desc':
+            $orderBy = " username DESC";
+            break;
+        case 'id_asc':
+            $orderBy = " id_comment ASC";
+            break;
+        case 'id_desc':
+            $orderBy = " id_comment DESC";
+            break;
+        case 'date_add_asc':
+            $orderBy = " date_add ASC";
+            break;
+        case 'date_add_desc':
+            $orderBy = " date_add DESC";
+            break;
+        case 'title_asc':
+            $orderBy = " a.title ASC";
+            break;
+        case 'title_desc':
+            $orderBy = " a.title DESC";
+            break;
+        default:
+            $orderBy = " c.id_comment DESC";
+            break;
+    }
+    $stmt = $pdo->prepare("
+        SELECT c.*, u.username, a.title, a.id_article 
+        FROM comments c JOIN users u ON c.id_user = u.id_user JOIN articles a ON c.id_article = a.id_article
+        WHERE c.content LIKE :search or a.title LIKE :search or u.username LIKE :search
+        ORDER BY $orderBy
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':search', "%{$search}%", PDO::PARAM_STR);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function countComments($search = '') {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE content LIKE :search");
-    $stmt->bindValue(':search', "%" . $search . "%", PDO::PARAM_STR);
+    $sql = "SELECT COUNT(*) FROM comments c JOIN users u ON c.id_user = u.id_user JOIN articles a ON c.id_article = a.id_article";
+    $params = [];
+
+    if (!empty($search)) {
+        $sql .= " WHERE c.content LIKE :search OR u.username LIKE :search OR a.title LIKE :search";
+        $params[':search'] = "%" . $search . "%";
+    }
+
+    $stmt = $pdo->prepare($sql);
+    
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+    
     $stmt->execute();
     return $stmt->fetchColumn();
 }
+
+
 
 function getCommentsByUserId($id_user) {
     global $pdo;

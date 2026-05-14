@@ -51,9 +51,28 @@
         <br>
         <input type="submit" name="bArticleSave" value="Enregistrer les modifications">
     </form>
-    <a href="?route=admin&section=articles">Retour à la liste des articles</a>
     <br><br>
     <?php if (isset($article['id_article'])): ?>
+
+
+    <h2>Commentaires</h2>
+    <?php if ($numberComments > 0): ?>
+    <p>Nombre de commentaires : <?= $numberComments ?></p>
+        <?php foreach ($comments as $comment): ?>
+            <div>
+                <strong><a href="?route=admin&section=users&action=form&id=<?= htmlspecialchars($comment['id_user']) ?>"><?= htmlspecialchars($comment['username']) ?></a></strong> - <strong><?= htmlspecialchars($comment['note']) ?>/10</strong>
+                <p><?= htmlspecialchars($comment['content']) ?></p>
+            </div>
+            <p><?= htmlspecialchars($comment['date_add']) ?></p>
+            <a href="?route=admin&section=comments&action=delete&id=<?= htmlspecialchars($comment['id_comment']) ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">
+                Supprimer le commentaire
+            </a>
+            <br>
+            <hr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucun commentaire</p>
+    <?php endif; ?>
     <h2>Supprimer l'article</h2>
     <form action="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
         <input type="submit" name="bArticleDelete" value="Supprimer l'article">
@@ -61,6 +80,7 @@
     <h2>Voir l'article</h2>
     <a href="?route=article&id=<?= htmlspecialchars($article['id_article']) ?>" target="_blank">Voir l'article</a>
     <?php endif; ?>
-
+    <br><br>
+    <a href="?route=admin&section=articles">Retour à la liste des articles</a>
 </body> 
 </html>

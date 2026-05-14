@@ -86,13 +86,17 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     } else {
         // En cas d'erreur, on prépare les données pour réafficher le formulaire
+        $existingUser = getUserById($id);
         $user = [
             'id_user' => $id,
             'username' => $_POST['username'] ?? '',
             'email' => $_POST['email'] ?? '',
             'answer' => $_POST['answer'] ?? '',
-            'role' => $_POST['role'] ?? ''
+            'role' => $_POST['role'] ?? '',
+            'date_subscription' => $existingUser['date_subscription'] ?? date('Y-m-d H:i:s')
         ];
+        $comments = getCommentsByUserId($id);
+        $numberComments = countCommentsByUserId($id);
         require 'views/admin/user_form.php';
         exit;
     }

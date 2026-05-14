@@ -44,17 +44,21 @@
     </form>
     <h2>Compte crée le : <?= date('d/m/Y H:i', strtotime($user['date_subscription'])) ?></h2>
     <?php if ($numberComments > 0): ?>
-    <h2>Nombre de commentaires : <?= $numberComments ?></h2>
-    <h2>Commentaires</h2>
-    <?php foreach ($comments as $comment): ?>
-        <h3>Article : <?= htmlspecialchars($comment['title']) ?></h3>
-        <p>Note : <?= htmlspecialchars($comment['note']) ?>/10</p>
-        <p>Date : <?= date('d/m/Y H:i', strtotime($comment['date_add'])) ?></p>
-        <p>Commentaire : <?= htmlspecialchars($comment['content']) ?></p>
-        <hr>
-    <?php endforeach; ?>
+    <p>Nombre de commentaires : <?= $numberComments ?></p>
+        <?php foreach ($comments as $comment): ?>
+            <div>
+                <strong><?= htmlspecialchars($comment['note']) ?>/10</strong>
+                <p><?= htmlspecialchars($comment['content']) ?></p>
+            </div>
+            <p><?= htmlspecialchars($comment['date_add']) ?></p>
+            <a href="?route=admin&section=comments&action=delete&id=<?= htmlspecialchars($comment['id_comment']) ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">
+                Supprimer le commentaire
+            </a>
+            <br>
+            <hr>
+        <?php endforeach; ?>
     <?php else: ?>
-    <h2>Aucun commentaire</h2>
+        <p>Aucun commentaire</p>
     <?php endif; ?>
     <a href="?route=admin&section=users">Retour à la liste des utilisateurs</a>
     <br><br>

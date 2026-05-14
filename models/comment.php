@@ -10,6 +10,14 @@ function getCommentsByArticle($id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function countCommentsByArticle($id) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE id_article = :id");
+    $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
 function addComment($id_article, $id_user, $comment, $note) {
     global $pdo;
     $stmt = $pdo->prepare("INSERT INTO comments (id_article, id_user, content, note) VALUES (:id_article, :id_user, :content, :note)");

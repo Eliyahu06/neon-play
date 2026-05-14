@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/article.php';
+require_once 'models/comment.php';
 
 $action = $_GET['action'] ?? 'list';
 $id = $_GET['id'] ?? null;
@@ -34,6 +35,9 @@ if ($action === 'form') {
         if (!$article) {
             die('article introuvable');
         }
+
+        $comments = getCommentsByArticle($id);
+        $numberComments = countCommentsByArticle($id);
     }
 
     require 'views/admin/article_form.php';

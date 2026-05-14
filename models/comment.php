@@ -18,6 +18,7 @@ function addComment($id_article, $id_user, $comment, $note) {
     $stmt->bindValue(':content', $comment, PDO::PARAM_STR);
     $stmt->bindValue(':note', $note, PDO::PARAM_STR);
     $stmt->execute();
+    return "Commentaire ajouté avec succès";
 }
 
 function hasUserCommented($id_article, $id_user) {
@@ -41,6 +42,7 @@ function editComment($id, $comment, $note) {
     $stmt->bindValue(':content', $comment, PDO::PARAM_STR);
     $stmt->bindValue(':note', $note, PDO::PARAM_STR);
     $stmt->execute();
+    return "Commentaire modifié avec succès";
 }
 
 function deleteComment($id) {
@@ -48,6 +50,7 @@ function deleteComment($id) {
     $stmt = $pdo->prepare("DELETE FROM comments WHERE id_comment = :id");
     $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
     $stmt->execute();
+    return "Commentaire supprimé avec succès";
 }
 
 function getAllComments($page = 1, $limit = 8, $sort = 'date_desc', $search = '') {

@@ -68,12 +68,17 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Le rôle est requis.";
     }
 
+    $_SESSION['error_message'] = $errors;
+    
     if (empty($errors)) {
         if ($id) {
-            updateUser($id, $username, $email, $answer, $role, $password);
-            $_SESSION['success_message'] = "L'utilisateur a bien été modifié.";
+            $message = updateUser($id, $username, $email, $answer, $role, $password);
+            if ($message) {
+                $_SESSION['success_message'] = $message;
+            } else {
+                $_SESSION['error_message'] = "Erreur lors de la modification de l'utilisateur.";
+            }
         } else {
-            // Fallback en cas d'erreur (ne devrait pas arriver ici car l'action est 'update')
             $_SESSION['error_message'] = "Erreur : l'utilisateur n'a pas été trouvé.";
         }
 
@@ -96,7 +101,12 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 // Suppression
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
     $id = (int)$_GET['id'];
-    deleteUser($id);
+    $message = deleteUser($id);
+    if($message) {
+        $_SESSION['success_message'] = $message;
+    }else {
+        $_SESSION['error_message'] = "Erreur lors de la suppression de l'utilisateur.";
+    }
     header('Location: index.php?route=admin&section=users');
     exit;
 }

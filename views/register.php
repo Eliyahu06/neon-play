@@ -7,6 +7,20 @@
 </head>
 <body>
     <?php require_once 'partials/header.php'; ?>
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="message success">
+            <?= htmlspecialchars($_SESSION['success_message']) ?>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+
     <form action="index.php?route=register" method="post">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" id="username" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" required>
@@ -21,10 +35,6 @@
         <button type="submit" name="bRegister">S'inscrire</button>
         <a href="index.php?route=login">Se connecter</a>
     </form>
-    <?php if (isset($_SESSION['message'])): ?>
-        <p><?php echo $_SESSION['message']; ?></p>
-        <?php unset($_SESSION['message']); ?>
-    <?php endif; ?>
     <?php require_once 'partials/footer.php'; ?>
 </body>
 </html>

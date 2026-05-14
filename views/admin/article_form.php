@@ -9,15 +9,13 @@
     <?php require_once 'partials/header.php'; ?>
     <h1><?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?></h1>
 
-    <?php if (!empty($errors)): ?>
-        <div style="color: red; margin-bottom: 20px;">
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                    <li><?= htmlspecialchars($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
+    <?php if (!empty($_SESSION['error_message'])): ?>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
         </div>
-    <?php endif; ?>
+    <?php 
+    unset($_SESSION['error_message']);
+    endif; ?>
 
     <form action="?route=admin&section=article&action=update" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id_article" value="<?= htmlspecialchars($article['id_article'] ?? '') ?>">

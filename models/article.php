@@ -109,6 +109,7 @@ function createArticle($title, $intro, $description, $critic, $note, $opinion, $
     $stmt->bindValue(':card_img', $card_img, PDO::PARAM_STR);
     $stmt->bindValue(':id_author', $id_author, PDO::PARAM_INT);
     $stmt->execute();
+    return "Article créé avec succès";
 }
 
 function updateArticle($id, $title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img) {
@@ -124,6 +125,7 @@ function updateArticle($id, $title, $intro, $description, $critic, $note, $opini
     $stmt->bindValue(':banner_img', $banner_img, PDO::PARAM_STR);
     $stmt->bindValue(':card_img', $card_img, PDO::PARAM_STR);
     $stmt->execute();
+    return "Article modifié avec succès";
 }
 
 function deleteArticle($id) {
@@ -131,6 +133,7 @@ function deleteArticle($id) {
     $stmt = $pdo->prepare("DELETE FROM articles WHERE id_article = :id");
     $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
     $stmt->execute();
+    return "Article supprimé avec succès";
 }
 
 function uploadImage($file, $articleTitle, $type) {

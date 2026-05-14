@@ -9,8 +9,15 @@
     <?php require_once 'partials/header.php'; ?>
     <h1>Listes des articles</h1>
 
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
+
     <?php if (isset($_SESSION['success_message'])): ?>
-        <div style="color: green; margin-bottom: 20px; border: 1px solid green; padding: 10px;">
+        <div class="message success">
             <?= htmlspecialchars($_SESSION['success_message']) ?>
         </div>
         <?php unset($_SESSION['success_message']); ?>

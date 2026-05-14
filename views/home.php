@@ -9,10 +9,20 @@
     <?php require_once 'partials/header.php'; ?>
     <h1>Bienvenue sur Neon Play</h1>
 
-    <?php if (isset($_SESSION['message'])): ?>
-        <p><?php echo $_SESSION['message']; ?></p>
-        <?php unset($_SESSION['message']); ?>
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
     <?php endif; ?>
+
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="message success">
+            <?= htmlspecialchars($_SESSION['success_message']) ?>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+    
     <h2>Dernières actualités</h2>
     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;">
         <?php foreach ($latestArticles as $article): ?>

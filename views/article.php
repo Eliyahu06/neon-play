@@ -18,14 +18,21 @@
     <p>Publié le <?= htmlspecialchars(date('d/m/Y', strtotime($article['date_add']))) ?></p>
     <p>Note moyenne des lecteurs : <?= $note !== 0.0 ? htmlspecialchars($note) . '/10' : 'Aucune note' ?></p>
     <h2>Commentaires</h2>
+
     <?php if (isset($_SESSION['comment_error'])): ?>
-        <p style="color: red;"><?= htmlspecialchars($_SESSION['comment_error']) ?></p>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['comment_error']) ?>
+        </div>
         <?php unset($_SESSION['comment_error']); ?>
     <?php endif; ?>
+
     <?php if (isset($_SESSION['comment_success'])): ?>
-        <p style="color: green;"><?= htmlspecialchars($_SESSION['comment_success']) ?></p>
+        <div class="message success">
+            <?= htmlspecialchars($_SESSION['comment_success']) ?>
+        </div>
         <?php unset($_SESSION['comment_success']); ?>
     <?php endif; ?>
+
     <?php foreach ($comments as $comment): ?>
         <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>
             <form action="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>" method="post">

@@ -9,6 +9,21 @@
     <?php require_once 'partials/header.php'; ?>
     <h1>Liste des utilisateurs</h1>
 
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="message error">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="message success">
+            <?= htmlspecialchars($_SESSION['success_message']) ?>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+
+
     <p>Nombre d'utilisateurs : <?= $numberUsers ?></p>
     <p>Trier par : </p>
         <form method="get">

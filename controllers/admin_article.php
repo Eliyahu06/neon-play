@@ -116,33 +116,13 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "L'image miniature est requise (ou format invalide : jpg, jpeg, png, gif).";
     }
 
+    $_SESSION['error_message'] = $errors;
+
     if (empty($errors)) {
         if ($id) {
-            updateArticle(
-                $id,
-                $title,
-                $intro,
-                $description,
-                $critic,
-                $note,
-                $opinion,
-                $banner_img,
-                $card_img
-            );
-            $_SESSION['success_message'] = "L'article a bien été modifié.";
+            $_SESSION['success_message'] = updateArticle($id, $title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img);
         } else {
-            createArticle(
-                $title,
-                $intro,
-                $description,
-                $critic,
-                $note,
-                $opinion,
-                $banner_img,
-                $card_img,
-                $_SESSION['user']['id_user']
-            );
-            $_SESSION['success_message'] = "L'article a bien été ajouté.";
+            $_SESSION['success_message'] = createArticle($title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img, $_SESSION['user']['id_user']);
         }
 
         header('Location: index.php?route=admin&section=articles');
@@ -168,7 +148,12 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 // Suppression
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
     $id = (int)$_GET['id'];
-    deleteArticle($id);
+    $message = deleteArticle($id);
+    if ($message === "Article supprimé avec succès") {
+        $_SESSION['success_message'] = $message;
+    } else {
+        $_SESSION['error_message'] = $message;
+    }
     header('Location: index.php?route=admin&section=articles');
     exit;
 }

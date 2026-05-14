@@ -8,14 +8,16 @@
 <body>
     <?php require_once 'partials/header.php'; ?>
     <h1><?= htmlspecialchars($user['username']) ?></h1>
-    <?php if (!empty($errors)): ?>
+
+    <?php if (isset($_SESSION['error_message'])): ?>
         <div style="color: red; margin-bottom: 20px;">
             <ul>
-                <?php foreach ($errors as $error): ?>
+                <?php foreach ($_SESSION['error_message'] as $error): ?>
                     <li><?= htmlspecialchars($error) ?></li>
                 <?php endforeach; ?>
             </ul>
         </div>
+        <?php unset($_SESSION['error_message']); ?>
     <?php endif; ?>
 
     <form action="?route=admin&section=users&action=update" method="POST">

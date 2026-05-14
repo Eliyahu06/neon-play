@@ -19,14 +19,14 @@ function registerUser($username, $email, $password, $password_confirm, $answer) 
     $checkUsername->execute();
 
     if ($checkEmail->fetch()) {
-        $message = "Email déjà utilisé";
+        return "Email déjà utilisé";
     }
     elseif ($checkUsername->fetch()) {
-        $message = "Ce nom d'utilisateur est déjà pris";
+        return "Ce nom d'utilisateur est déjà pris";
     }
     //vérification si le mot de passe correspond 
     else if ($password !== $password_confirm) {
-        $message = "Les mots de passe ne correspondent pas";
+        return "Les mots de passe ne correspondent pas";
     }
     else {
         // inssertion dans la base de donnée
@@ -38,9 +38,8 @@ function registerUser($username, $email, $password, $password_confirm, $answer) 
         $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
         $stmt->bindValue(':answer', $answer);
         $stmt->execute();
-        $message = "Inscription reussie";
     }
-    return $message;
+    return "Inscription reussie";
 }
 
 function loginUser($email, $password) {
@@ -60,15 +59,15 @@ function loginUser($email, $password) {
         header('Location: index.php?route=home');
         exit;
     } else {
-        $message = "Email ou mot de passe incorrect";
+        return "Email ou mot de passe incorrect";
     }
-    return $message;
 }  
+
 function forgotPassword($email, $answer, $password, $password_confirm){
     global $pdo;
 
     if ($password !== $password_confirm) {
-        $message = "Les mots de passe ne correspondent pas";
+        return "Les mots de passe ne correspondent pas";
     }
     else {
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
@@ -82,10 +81,10 @@ function forgotPassword($email, $answer, $password, $password_confirm){
             $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
             $stmt->bindValue(':email', $email);
             $stmt->execute();
+            return true;
         } 
-        $message = "Si les infos sont correcte, votre mot de passe a été réinitialisé";
     }
-    return $message;
+    return false;
 } 
 
 function getUserById($id) {

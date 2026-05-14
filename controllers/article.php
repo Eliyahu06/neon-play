@@ -36,8 +36,12 @@ if (isset($_POST['bComment'])) {
     } elseif (!is_numeric($note) || $note < 0 || $note > 10) {
         $_SESSION['comment_error'] = "La note doit être entre 0 et 10.";
     } else {
-        addComment($id_article, $id_user, $comment, $note);
-        $_SESSION['comment_success'] = "Commentaire ajouté avec succès.";
+        $addComment = addComment($id_article, $id_user, $comment, $note);
+        if ($addComment === "Commentaire ajouté avec succès") {
+            $_SESSION['comment_success'] = $addComment;
+        } else {
+            $_SESSION['comment_error'] = $addComment;
+        }
     }
 
     header("Location: index.php?route=article&id=" . $id_article);
@@ -55,8 +59,12 @@ if (isset($_POST['bEditComment'])) {
     } elseif (!is_numeric($note) || $note < 0 || $note > 10) {
         $_SESSION['comment_error'] = "La note doit être entre 0 et 10.";
     } else {
-        editComment($id_comment, $comment, $note);
-        $_SESSION['comment_success'] = "Commentaire modifié avec succès.";
+        $editComment = editComment($id_comment, $comment, $note);
+        if ($editComment === "Commentaire modifié avec succès") {
+            $_SESSION['comment_success'] = $editComment;
+        } else {
+            $_SESSION['comment_error'] = $editComment;
+        }
     }
     header("Location: index.php?route=article&id=" . $_GET['id']);
     exit();
@@ -65,7 +73,12 @@ if (isset($_POST['bEditComment'])) {
 // Suppression commentaire
 if (isset($_GET['deleteComment'])) {
     $id_comment = $_GET['deleteComment'];
-    deleteComment($id_comment);
+    $deleteComment = deleteComment($id_comment);
+    if ($deleteComment === "Commentaire supprimé avec succès") {
+        $_SESSION['comment_success'] = $deleteComment;
+    } else {
+        $_SESSION['comment_error'] = $deleteComment;
+    }
     header("Location: index.php?route=article&id=" . $_GET['id']);
     exit();
 }

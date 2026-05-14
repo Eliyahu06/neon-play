@@ -10,35 +10,47 @@ if (isset($_POST['bRegister'])) {
     $answer = strtolower(trim($_POST['answer'] ?? ''));
     
     $message = registerUser($username, $email, $password, $password_confirm, $answer);
-    $_SESSION['message'] = $message;
-    
+
     if ($message === "Inscription reussie") {
+        $_SESSION['success_message'] = $message;
         header("Location: index.php?route=login");
+        exit();
     } else {
-        require_once 'views/register.php';
+        $_SESSION['error_message'] = $message;
+        header("Location: index.php?route=register");
+        exit();
     }
-    exit();
 }
 if (isset($_POST['bLogin'])) {
     $email = strtolower(trim($_POST['email'] ?? ''));
     $password = trim($_POST['password'] ?? '');
-    $_SESSION['message'] = loginUser($email, $password);
+    $message = loginUser($email, $password);
 
     if (isset($_SESSION['user'])) {
         header("Location: index.php?route=home");
+        exit();
     } else {
-        require_once 'views/login.php';
+        $_SESSION['error_message'] = $message;
+        header("Location: index.php?route=login");
+        exit();
     }
-    exit();
 }
 if (isset($_POST['bReset'])) {
     $email = strtolower(trim($_POST['email']));
     $answer = strtolower(trim($_POST['answer']));
     $password = trim($_POST['password']);
     $password_confirm = trim($_POST['password_confirm']);
-    $_SESSION['message'] = forgotPassword($email, $answer, $password, $password_confirm);
-    header("Location: index.php?route=forgot");
-    exit();
+    $message = forgotPassword($email, $answer, $password, $password_confirm);
+
+    if ($message == true) {
+        $_SESSION['success_message'] = "Si les infos sont correcte, votre mot de passe a été réinitialisé";
+        header("Location: index.php?route=login");
+        exit();
+    } else {
+        $_SESSION['error_message'] = $message;
+        header("Location: index.php?route=forgot");
+        exit();
+    }
 }
 
 if ($route == 'register') {

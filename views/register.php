@@ -9,15 +9,15 @@
     <?php require_once 'partials/header.php'; ?>
     <form action="index.php?route=register" method="post">
         <label for="username">Nom d'utilisateur</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" required>
         <label for="email">Email</label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
         <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" required>
         <label for="password_confirm">Confirmer le mot de passe</label>
-        <input type="password" id="password_confirm" name="password_confirm">
+        <input type="password" id="password_confirm" name="password_confirm" required>
         <label for="answer">Quel est le nom de votre premier animal de compagnie ?</label>
-        <input type="text" id="answer" name="answer">
+        <input type="text" id="answer" name="answer" value="<?= htmlspecialchars($_POST['answer'] ?? '') ?>" required>
         <button type="submit" name="bRegister">S'inscrire</button>
         <a href="index.php?route=login">Se connecter</a>
     </form>

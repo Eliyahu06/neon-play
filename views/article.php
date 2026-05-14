@@ -18,12 +18,20 @@
     <p>Publié le <?= htmlspecialchars(date('d/m/Y', strtotime($article['date_add']))) ?></p>
     <p>Note moyenne des lecteurs : <?= $note !== 0.0 ? htmlspecialchars($note) . '/10' : 'Aucune note' ?></p>
     <h2>Commentaires</h2>
+    <?php if (isset($_SESSION['comment_error'])): ?>
+        <p style="color: red;"><?= htmlspecialchars($_SESSION['comment_error']) ?></p>
+        <?php unset($_SESSION['comment_error']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['comment_success'])): ?>
+        <p style="color: green;"><?= htmlspecialchars($_SESSION['comment_success']) ?></p>
+        <?php unset($_SESSION['comment_success']); ?>
+    <?php endif; ?>
     <?php foreach ($comments as $comment): ?>
         <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>
             <form action="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>" method="post">
                 <input type="hidden" name="id_comment" value="<?= $comment['id_comment'] ?>">
                 <label for="comment_<?= $comment['id_comment'] ?>">Commentaire</label>
-                <textarea name="comment" id="comment_<?= $comment['id_comment'] ?>" cols="30" rows="5"><?= htmlspecialchars($comment['content']) ?></textarea>
+                <textarea name="comment" id="comment_<?= $comment['id_comment'] ?>" cols="30" rows="5" required><?= htmlspecialchars($comment['content']) ?></textarea>
                 <label for="note_<?= $comment['id_comment'] ?>">Note</label>
                 <input type="number" name="note" id="note_<?= $comment['id_comment'] ?>" min="0" max="10" step="0.1" value="<?= htmlspecialchars($comment['note']) ?>" required>
                 <button type="submit" name="bEditComment">Confirmer l'édition</button>
@@ -43,7 +51,7 @@
     <?php if (isset($_SESSION['user']) && !$hasCommented): ?>
         <form action="index.php?route=article&id=<?= $article['id_article'] ?>" method="post">
             <label for="comment">Commentaire</label>
-            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
             <label for="note">Note</label>
             <input type="number" name="note" min="0" max="10" step="0.1" required>
             <button type="submit" name="bComment">Commenter</button>

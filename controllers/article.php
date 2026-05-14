@@ -28,9 +28,17 @@ if (isset($_POST['bComment'])) {
     $id_article = $_GET['id'];
     $id_user = $_SESSION['user']['id_user'];
 
-    $comment = trim($_POST['comment']);
-    $note = $_POST['note'];
-    addComment($id_article, $id_user, $comment, $note);
+    $comment = trim($_POST['comment'] ?? '');
+    $note = trim($_POST['note'] ?? '');
+
+    if (empty($comment) || $note === '') {
+        $_SESSION['comment_error'] = "Le commentaire et la note sont requis.";
+    } elseif (!is_numeric($note) || $note < 0 || $note > 10) {
+        $_SESSION['comment_error'] = "La note doit être entre 0 et 10.";
+    } else {
+        addComment($id_article, $id_user, $comment, $note);
+        $_SESSION['comment_success'] = "Commentaire ajouté avec succès.";
+    }
 
     header("Location: index.php?route=article&id=" . $id_article);
     exit();
@@ -39,9 +47,17 @@ if (isset($_POST['bComment'])) {
 // Modification commentaire
 if (isset($_POST['bEditComment'])) {
     $id_comment = $_POST['id_comment'] ?? $_GET['editComment'];
-    $comment = trim($_POST['comment']);
-    $note = $_POST['note'];
-    editComment($id_comment, $comment, $note);
+    $comment = trim($_POST['comment'] ?? '');
+    $note = trim($_POST['note'] ?? '');
+
+    if (empty($comment) || $note === '') {
+        $_SESSION['comment_error'] = "Le commentaire et la note sont requis.";
+    } elseif (!is_numeric($note) || $note < 0 || $note > 10) {
+        $_SESSION['comment_error'] = "La note doit être entre 0 et 10.";
+    } else {
+        editComment($id_comment, $comment, $note);
+        $_SESSION['comment_success'] = "Commentaire modifié avec succès.";
+    }
     header("Location: index.php?route=article&id=" . $_GET['id']);
     exit();
 }

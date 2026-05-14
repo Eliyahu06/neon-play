@@ -4,13 +4,25 @@ require_once 'config/database.php';
 function registerUser($username, $email, $password, $password_confirm, $answer) {
     global $pdo;
 
-    // Vérification si l'email existe déjà
-    $check = $pdo->prepare("SELECT id_user FROM users WHERE email = :email");
-    $check->bindValue(':email', $email);
-    $check->execute();
+    if (empty($username) || empty($email) || empty($password) || empty($password_confirm) || empty($answer)) {
+        return "Tous les champs sont requis.";
+    }
 
-    if ($check->fetch()) {
+    // Vérification si l'email existe déjà
+    $checkEmail = $pdo->prepare("SELECT id_user FROM users WHERE email = :email");
+    $checkEmail->bindValue(':email', $email);
+    $checkEmail->execute();
+
+    // Vérification si le pseudo existe déjà
+    $checkUsername = $pdo->prepare("SELECT id_user FROM users WHERE username = :username");
+    $checkUsername->bindValue(':username', $username);
+    $checkUsername->execute();
+
+    if ($checkEmail->fetch()) {
         $message = "Email déjà utilisé";
+    }
+    elseif ($checkUsername->fetch()) {
+        $message = "Ce nom d'utilisateur est déjà pris";
     }
     //vérification si le mot de passe correspond 
     else if ($password !== $password_confirm) {
@@ -33,6 +45,10 @@ function registerUser($username, $email, $password, $password_confirm, $answer) 
 
 function loginUser($email, $password) {
     global $pdo;
+
+    if (empty($email) || empty($password)) {
+        return "L'email et le mot de passe sont requis.";
+    }
 
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
     $stmt->bindValue(':email', $email);

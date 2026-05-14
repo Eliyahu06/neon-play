@@ -26,6 +26,8 @@
                 <option value="">-- Sélectionnez --</option>
                 <option value="date_desc" <?= isset($_GET['sort']) && $_GET['sort'] === 'date_desc' ? 'selected' : '' ?>>Date de publication (du plus récent au plus ancien)</option>
                 <option value="date_asc" <?= isset($_GET['sort']) && $_GET['sort'] === 'date_asc' ? 'selected' : '' ?>>Date de publication (du plus ancien au plus récent)</option>
+                <option value="id_asc" <?= isset($_GET['sort']) && $_GET['sort'] === 'id_asc' ? 'selected' : '' ?>>Id (du plus petit au plus grand)</option>
+                <option value="id_desc" <?= isset($_GET['sort']) && $_GET['sort'] === 'id_desc' ? 'selected' : '' ?>>Id (du plus grand au plus petit)</option>
             </select>
         </form>
     <form method="GET">
@@ -54,7 +56,7 @@
             <td><?= htmlspecialchars($article['date_add']) ?></td>
             <td>
                 <a href="?route=admin&section=article&action=form&id=<?= $article['id_article'] ?>">Modifier</a>
-                <a href="?route=admin&section=article&action=delete&id=<?= $article['id_article'] ?>">Supprimer</a>
+                <a href="?route=admin&section=article&action=delete&id=<?= $article['id_article'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">Supprimer</a>
             </td>
         </tr>
     <?php endforeach; ?>

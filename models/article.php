@@ -44,6 +44,12 @@ function getAllArticles($limit = 8, $offset = 0, $sort = 'date_desc', $search = 
         case 'title_desc':
             $orderBy = 'title DESC';
             break;
+        case 'id_asc':
+            $orderBy = 'id_article ASC';
+            break;
+        case 'id_desc':
+            $orderBy = 'id_article DESC';
+            break;
         default:
             $orderBy = 'date_add DESC';
     }

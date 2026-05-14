@@ -57,7 +57,7 @@
     <br><br>
     <?php if (isset($article['id_article'])): ?>
     <h2>Supprimer l'article</h2>
-    <form action="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>" method="POST">
+    <form action="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
         <input type="submit" name="bArticleDelete" value="Supprimer l'article">
     </form>
     <?php endif; ?>

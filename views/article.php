@@ -41,7 +41,7 @@
             <p><?= htmlspecialchars($comment['username']) ?>: <?= htmlspecialchars($comment['content']) ?> (<?= htmlspecialchars($comment['note']) ?>/10)</p>
             <p>Posté le <?= htmlspecialchars($comment['date_add']) ?></p>
             <?php if (isset($_SESSION['user']) && ($_SESSION['user']['id_user'] === $comment['id_user'] || $_SESSION['user']['role'] === 'admin')): ?>
-                <a href="index.php?route=article&id=<?= $article['id_article'] ?>&deleteComment=<?= $comment['id_comment'] ?>">Supprimer</a>
+                <a href="index.php?route=article&id=<?= $article['id_article'] ?>&deleteComment=<?= $comment['id_comment'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">Supprimer</a>
             <?php endif; ?>
             <?php if (isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $comment['id_user']): ?>
                 <a href="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>">Modifier</a>

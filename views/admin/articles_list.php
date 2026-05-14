@@ -57,6 +57,7 @@
             <td>
                 <a href="?route=admin&section=article&action=form&id=<?= $article['id_article'] ?>">Modifier</a>
                 <a href="?route=admin&section=article&action=delete&id=<?= $article['id_article'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">Supprimer</a>
+                <a href="?route=article&id=<?= $article['id_article'] ?>" target="_blank">Voir</a>
             </td>
         </tr>
     <?php endforeach; ?>

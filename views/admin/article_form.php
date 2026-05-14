@@ -60,6 +60,8 @@
     <form action="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
         <input type="submit" name="bArticleDelete" value="Supprimer l'article">
     </form>
+    <h2>Voir l'article</h2>
+    <a href="?route=article&id=<?= htmlspecialchars($article['id_article']) ?>" target="_blank">Voir l'article</a>
     <?php endif; ?>
 
 </body> 

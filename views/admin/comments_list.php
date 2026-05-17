@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,5 +60,16 @@
             <hr>
         </div>
     <?php endforeach; ?>
+    <div>
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if ($i == $page): ?>
+                <span style="font-weight:bold;color:red;"><?= $i ?></span>
+            <?php else: ?>
+                <a href="index.php?route=admin&section=comments&page=<?= $i ?>&sort=<?= $_GET['sort'] ?? '' ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">
+                    <?= $i ?>
+                </a>
+            <?php endif; ?>
+        <?php endfor; ?>
+    </div>
 </body>
 </html>

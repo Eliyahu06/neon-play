@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,6 +47,7 @@
     <p>Nombre de commentaires : <?= $numberComments ?></p>
         <?php foreach ($comments as $comment): ?>
             <div>
+                <strong><?= htmlspecialchars($comment['title']) ?></strong><br>
                 <strong><?= htmlspecialchars($comment['note']) ?>/10</strong>
                 <p><?= htmlspecialchars($comment['content']) ?></p>
             </div>

@@ -16,7 +16,7 @@ if ($action === 'list') {
     $sort = $_GET['sort'] ?? 'id_desc';
     $search = $_GET['search'] ?? '';
     
-    $numberArticles = countArticles();
+    $numberArticles = countArticles($search);
     $articles = getAllArticles($limit, $offset, $sort, $search);
     $totalPages = ceil($numberArticles / $limit);
 
@@ -91,38 +91,12 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $note = trim($_POST['note'] ?? '');
     $opinion = trim($_POST['opinion'] ?? '');
 
-    if (empty($title)) {
-        $errors[] = "Le titre est requis.";
-    }
-    if (empty($intro)) {
-        $errors[] = "L'introduction est requise.";
-    }
-    if (empty($description)) {
-        $errors[] = "La description est requise.";
-    }
-    if (empty($critic)) {
-        $errors[] = "La critique est requise.";
-    }
-    if (empty($opinion)) {
-        $errors[] = "L'opinion est requise.";
-    }
-    
-    if ($note === '') {
-        $errors[] = "La note est requise.";
-    } elseif (!is_numeric($note) || $note < 0 || $note > 10) {
-        $errors[] = "La note doit être un nombre entre 0 et 10.";
+    if (empty($title) && empty($intro) && empty($description) && empty($critic) && empty($opinion) && $note === '' && empty($banner_img) && empty($card_img)) {
+        $_SESSION['error_message'] = "Tout les champs sont requis.";
     }
 
-    if (empty($banner_img)) {
-        $errors[] = "L'image de bannière est requise (ou format invalide : jpg, jpeg, png, gif).";
-    }
-    if (empty($card_img)) {
-        $errors[] = "L'image miniature est requise (ou format invalide : jpg, jpeg, png, gif).";
-    }
 
-    $_SESSION['error_message'] = $errors;
-
-    if (empty($errors)) {
+    if (empty($_SESSION['error_message'])) {
         if ($id) {
             $_SESSION['success_message'] = updateArticle($id, $title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img);
         } else {

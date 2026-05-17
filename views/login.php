@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+$title = "Neon Play - Connexion";
+require_once 'partials/head.php';
+?>
+<body class="bg-black text-white">
     <?php require_once 'partials/header.php'; ?>
     <?php if (isset($_SESSION['error_message'])): ?>
-        <div class="message error">
+        <div class="message error text-error-text bg-error-container">
             <?= htmlspecialchars($_SESSION['error_message']) ?>
         </div>
         <?php unset($_SESSION['error_message']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['success_message'])): ?>
-        <div class="message success">
+        <div class="message success text-success-text bg-success-container">
             <?= htmlspecialchars($_SESSION['success_message']) ?>
         </div>
         <?php unset($_SESSION['success_message']); ?>

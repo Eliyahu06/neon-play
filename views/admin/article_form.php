@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php
+$title = "Neon Play Admin - " . ($article['title'] ?? 'Nouvel article');
+require_once __DIR__ . '/../partials/head.php';?>
 <body>
     <?php require_once 'partials/header.php'; ?>
     <h1><?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?></h1>
 
     <?php if (!empty($_SESSION['error_message'])): ?>
-        <div class="message error">
+        <div class="message error text-error-text bg-error-container">
             <?= htmlspecialchars($_SESSION['error_message']) ?>
         </div>
     <?php 

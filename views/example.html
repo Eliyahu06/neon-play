@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Neon Play | L'Interface Neurale</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#950085",
+                        "on-primary-container": "#005359",
+                        "surface-tint": "#8ff5ff",
+                        "surface-bright": "#2c2c2c",
+                        "on-tertiary-container": "#f8f1ff",
+                        "on-tertiary-fixed": "#1f0052",
+                        "secondary": "#ff59e3",
+                        "secondary-container": "#ad009b",
+                        "surface-container": "#1a1919",
+                        "surface-dim": "#0e0e0e",
+                        "on-secondary-container": "#fff5f8",
+                        "error-container": "#9f0519",
+                        "primary-fixed": "#00eefc",
+                        "on-error-container": "#ffa8a3",
+                        "inverse-surface": "#fcf9f8",
+                        "outline-variant": "#484847",
+                        "on-primary": "#005d63",
+                        "on-error": "#490006",
+                        "surface": "#0e0e0e",
+                        "on-surface-variant": "#adaaaa",
+                        "surface-variant": "#262626",
+                        "inverse-primary": "#006a71",
+                        "on-primary-fixed-variant": "#005e64",
+                        "surface-container-high": "#201f1f",
+                        "on-tertiary": "#290067",
+                        "on-primary-fixed": "#003f43",
+                        "tertiary-fixed": "#bda1ff",
+                        "inverse-on-surface": "#565555",
+                        "secondary-fixed": "#ffbeeb",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#131313",
+                        "tertiary-dim": "#874cff",
+                        "on-surface": "#ffffff",
+                        "tertiary-fixed-dim": "#b190ff",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#00eefc",
+                        "primary-dim": "#00deec",
+                        "tertiary": "#ac89ff",
+                        "error": "#ff716c",
+                        "secondary-dim": "#ff59e3",
+                        "surface-container-highest": "#262626",
+                        "secondary-fixed-dim": "#ffa8e7",
+                        "on-secondary": "#42003a",
+                        "on-tertiary-fixed-variant": "#4700a7",
+                        "primary": "#8ff5ff",
+                        "primary-fixed-dim": "#00deec",
+                        "background": "#0e0e0e",
+                        "tertiary-container": "#7000ff",
+                        "outline": "#767575",
+                        "on-background": "#ffffff",
+                        "on-secondary-fixed": "#640059"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(12px);
+        }
+
+        .neon-glow-blue {
+            box-shadow: 0 0 20px rgba(143, 245, 255, 0.15);
+        }
+
+        .neon-glow-pink {
+            box-shadow: 0 0 20px rgba(255, 89, 227, 0.15);
+        }
+
+        .text-glow-primary {
+            text-shadow: 0 0 10px rgba(143, 245, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary">
+    <!-- TopAppBar -->
+    <nav
+        class="fixed top-0 w-full border-b border-outline-variant/20 bg-[#0e0e0e]/60 backdrop-blur-xl z-50 flex justify-between items-center h-16 px-6 shadow-[0_0_20px_rgba(143,245,255,0.15)]">
+        <div class="flex items-center gap-8">
+            <a class="text-2xl font-bold tracking-tighter text-primary drop-shadow-[0_0_10px_rgba(143,245,255,0.5)] font-headline uppercase"
+                href="#">
+                Neon Play
+            </a>
+            <div class="hidden md:flex gap-6 items-center">
+                <a class="font-label tracking-tighter uppercase text-sm text-primary border-b-2 border-primary pb-1"
+                    href="#">RPG</a>
+                <a class="font-label tracking-tighter uppercase text-sm text-white/70 hover:text-primary transition-colors"
+                    href="#">Action</a>
+                <a class="font-label tracking-tighter uppercase text-sm text-white/70 hover:text-primary transition-colors"
+                    href="#">FPS</a>
+                <a class="font-label tracking-tighter uppercase text-sm text-white/70 hover:text-primary transition-colors"
+                    href="#">Stratégie</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden lg:flex items-center bg-surface-variant/40 border-b border-outline px-3 py-1">
+                <span class="material-symbols-outlined text-sm text-primary mr-2" data-icon="search">search</span>
+                <input
+                    class="bg-transparent border-none focus:ring-0 text-xs font-label uppercase tracking-widest w-40 placeholder:text-outline"
+                    placeholder="RECHERCHE TERMINAL..." type="text" />
+            </div>
+            <button
+                class="bg-primary text-on-primary font-label text-xs font-bold px-6 py-2 tracking-widest hover:shadow-[0_0_15px_rgba(143,245,255,0.3)] transition-all active:scale-95">
+                CONNEXION
+            </button>
+        </div>
+    </nav>
+    <!-- Banner Hero Section -->
+    <header class="relative w-full h-[819px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img alt="Ville cyberpunk" class="w-full h-full object-cover opacity-60 scale-105"
+                data-alt="Cinematic wide shot of a futuristic cyberpunk mega-city at night with heavy rain, glowing neon signs in cyan and magenta, and dark metallic skyscrapers."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9y9VwFBWAv8uz58KZMCt1Mp2Tqvd33A0WIT_yYHfCMXPSjr83DH75MwyiSlFVGdVQ5yUdNF7lYhr0H9b16va6OwzMeI3nWerWMDBLeWteluwyP7EpuL7CoOZQA_umFomwpjM_DkXXtYW-QGlPz5-0Obsqq5hSrpAwKgw_4Bczy7Yy9KgwUly8_I758Jm6YH-ZInZ0xPbd6Zn_vAYRaZxAIjRFAtPDJczl9kFPaITwJX4T4VxxS9sIBG7I0kbCZ2pkZNcR82en8Ao_" />
+            <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-surface"></div>
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <span
+                class="font-label text-secondary tracking-[0.5em] uppercase text-xs mb-4 block animate-pulse">SYSTÈME_EN_LIGNE
+                // LIAISON_DIRECTE_ÉTABLIE</span>
+            <h1
+                class="font-headline text-7xl md:text-9xl font-extrabold tracking-tighter text-on-surface uppercase drop-shadow-[0_0_30px_rgba(143,245,255,0.4)]">
+                Neon Play
+            </h1>
+            <div class="mt-8 flex flex-col md:flex-row gap-4 justify-center items-center">
+                <p class="font-body text-on-surface-variant max-w-xl text-lg">
+                    L'interface neurale premium pour le divertissement interactif numérique haut de gamme. Critiques
+                    sélectionnées depuis les frontières de demain.
+                </p>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+            <span class="font-label text-[10px] text-primary/50 tracking-widest uppercase">Faire défiler pour
+                décoder</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"></div>
+        </div>
+    </header>
+    <!-- Game Cards Section -->
+    <main class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex items-center gap-4 mb-16">
+            <div class="h-[2px] w-12 bg-secondary"></div>
+            <h2 class="font-headline text-4xl font-bold tracking-tight uppercase">Modules Vedettes</h2>
+            <span class="font-label text-secondary text-xs uppercase tracking-widest ml-auto">Batch_ID: 0x9928</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <article
+                class="group bg-surface-container-low transition-all duration-300 hover:bg-surface-container-high relative overflow-hidden">
+                <div
+                    class="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[2px] bg-secondary transition-all duration-300">
+                </div>
+                <div class="h-64 overflow-hidden relative">
+                    <img alt="Monde de jeu de science-fiction"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        data-alt="Dystopian science fiction city interior with glowing computer terminals, floating holographic displays, and dark industrial architecture in cool blue tones."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxXk8YYt6towW4y0zgzRqm0G2EF_lf_n6SrbimOEFS0qoC1rveWm_KPuX35QokIjNrHH_AAWJXMgK6IPO114oLtQsnrE9WKFOY9kvfXCVT5DehdFeftUJki5ldKIqe7URCculW---uYgQk8FxmW1eB0Fo2OocIm6pqUemB_u2FCCZ-j9CrmJDCD-O5yieEN2yzOj6XUNOWD81AKmfMl-j0yFz4Du_-haeEiBYBmrAoLaaMcZzKdxJQrKpu1krVPIRKqRQ5tuXfA8jb" />
+                    <div
+                        class="absolute top-4 right-4 bg-surface/80 backdrop-blur-md px-3 py-1 font-label text-xs text-primary border border-primary/20">
+                        RPG
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="font-headline text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        Cyberpunk 2077</h3>
+                    <p class="text-on-surface-variant text-sm font-body leading-relaxed mb-6 line-clamp-3">
+                        Un RPG vaste en monde ouvert situé à Night City, où le pouvoir, le glamour et les modifications
+                        corporelles sont rois. La guerre cybernétique de haut vol rencontre une narration profonde.
+                    </p>
+                    <div class="flex justify-between items-end border-t border-outline-variant/10 pt-6">
+                        <div class="space-y-1">
+                            <span class="block font-label text-[10px] text-outline uppercase tracking-widest">NOTE
+                                CRITIQUE</span>
+                            <span class="text-2xl font-black text-primary font-headline">9<span
+                                    class="text-xs text-outline ml-1">/ 10</span></span>
+                        </div>
+                        <div class="space-y-1 text-right">
+                            <span class="block font-label text-[10px] text-outline uppercase tracking-widest">MOY.
+                                UTILISATEURS</span>
+                            <span class="text-2xl font-black text-secondary font-headline">8.5<span
+                                    class="text-xs text-outline ml-1">/ 10</span></span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+           
+        </div>
+        <div class="mt-24 flex justify-center">
+            <button
+                class="group flex items-center gap-4 bg-surface-variant/40 px-10 py-4 hover:bg-primary/10 transition-all border-b-2 border-primary">
+                <span class="font-label text-sm tracking-[0.3em] uppercase">Initialiser Plus de Données</span>
+                <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform"
+                    data-icon="keyboard_double_arrow_right">keyboard_double_arrow_right</span>
+            </button>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full border-t border-outline-variant/20 pt-12 pb-8 bg-surface">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col gap-2">
+                <span class="text-lg font-black text-secondary font-headline tracking-tighter uppercase">Neon
+                    Play</span>
+                <p class="font-label text-[10px] uppercase tracking-widest text-white/40">
+                    © 2024 NEON PLAY. TOUS DROITS RÉSERVÉS. // ACCÈS_TERMINAL_AUTORISÉ
+                </p>
+            </div>
+            <div class="flex gap-8">
+                <a class="font-label text-[10px] uppercase tracking-widest text-white/40 hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all duration-300"
+                    href="#">Politique de Confidentialité</a>
+                <a class="font-label text-[10px] uppercase tracking-widest text-white/40 hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all duration-300"
+                    href="#">Conditions d'Utilisation</a>
+                <a class="font-label text-[10px] uppercase tracking-widest text-white/40 hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all duration-300"
+                    href="#">Contact</a>
+                <a class="font-label text-[10px] uppercase tracking-widest text-white/40 hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all duration-300"
+                    href="#">À Propos</a>
+            </div>
+            <div class="flex gap-4">
+                <button
+                    class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center text-white/40 hover:text-primary hover:border-primary transition-colors">
+                    <span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+                </button>
+                <button
+                    class="w-10 h-10 border border-outline-variant/30 flex items-center justify-center text-white/40 hover:text-secondary hover:border-secondary transition-colors">
+                    <span class="material-symbols-outlined text-lg" data-icon="rss_feed">rss_feed</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

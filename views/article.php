@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+$title = "Neon Play - " . $article['title'];
+require_once 'partials/head.php';
+?>
+<body class="bg-black text-white">
     <?php require_once 'partials/header.php'; ?>
     <img src="assets/img/<?= htmlspecialchars($article['banner_img']) ?>" alt="">
     <img src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" alt="">
@@ -20,17 +19,27 @@
     <h2>Commentaires</h2>
 
     <?php if (isset($_SESSION['comment_error'])): ?>
-        <div class="message error">
+        <div class="message error text-error-text bg-error-container">
             <?= htmlspecialchars($_SESSION['comment_error']) ?>
         </div>
         <?php unset($_SESSION['comment_error']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['comment_success'])): ?>
-        <div class="message success">
+        <div class="message success text-success-text bg-success-container">
             <?= htmlspecialchars($_SESSION['comment_success']) ?>
         </div>
         <?php unset($_SESSION['comment_success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['user']) && !$hasCommented): ?>
+        <form action="index.php?route=article&id=<?= $article['id_article'] ?>" method="post">
+            <label for="comment">Commentaire</label>
+            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
+            <label for="note">Note</label>
+            <input type="number" name="note" min="0" max="10" step="0.1" required>
+            <button type="submit" name="bComment">Commenter</button>
+        </form>
     <?php endif; ?>
 
     <?php foreach ($comments as $comment): ?>
@@ -55,15 +64,7 @@
             <?php endif; ?>
         <?php endif; ?>
     <?php endforeach; ?>
-    <?php if (isset($_SESSION['user']) && !$hasCommented): ?>
-        <form action="index.php?route=article&id=<?= $article['id_article'] ?>" method="post">
-            <label for="comment">Commentaire</label>
-            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
-            <label for="note">Note</label>
-            <input type="number" name="note" min="0" max="10" step="0.1" required>
-            <button type="submit" name="bComment">Commenter</button>
-        </form>
-    <?php endif; ?>
+    
     <a href="index.php?route=articles">Retour</a>
     <?php require_once 'partials/footer.php'; ?>
 </body>

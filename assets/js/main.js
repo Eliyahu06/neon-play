@@ -1,4 +1,11 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
+  removeMessages();
+//   BurgerMenu();
+//   BackToTop();
+//   ImagePreview();
+});
+
+function removeMessages() {
     const messages = document.querySelectorAll('.message');
     messages.forEach(function (msg) {
         // Faire disparaître le message après 5 secondes (5000 millisecondes)
@@ -12,4 +19,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500);
         }, 5000);
     });
-});
+}

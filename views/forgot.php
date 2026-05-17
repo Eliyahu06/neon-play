@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+$title = "Neon Play - Mot de passe oublié";
+require_once 'partials/head.php';
+?>
+<body class="bg-black text-white">
     <?php require_once 'partials/header.php'; ?>
     <form action="index.php?route=forgot" method="post">
         <label for="email">Email</label>

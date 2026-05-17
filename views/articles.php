@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+$title = "Neon Play - Articles";
+require_once 'partials/head.php';
+?>
+<body class="bg-black text-white">
     <?php require_once 'partials/header.php'; ?>
     <h1>Article</h1>
     <p>Trier par : </p>

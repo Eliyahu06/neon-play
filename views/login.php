@@ -19,7 +19,10 @@ require_once 'partials/head.php';
         </div>
         <?php unset($_SESSION['success_message']); ?>
     <?php endif; ?>
-
+<br>
+<br>
+<br>
+<br>
     <form action="index.php?route=login" method="post">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>

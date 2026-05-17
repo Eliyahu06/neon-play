@@ -28,7 +28,7 @@ require_once 'partials/head.php';
             </div>
         </div>
     </header>
-    <main class="max-w-7xl mx-auto px-6 py-24">
+    <main class="container mx-auto px-6 py-24">
     <h1>Bienvenue sur Neon Play</h1>
     
     <?php if (isset($_SESSION['error_message'])): ?>
@@ -48,6 +48,7 @@ require_once 'partials/head.php';
 
     <h2 class="font-headline text-4xl font-bold uppercase mb-16">Dernières actualités</h2>
     <div class="articles-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
         <?php foreach ($latestArticles as $article): ?>
             <article class="article-card group bg-tertiary-black">
                 <div class="h-64 overflow-hidden relative">
@@ -55,17 +56,17 @@ require_once 'partials/head.php';
                 </div>
                 <div class="p-8">
                     <h3 class="font-headline text-2xl font-bold mb-3 group-hover:text-primary transition-colors"><?= htmlspecialchars($article['title']) ?></h3>
-                    <p class="text-white text-sm font-body leading-relaxed mb-6"><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?></p>
-                    <div class="flex justify-between items-end border-t border-outline-variant/10 pt-6 mb-8">
+                    <p class="text-tertiary-white text-sm font-body leading-relaxed mb-6"><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?></p>
+                    <div class="flex justify-between items-end border-t border-tertiary-white/10 pt-6 mb-8">
                     <div class="space-y-1">
-                        <span class="block font-label text-[10px] text-outline uppercase ">Note du rédacteur :</span>
-                        <span class="text-2xl font-black text-primary font-headline"><?= htmlspecialchars($article['note']) ?><span class="text-xs text-outline ml-1">/ 10</span></span>
+                        <span class="block font-label text-[10px] text-tertiary-white uppercase ">Note du rédacteur :</span>
+                        <span class="text-2xl font-black text-primary font-headline"><?= htmlspecialchars($article['note']) ?><span class="text-xs text-tertiary-white ml-1">/ 10</span></span>
                     </div>
                     <div class="space-y-1 text-right">
-                        <span class="block font-label text-[10px] text-outline uppercase">Note moyenne utilisateurs :</span>
+                        <span class="block font-label text-[10px] text-tertiary-white uppercase">Note moyenne utilisateurs :</span>
                         <span class="text-2xl font-black text-secondary font-headline">
                              <?php $avgNote = getArticleNote($article['id_article']); ?>
-                            <?= $avgNote !== 0.0 ? htmlspecialchars($avgNote) . '<span class="text-xs text-outline ml-1">/10</span>' : '<span class="text-xs text-outline ml-1">Aucune note</span>' ?>
+                            <?= $avgNote !== 0.0 ? htmlspecialchars($avgNote) . '<span class="text-xs text-tertiary-white ml-1">/10</span>' : '<span class="text-xs text-tertiary-white ml-1">Aucune note</span>' ?>
 
                             </span></span>
                     </div>
@@ -75,6 +76,7 @@ require_once 'partials/head.php';
             </article>
         <?php endforeach; ?>
     </div>
+    
     <div class="mt-24 flex justify-center">
             <a href="index.php?route=articles" class="group flex items-center gap-4 bg-surface-variant/40 px-10 py-4 hover:bg-primary/10 transition-all border-b-2 border-primary">
                 <span class="font-label text-sm tracking-[0.3em] uppercase">

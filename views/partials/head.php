@@ -27,6 +27,7 @@
                     "error-container": "#ff716c",
                     "success-text": "#006a71",
                     "success-container": "#00deec",
+                    "transparent": "transparent",
 
               },
               "fontFamily": {

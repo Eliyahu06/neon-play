@@ -5,13 +5,13 @@ $title = "Neon Play - Connexion";
 require_once 'partials/head.php';
 ?>
 <body class="bg-black text-white">
+<?php require_once 'partials/header.php'; ?>
 
 <main class="min-h-screen pt-20 flex items-center justify-center ">
 <?php 
     $old = $_SESSION['old_post'] ?? []; 
     unset($_SESSION['old_post']); 
 ?>
-<?php require_once 'partials/header.php'; ?>
     <?php if (isset($_SESSION['error_message'])): ?>
         <div class="message error text-error-text bg-error-container">
             <?= htmlspecialchars($_SESSION['error_message']) ?>

@@ -5,9 +5,7 @@ $title = "Neon Play - Inscription";
 require_once 'partials/head.php';
 ?>
 <body class="bg-black text-white">   
-    
-
-    <?php require_once 'partials/header.php'; ?>;
+<?php require_once 'partials/header.php'; ?>;
 
     <main class="min-h-screen pt-20 flex items-center justify-center ">
 <?php 

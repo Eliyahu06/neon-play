@@ -56,7 +56,7 @@ require_once 'partials/head.php';
                 </div>
                 <div class="p-8">
                     <h3 class="font-headline text-2xl font-bold mb-3 group-hover:text-primary transition-colors"><?= htmlspecialchars($article['title']) ?></h3>
-                    <p class="text-tertiary-white text-sm font-body leading-relaxed mb-6"><?= htmlspecialchars(substr($article['intro'], 0, 100)) ?></p>
+                    <p class="text-tertiary-white text-sm font-body leading-relaxed mb-6"><?= htmlspecialchars($article['intro']) ?></p>
                     <div class="flex justify-between items-end border-t border-tertiary-white/10 pt-6 mb-8">
                     <div class="space-y-1">
                         <span class="block font-label text-[10px] text-tertiary-white uppercase ">Note du rédacteur :</span>

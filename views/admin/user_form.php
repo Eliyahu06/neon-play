@@ -3,8 +3,9 @@
 <?php
 $title = "Neon Play Admin - " . $user['username'];
 require_once __DIR__ . '/../partials/head.php';?>
-<body>
+<body class="overflow-x-hidden bg-white">
     <?php require_once 'partials/header.php'; ?>
+    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
     <h1><?= htmlspecialchars($user['username']) ?></h1>
 
     <?php if (isset($_SESSION['error_message'])): ?>
@@ -67,5 +68,6 @@ require_once __DIR__ . '/../partials/head.php';?>
         <input type="submit" name="bUserDelete" value="Supprimer l'utilisateur">
     </form>
     <?php endif; ?>
+    </main>
 </body>
 </html>

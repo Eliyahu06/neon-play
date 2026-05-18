@@ -3,8 +3,9 @@
 <?php
 $title = "Neon Play Admin - " . ($article['title'] ?? 'Nouvel article');
 require_once __DIR__ . '/../partials/head.php';?>
-<body>
+<body class="overflow-x-hidden bg-white text-slate-900">
     <?php require_once 'partials/header.php'; ?>
+    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
     <h1><?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?></h1>
 
     <?php if (!empty($_SESSION['error_message'])): ?>
@@ -80,5 +81,6 @@ require_once __DIR__ . '/../partials/head.php';?>
     <?php endif; ?>
     <br><br>
     <a href="?route=admin&section=articles">Retour à la liste des articles</a>
+    </main>
 </body> 
 </html>

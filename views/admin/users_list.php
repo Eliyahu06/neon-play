@@ -3,8 +3,9 @@
 <?php
 $title = "Neon Play Admin - Listes des utilisateurs";
 require_once __DIR__ . '/../partials/head.php';?>
-<body>
+<body class="overflow-x-hidden bg-white">
     <?php require_once 'partials/header.php'; ?>
+    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
     <h1>Liste des utilisateurs</h1>
 
     <?php if (isset($_SESSION['error_message'])): ?>
@@ -84,6 +85,6 @@ require_once __DIR__ . '/../partials/head.php';?>
             <?php endfor; ?>
         </ul>
     </nav>
-
+    </main>
 </body>
 </html>

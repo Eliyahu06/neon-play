@@ -137,6 +137,9 @@ require_once 'partials/head.php';
                 </div>
                   <?php endif; ?>
                 <div class="space-y-12">
+                    <?php if ($noComments == 0): ?>
+                    <p class="text-tertiary-white text-xs mt-2 uppercase font-headline">Pas encore de commentaires</p>
+                    <?php endif; ?>
                     <?php foreach ($comments as $comment): ?>
                     <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>
                     <form class="space-y-6" action="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>" method="post">

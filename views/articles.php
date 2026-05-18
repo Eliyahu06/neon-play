@@ -155,7 +155,17 @@ require_once 'partials/head.php';
         </a>
     <?php endif; ?>
 </div>
-    <a href="index.php?route=home">Retour</a>
+        <div class="mt-24 flex justify-center">
+        <a href="index.php?route=home" class="group flex items-center gap-4 bg-surface-variant/40 px-10 py-4 hover:bg-primary/10 transition-all border-b-2 border-primary">
+            <span class="font-label text-sm tracking-[0.3em] uppercase">
+                Retourner à l'accueil
+            </span>
+            <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform"
+                data-icon="keyboard_double_arrow_right">
+                keyboard_double_arrow_right
+            </span>
+        </a>
+    </div>
     </main>
     <?php require_once 'partials/footer.php'; ?>
 </body>

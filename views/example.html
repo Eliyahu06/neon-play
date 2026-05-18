@@ -5,10 +5,13 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Neon Play // Interface de Jeu</title>
+    <title>NEON PLAY - CONNEXION</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -19,57 +22,57 @@
             theme: {
                 extend: {
                     "colors": {
-                        "on-secondary-fixed-variant": "#950085",
-                        "on-primary-container": "#005359",
-                        "surface-tint": "#8ff5ff",
-                        "surface-bright": "#2c2c2c",
-                        "on-tertiary-container": "#f8f1ff",
-                        "on-tertiary-fixed": "#1f0052",
-                        "secondary": "#ff59e3",
-                        "secondary-container": "#ad009b",
-                        "surface-container": "#1a1919",
-                        "surface-dim": "#0e0e0e",
-                        "on-secondary-container": "#fff5f8",
-                        "error-container": "#9f0519",
                         "primary-fixed": "#00eefc",
-                        "on-error-container": "#ffa8a3",
-                        "inverse-surface": "#fcf9f8",
-                        "outline-variant": "#484847",
-                        "on-primary": "#005d63",
-                        "on-error": "#490006",
-                        "surface": "#0e0e0e",
-                        "on-surface-variant": "#adaaaa",
-                        "surface-variant": "#262626",
-                        "inverse-primary": "#006a71",
-                        "on-primary-fixed-variant": "#005e64",
-                        "surface-container-high": "#201f1f",
-                        "on-tertiary": "#290067",
-                        "on-primary-fixed": "#003f43",
-                        "tertiary-fixed": "#bda1ff",
-                        "inverse-on-surface": "#565555",
-                        "secondary-fixed": "#ffbeeb",
-                        "surface-container-lowest": "#000000",
-                        "surface-container-low": "#131313",
-                        "tertiary-dim": "#874cff",
-                        "on-surface": "#ffffff",
-                        "tertiary-fixed-dim": "#b190ff",
+                        "surface-bright": "#2c2c2c",
                         "error-dim": "#d7383b",
-                        "primary-container": "#00eefc",
-                        "primary-dim": "#00deec",
-                        "tertiary": "#ac89ff",
-                        "error": "#ff716c",
-                        "secondary-dim": "#ff59e3",
-                        "surface-container-highest": "#262626",
+                        "on-tertiary-container": "#f8f1ff",
                         "secondary-fixed-dim": "#ffa8e7",
-                        "on-secondary": "#42003a",
-                        "on-tertiary-fixed-variant": "#4700a7",
+                        "surface-tint": "#8ff5ff",
                         "primary": "#8ff5ff",
-                        "primary-fixed-dim": "#00deec",
+                        "surface-container-highest": "#262626",
+                        "inverse-on-surface": "#565555",
+                        "surface": "#0e0e0e",
+                        "on-tertiary-fixed-variant": "#4700a7",
+                        "on-secondary": "#42003a",
+                        "surface-variant": "#262626",
+                        "tertiary": "#ac89ff",
+                        "on-error": "#490006",
+                        "error-container": "#9f0519",
                         "background": "#0e0e0e",
-                        "tertiary-container": "#7000ff",
+                        "tertiary-dim": "#874cff",
+                        "surface-container-lowest": "#000000",
+                        "secondary-fixed": "#ffbeeb",
+                        "tertiary-fixed-dim": "#b190ff",
+                        "surface-dim": "#0e0e0e",
+                        "surface-container-low": "#131313",
+                        "primary-fixed-dim": "#00deec",
+                        "on-primary-fixed": "#003f43",
                         "outline": "#767575",
+                        "error": "#ff716c",
                         "on-background": "#ffffff",
-                        "on-secondary-fixed": "#640059"
+                        "on-secondary-container": "#fff5f8",
+                        "tertiary-fixed": "#bda1ff",
+                        "outline-variant": "#484847",
+                        "on-primary-fixed-variant": "#005e64",
+                        "primary-dim": "#00deec",
+                        "on-secondary-fixed": "#640059",
+                        "tertiary-container": "#7000ff",
+                        "primary-container": "#00eefc",
+                        "surface-container": "#1a1919",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-container-high": "#201f1f",
+                        "on-surface-variant": "#adaaaa",
+                        "secondary": "#ff59e3",
+                        "inverse-primary": "#006a71",
+                        "secondary-dim": "#ff59e3",
+                        "on-tertiary": "#290067",
+                        "on-primary": "#005d63",
+                        "secondary-container": "#ad009b",
+                        "on-tertiary-fixed": "#1f0052",
+                        "on-surface": "#ffffff",
+                        "on-error-container": "#ffa8a3",
+                        "on-primary-container": "#005359",
+                        "on-secondary-fixed-variant": "#950085"
                     },
                     "borderRadius": {
                         "DEFAULT": "0px",
@@ -79,6 +82,7 @@
                     },
                     "fontFamily": {
                         "headline": ["Space Grotesk"],
+                        "display": ["Space Grotesk"],
                         "body": ["Manrope"],
                         "label": ["Space Grotesk"]
                     }
@@ -87,290 +91,190 @@
         }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #0e0e0e;
         }
 
-        body {
-            background-color: #0e0e0e;
-            color: #ffffff;
-            font-family: 'Manrope', sans-serif;
+        .font-space {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .glass-card {
             background: rgba(38, 38, 38, 0.6);
             backdrop-filter: blur(12px);
+            box-shadow: 0 0 20px rgba(143, 245, 255, 0.05);
         }
 
-        .neon-border-left {
-            border-left: 2px solid #ff59e3;
+        .neon-glow-blue:hover {
+            box-shadow: 0 0 20px rgba(143, 245, 255, 0.4);
         }
 
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        .neon-glow-pink:hover {
+            box-shadow: 0 0 20px rgba(255, 89, 227, 0.4);
+        }
+
+        .custom-gradient-bg {
+            background: radial-gradient(circle at 50% 50%, #1a1919 0%, #0e0e0e 100%);
+        }
+
+        .terminal-input:focus {
+            outline: none;
+            border-color: #8ff5ff;
+            box-shadow: 0 1px 0 0 #8ff5ff;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
     </style>
 </head>
 
-<body class="bg-surface text-on-surface">
-    <!-- TopAppBar -->
-    <header
-        class="fixed top-0 w-full border-b border-outline-variant/20 bg-[#0e0e0e]/60 backdrop-blur-xl z-50 flex justify-between items-center h-16 px-6 shadow-[0_0_20px_rgba(143,245,255,0.15)]">
-        <div
-            class="text-2xl font-bold tracking-tighter text-primary drop-shadow-[0_0_10px_rgba(143,245,255,0.5)] font-headline uppercase">
-            Neon Play
-        </div>
-        <nav class="hidden md:flex gap-8 font-headline tracking-tighter uppercase text-sm">
-            <a class="text-primary border-b-2 border-primary pb-1" href="#">RPG</a>
-            <a class="text-white/70 hover:text-primary transition-colors" href="#">Action</a>
-            <a class="text-white/70 hover:text-primary transition-colors" href="#">FPS</a>
-            <a class="text-white/70 hover:text-primary transition-colors" href="#">Stratégie</a>
-        </nav>
-        <div class="flex items-center gap-4">
-            <button class="material-symbols-outlined text-white/70 hover:text-primary transition-all">search</button>
+<body class="text-on-background selection:bg-primary selection:text-on-primary">
+    <!-- TopAppBar from JSON - Suppressing Navigation for focused login task per protocol -->
+    <nav
+        class="fixed top-0 w-full z-50 rounded-none bg-[#0e0e0e]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(0,240,255,0.1)] flex justify-between items-center px-8 h-20">
+        <div class="text-3xl font-black text-white italic tracking-widest font-space">NEON PLAY</div>
+        <div class="flex items-center gap-6">
+            <span
+                class="material-symbols-outlined text-[#00F0FF] cursor-pointer hover:text-[#FF59E3] transition-all duration-300">terminal</span>
+            <span
+                class="material-symbols-outlined text-[#00F0FF] cursor-pointer hover:text-[#FF59E3] transition-all duration-300">sensors</span>
             <button
-                class="bg-primary text-on-primary font-headline font-bold px-6 py-2 transition-all hover:shadow-[0_0_15px_rgba(143,245,255,0.3)] active:scale-95">
-                CONNEXION
-            </button>
+                class="font-space tracking-tighter uppercase text-[#00F0FF] border border-[#00F0FF] px-6 py-2 hover:bg-[#00F0FF] hover:text-[#005d63] transition-all duration-300 active:scale-95">LOGIN</button>
         </div>
-    </header>
-    <main class="pt-16 min-h-screen">
-        <!-- Hero Banner -->
-        <section class="relative h-[614px] w-full overflow-hidden">
-            <img alt="Vue cinématographique d'une rue futuriste cyberpunk néon la nuit avec de la pluie reflétant des publicités holographiques bleues et roses"
-                class="w-full h-full object-cover opacity-60"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaV2qvPUtZmFz7LZZETqVlq9CqnvvZqS6p8l0FOcTI5VuV10_2Nsr2-tQ-kbWLdaNTj069qlpNZbPuStexdmkBCYpsfUwQU3zDkpHkd6_SmbCLJiTy5Hx6sVpgmfIKAJsVniU1tGR_rqtx1FugmkAwpM6HFjCIM38jdJTMnsTiTCLAegGXCJt9R66X0ngAW-POZyKZBi0oNVbr7JlKuxJMtAfalJ_j_NbiYWPfxjdCyQfOEt0BrGCk1QkgVtBX-3gpSbr01WvqLJRg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
-            <div class="absolute bottom-0 left-0 w-full p-8 md:p-16">
-                <div class="max-w-7xl mx-auto">
-                    <span
-                        class="inline-block bg-primary-container/20 text-primary px-3 py-1 font-headline text-xs tracking-widest uppercase mb-4">INFOS
-                        PREMIUM // 0X-442</span>
+    </nav>
+    <main class="min-h-screen pt-20 flex items-center justify-center custom-gradient-bg relative overflow-hidden">
+        <!-- Background Atmospheric Element -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-0 relative z-10 px-4">
+            <!-- Left Side: Visual Content -->
+            <div
+                class="hidden lg:flex flex-col justify-center p-12 border-l border-white/5 bg-surface-container-low/40 backdrop-blur-sm">
+                <div class="mb-8">
+                    <span class="font-space text-primary uppercase tracking-[0.3em] text-xs mb-4 block">Système d'accès
+                        Neural</span>
                     <h1
-                        class="text-5xl md:text-8xl font-headline font-bold tracking-tighter uppercase leading-none mb-6">
-                        CHRONO <span class="text-primary">BREACH</span>
+                        class="font-space text-6xl font-black italic tracking-tighter leading-none text-white uppercase mb-6">
+                        Entrez dans <br /><span class="text-primary">La Matrice</span>
                     </h1>
-                    <div class="flex flex-wrap gap-6 items-center">
-                        <div class="flex items-center gap-2">
-                            <span class="text-on-surface-variant text-xs uppercase font-headline">Date de Sortie</span>
-                            <span class="text-on-surface font-bold">12 DÉC 2024</span>
-                        </div>
-                        <div class="h-4 w-px bg-outline-variant/30"></div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-on-surface-variant text-xs uppercase font-headline">Genre</span>
-                            <span class="text-on-surface font-bold">RPG D'ACTION TACTIQUE</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Article Content Shell -->
-        <div class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Ratings & Stats (Asymmetric Sidebar) -->
-            <aside class="lg:col-span-4 space-y-8 order-2 lg:order-1">
-                <div class="bg-surface-container p-8 space-y-8 relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
-                    <div>
-                        <h3 class="font-headline text-xs text-secondary tracking-widest uppercase mb-4">NOTE CRITIQUE
-                        </h3>
-                        <div class="flex items-end gap-2">
-                            <span class="text-7xl font-headline font-black leading-none text-white">9.5</span>
-                            <span class="text-secondary font-headline text-xl pb-1">/ 10</span>
-                        </div>
-                        <p class="text-on-surface-variant text-sm mt-2 italic font-body">"Un chef-d'œuvre de narration
-                            cinétique."</p>
-                    </div>
-                    <div class="h-px bg-outline-variant/20"></div>
-                    <div>
-                        <h3 class="font-headline text-xs text-primary tracking-widest uppercase mb-4">SCORE UTILISATEURS
-                        </h3>
-                        <div class="flex items-end gap-2">
-                            <span class="text-5xl font-headline font-black leading-none text-white">8.8</span>
-                            <span class="text-primary font-headline text-lg pb-1">/ 10</span>
-                        </div>
-                        <p class="text-on-surface-variant text-xs mt-2 uppercase tracking-tighter font-headline">Basé
-                            sur 14 204 liaisons d'interface</p>
-                    </div>
-                    <div class="h-px bg-outline-variant/20"></div>
-                    <div class="space-y-4">
-                        <h3 class="font-headline text-xs text-on-surface-variant tracking-widest uppercase">REQUIS
-                            MATÉRIELS</h3>
-                        <div class="space-y-2">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-on-surface-variant">OS:</span>
-                                <span>NEURAL-OS 12.0+</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-on-surface-variant">GFX:</span>
-                                <span>RTX 5090 Ti</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Bento Style Image Fragment -->
-                <div class="bg-surface-container overflow-hidden group">
-                    <img alt="Gros plan de l'interface du jeu montrant des éléments HUD néon, des arbres de compétences brillants et des textures numériques complexes"
-                        class="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110 opacity-80"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLgGo26tqX61sul7x6hCjtJnq-IvESp0uWtwt-wSSm8SYU9Q5bVWg3ftbEM9Bsb0_GpJSLrbgjvj4g1ukP7TybPRGKFwk2IOhuuiP0quULwSlxqpiorNsY70PcoqMOJGNtcQb47pIblPEwUFfIgmUur5tn5u89uSrTjEiWlEXss0pCfiY_qNfNPwNRlY-OtQLK9pLPcPeXuAKU6bjNhUVG5p6yUE6TgmivvoR4NP14-69DCHmEIp_n1nrAldHOeNmAAt9yo9iqZ6X" />
-                </div>
-            </aside>
-            <!-- Main Text Content -->
-            <article class="lg:col-span-8 space-y-12 order-1 lg:order-2">
-                <section class="space-y-6">
-                    <p
-                        class="text-xl md:text-2xl font-light leading-relaxed text-on-surface border-l-4 border-primary pl-8 py-2">
-                        Chrono Breach n'est pas seulement un jeu ; c'est un assaut sensoriel qui redéfinit les limites
-                        du genre RPG grâce à sa mécanique révolutionnaire de "Time-Slicing".
+                    <p class="text-on-surface-variant max-w-md text-lg leading-relaxed">
+                        Accédez à votre terminal de divertissement haute définition. Synchronisation des données
+                        cryptées en cours.
                     </p>
-                    <div class="prose prose-invert max-w-none space-y-6 font-body text-on-surface/80 leading-loose">
-                        <p>
-                            Développé par l'énigmatique Void Syndicate, le jeu transporte les joueurs à Neo-Kyoto, une
-                            mégalopole tentaculaire bâtie sur les ruines d'un âge numérique oublié. Vous incarnez
-                            Kaelen, un "Fantôme de Données" capable de manifester une forme physique tant dans le monde
-                            matériel que dans les couches cryptées du réseau de la ville.
-                        </p>
-                        <p>
-                            Le texte de présentation ne rend pas justice à la verticalité pure du monde. Des caniveaux
-                            détrempés par la pluie de l'Under-Rim aux flèches d'un blanc aveuglant du Corporate Zenith,
-                            chaque image de Chrono Breach ressemble à une photographie éditoriale méticuleusement
-                            élaborée. Le moteur d'éclairage utilise une illumination globale en temps réel qui fait
-                            baigner les enseignes néon dans le smog avec un réalisme hantant.
-                        </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="p-6 bg-surface-container/50 border-l-2 border-secondary">
+                        <span class="font-space text-secondary text-xs block mb-2 uppercase">Status_</span>
+                        <div class="text-xl font-bold font-space">ONLINE</div>
                     </div>
-                </section>
-                <div class="bg-surface-container-high p-12 space-y-8 border border-primary/10">
-                    <h2 class="font-headline text-3xl font-bold tracking-tighter uppercase flex items-center gap-4">
-                        <span class="w-8 h-px bg-primary"></span>
-                        Le Verdict
+                    <div class="p-6 bg-surface-container/50 border-l-2 border-primary">
+                        <span class="font-space text-primary text-xs block mb-2 uppercase">Latency_</span>
+                        <div class="text-xl font-bold font-space">12MS</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side: Login Form -->
+            <div
+                class="glass-card p-8 md:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-r border-white/10 relative">
+                <!-- Glitch accent -->
+                <div class="absolute top-0 right-0 w-32 h-1 bg-secondary shadow-[0_0_10px_#ff59e3]"></div>
+                <div class="mb-10">
+                    <h2 class="font-space text-3xl font-bold text-white uppercase tracking-tight mb-2">Identification
                     </h2>
-                    <div class="font-body text-on-surface/90 space-y-6">
-                        <p>
-                            Après 60 heures de jeu, l'élément le plus frappant reste la fluidité du combat.
-                            Contrairement aux systèmes traditionnels au tour par tour ou d'action, Chrono Breach utilise
-                            un système hybride où votre vitesse de mouvement est dictée par votre synchronisation
-                            matérielle.
-                        </p>
-                        <p>
-                            L'arc narratif est tout aussi ambitieux, abordant les thèmes de l'immortalité numérique et
-                            de la perte de l'expérience tactile humaine. C'est un regard froid et lucide sur notre
-                            avenir potentiel, enveloppé dans un package indéniablement cool. Bien que certains puissent
-                            trouver les pics de difficulté du dernier secteur punitifs, la récompense de découvrir le
-                            mystère central en vaut largement la sueur numérique.
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap gap-4 pt-6">
-                        <span
-                            class="bg-surface-variant px-4 py-1 text-[10px] font-headline uppercase tracking-widest text-primary">+
-                            Conception visuelle impeccable</span>
-                        <span
-                            class="bg-surface-variant px-4 py-1 text-[10px] font-headline uppercase tracking-widest text-primary">+
-                            Mécaniques de combat innovantes</span>
-                        <span
-                            class="bg-surface-variant px-4 py-1 text-[10px] font-headline uppercase tracking-widest text-secondary">-
-                            Barrière matérielle élevée</span>
-                    </div>
+                    <div class="w-12 h-1 bg-primary mb-6"></div>
                 </div>
-            </article>
-        </div>
-        <!-- Comments Section -->
-        <section class="bg-surface-container-low py-24">
-            <div class="max-w-4xl mx-auto px-6">
-                <div class="flex items-center justify-between mb-16">
-                    <h2 class="font-headline text-4xl font-black uppercase tracking-tighter">ÉCHANGES DE DONNÉES</h2>
-                    <span class="font-headline text-xs text-primary bg-primary/10 px-3 py-1">24 Terminaux Actifs</span>
-                </div>
-                <!-- Comment Form -->
-                <div class="mb-20 bg-surface-container p-8 border-b-2 border-primary">
-                    <h3 class="font-headline text-sm font-bold uppercase mb-8 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary text-sm">edit_note</span>
-                        Soumettre une nouvelle entrée
-                    </h3>
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-1">
-                                <label
-                                    class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest">Nom
-                                    d'Interface</label>
-                                <input
-                                    class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none"
-                                    type="text" />
-                            </div>
-                            <div class="space-y-1">
-                                <label
-                                    class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest">Taux
-                                    de Synchronisation (0-10)</label>
-                                <input
-                                    class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none"
-                                    max="10" min="0" type="number" />
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <label
-                                class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest">Module
-                                de Rétroaction</label>
-                            <textarea
-                                class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none resize-none"
-                                rows="4"></textarea>
-                        </div>
-                        <button
-                            class="bg-primary text-on-primary px-8 py-3 font-headline font-bold uppercase tracking-tighter hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all">
-                            Transmettre les Données
-                        </button>
-                    </form>
-                </div>
-                <!-- Comments List -->
-                <div class="space-y-12">
-                    <!-- Comment Item 1 -->
-                    <div class="group relative">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-surface-container-highest flex items-center justify-center font-headline font-bold text-secondary">
-                                    V_1
-                                </div>
-                                <div>
-                                    <h4 class="font-headline font-bold uppercase text-sm">Void_Walker_88</h4>
-                                    <span class="text-[10px] text-on-surface-variant font-headline uppercase">Il y a 3
-                                        heures</span>
-                                </div>
-                            </div>
-                            <div class="bg-secondary/10 px-4 py-1">
-                                <span class="font-headline font-bold text-secondary">9/10</span>
-                            </div>
-                        </div>
-                        <p class="font-body text-on-surface/70 leading-relaxed pl-16">
-                            La fidélité visuelle ici est inégalée. J'ai passé plus de temps dans le mode photo qu'à
-                            jouer la quête principale. Le meilleur RPG de la décennie.
-                        </p>
+                <form class="space-y-8">
+                    <!-- Email Field -->
+                    <div class="relative group">
+                        <label
+                            class="block font-space text-[10px] uppercase tracking-widest text-on-surface-variant group-focus-within:text-primary transition-colors mb-2">Email
+                            address field</label>
                         <div
-                            class="absolute -left-4 top-0 w-1 h-0 bg-secondary transition-all duration-300 group-hover:h-full">
+                            class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">
+                            <span
+                                class="material-symbols-outlined text-outline group-focus-within:text-primary pr-3 pb-2 text-lg">alternate_email</span>
+                            <input
+                                class="w-full bg-transparent border-none text-white font-space placeholder:text-zinc-700 pb-2 focus:ring-0 terminal-input"
+                                placeholder="USER_NAME@NEON.NET" type="email" />
                         </div>
                     </div>
+                    <!-- Password Field -->
+                    <div class="relative group">
+                        <label
+                            class="block font-space text-[10px] uppercase tracking-widest text-on-surface-variant group-focus-within:text-primary transition-colors mb-2">Password
+                            field</label>
+                        <div
+                            class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">
+                            <span
+                                class="material-symbols-outlined text-outline group-focus-within:text-primary pr-3 pb-2 text-lg">lock</span>
+                            <input
+                                class="w-full bg-transparent border-none text-white font-space placeholder:text-zinc-700 pb-2 focus:ring-0 terminal-input"
+                                placeholder="••••••••••••" type="password" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-6 pt-4">
+                        <button
+                            class="w-full bg-primary text-on-primary font-space font-bold py-5 uppercase tracking-widest text-sm hover:bg-primary-container neon-glow-blue transition-all active:scale-[0.98]">
+                            Connexion
+                        </button>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <a class="font-space text-[10px] uppercase tracking-widest text-secondary hover:text-white transition-colors"
+                                href="#">
+                                Mot de passe oublié ?
+                            </a>
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-widest text-on-surface-variant font-space">Nouveau
+                                    ici ?</span>
+                                <a class="text-[10px] uppercase tracking-widest text-primary hover:underline font-space font-bold"
+                                    href="#">Créer un compte</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- System Decoration -->
+                <div class="mt-16 flex items-center justify-between opacity-30">
+                    <div class="flex gap-1">
+                        <div class="w-1 h-1 bg-white"></div>
+                        <div class="w-1 h-1 bg-white"></div>
+                        <div class="w-1 h-1 bg-white"></div>
+                    </div>
+                    <span class="font-space text-[8px] uppercase tracking-[0.5em]">AUTH_PROTOCOL_V4.02</span>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
-    <!-- Footer -->
-    <footer class="bg-surface border-t border-outline-variant/20 pt-12 pb-8">
-        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-lg font-black text-secondary font-headline uppercase">
-                Neon Play
-            </div>
-            <nav class="flex gap-8 font-headline text-[10px] uppercase tracking-widest text-white/40">
-                <a class="hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all"
-                    href="#">Politique de Confidentialité</a>
-                <a class="hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all"
-                    href="#">Conditions d'Utilisation</a>
-                <a class="hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all"
-                    href="#">Contact</a>
-                <a class="hover:text-secondary hover:drop-shadow-[0_0_8px_rgba(255,89,227,0.5)] transition-all"
-                    href="#">À propos</a>
-            </nav>
-            <div class="font-headline text-[10px] uppercase tracking-widest text-white/40">
-                © 2024 NEON PLAY. TOUS DROITS RÉSERVÉS. // ACCÈS_TERMINAL_AUTORISÉ
-            </div>
+    <!-- Footer from JSON -->
+    <footer
+        class="w-full rounded-none border-t border-zinc-800 bg-[#0e0e0e] flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-6 relative z-10">
+        <div class="text-white font-bold font-space uppercase">NEON_PLAY</div>
+        <div class="flex flex-wrap justify-center gap-8">
+            <a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-zinc-600 hover:text-[#00F0FF] transition-colors"
+                href="#">PROTOCOL</a>
+            <a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-zinc-600 hover:text-[#00F0FF] transition-colors"
+                href="#">RESOURCES</a>
+            <a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-zinc-600 hover:text-[#00F0FF] transition-colors"
+                href="#">SUPPORT</a>
+            <a class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-zinc-600 hover:text-[#00F0FF] transition-colors"
+                href="#">NEURAL_NET</a>
+        </div>
+        <div
+            class="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#FF59E3] opacity-80 hover:opacity-100">
+            © 2024 NEON_PLAY // DATA_STRATUM_ENCRYPTED
         </div>
     </footer>
+    <!-- Decorative Corner Visual -->
+    <div class="fixed bottom-0 left-0 w-32 h-32 pointer-events-none opacity-20">
+        <img class="w-full h-full object-cover"
+            data-alt="Cyberpunk technical interface pattern with glowing neon blue lines and grid structures on deep dark anthracite background"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCWLbJNpqQ7mtbhR4P2OAXkmrpFn7EugTzcTnVZuDWZY_BUteW8mlPYcTta69Fpu4qBK4PoSmTKqS3mNGQZevBB3EwpRjdadmc7cqDdTJlSpQDnEFcQwri1JYR5PEpEtcQTpPxIGW1-ZakdMj_tqZrjlUon_7YUAbpNGhKLxeFA0fVnuvhR_jEoxmxqn8MMt3kDyE9Roa3cWDVEDDRuJUYbqatDwykg6UjdJ2W8c9K5N7UrCqAdzQDKGoAAKZmlaCbHdUqZeUbHbsP" />
+    </div>
 </body>
 
 </html>

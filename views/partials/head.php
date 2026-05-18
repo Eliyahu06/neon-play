@@ -21,7 +21,7 @@
                     "secondary-black": "#201f1f",
                     "tertiary-black": "#131313",
                     "white": "#ffffff",
-                    "secondary-white": "#f8fafc",
+                    "secondary-white": "#d0d0d0ff",
                     "tertiary-white": "#ADAAAA",
                     "error-text": "#d7383b",
                     "error-container": "#ff716c",

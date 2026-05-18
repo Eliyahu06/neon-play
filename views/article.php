@@ -47,117 +47,171 @@ require_once 'partials/head.php';
 
 
     <section class="mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Ratings & Stats (Asymmetric Sidebar) -->
-            <aside class="lg:col-span-4 space-y-8 order-2 lg:order-1">
-                <div class="bg-surface-container p-8 space-y-8 relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+            <aside class="lg:col-span-4 order-2 lg:order-1">
+                <div class="bg-secondary-black p-8 space-y-8 relative border-l-4 border-secondary">
                     <div>
-                        <h3 class="font-headline text-xs text-secondary tracking-widest uppercase mb-4">Note du rédacteur :
+                        <h3 class="font-headline text-xs text-primary uppercase mb-4">Note du rédacteur :
                         </h3>
                         <div class="flex items-end gap-2">
-                            <span class="text-7xl font-headline font-black leading-none text-white"><?= htmlspecialchars($article['note']) ?></span>
-                            <span class="text-secondary font-headline text-xl pb-1">/ 10</span>
+                            <span class="text-7xl font-headline font-black text-white"><?= htmlspecialchars($article['note']) ?></span>
+                            <span class="text-primary font-headline text-xl pb-1">/ 10</span>
                         </div>
-                        <p class="text-on-surface-variant text-sm mt-2 italic font-body">
+                        <p class="text-tertiary-white text-sm mt-2 font-body">
                                 <?= htmlspecialchars($article['opinion']) ?>
                         </p>
                     </div>
-                    <div class="h-px bg-outline-variant/20"></div>
+                    <div class="h-px bg-tertiary-white/20"></div>
                     <div>
-                        <h3 class="font-headline text-xs text-primary tracking-widest uppercase mb-4">Note moyenne utilisateurs :
+                        <h3 class="font-headline text-xs text-secondary uppercase mb-4">Note moyenne utilisateurs :
                        </h3>
                         <div class="flex items-end gap-2">
-                            <?= $note !== 0.0 ? '<span class="text-5xl font-headline font-black leading-none text-white">'.htmlspecialchars($note) . '</span><span class="text-primary font-headline text-lg pb-1">/ 10</span>' : 'Aucune note' ?>
+                            <?= $note !== 0.0 ? '<span class="text-7xl font-headline font-black leading-none text-white">'.htmlspecialchars($note) . '</span><span class="text-secondary font-headline text-lg pb-1">/ 10</span>' : 'Aucune note' ?>
                         </div>
-                        <?php if ($noComments > 0): ?>
-                            <p class="text-on-surface-variant text-xs mt-2 uppercase tracking-tighter font-headline">Basé
+                        <?php if ($noComments >= 2): ?>
+                            <p class="text-tertiary-white text-xs mt-2 uppercase font-headline">Basé
                                 sur <?= htmlspecialchars($noComments) ?> avis d'utilisateurs</p>
+                        <?php elseif ($noComments == 1): ?>
+                            <p class="text-tertiary-white text-xs mt-2 uppercase font-headline">Basé
+                                sur <?= htmlspecialchars($noComments) ?> avis d'utilisateur</p>
                         <?php endif; ?>
                     </div>
-
-
-
-                    <div class="h-px bg-outline-variant/20"></div>
                 </div>
-                <!-- Bento Style Image Fragment -->
-                <div class="bg-surface-container overflow-hidden group">
-                    <img alt="Gros plan de l'interface du jeu montrant des éléments HUD néon, des arbres de compétences brillants et des textures numériques complexes"
+                <div class="overflow-hidden group">
+                    <img alt="<?= htmlspecialchars($article['title']) ?> - miniature"
                         class="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110 opacity-80"
-                        src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" alt="<?= htmlspecialchars($article['title']) ?> - miniature" />
+                        src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" />
                 </div>
             </aside>
-            <!-- Main Text Content -->
             <article class="lg:col-span-8 space-y-12 order-1 lg:order-2">
-                <section class="space-y-6">
-                        <p><?= htmlspecialchars($article['intro']) ?></p>
-                    <div class="prose prose-invert max-w-none space-y-6 font-body text-on-surface/80 leading-loose">
+                <div class="space-y-6">
+                        <p class="text-xl md:text-2xl font-light text-white border-l-4 border-primary pl-8"><?= htmlspecialchars($article['intro']) ?></p>
+                    <div class="max-w-none space-y-6 font-body text-white">
                             <p><?= htmlspecialchars($article['description']) ?></p>
                     </div>
-                </section>
-                <div class="bg-surface-container-high p-12 space-y-8 border border-primary/10">
+                </div>
+                <div class="bg-secondary-black p-12 space-y-8 border border-primary/10">
                     <h2 class="font-headline text-3xl font-bold tracking-tighter uppercase flex items-center gap-4">
                         <span class="w-8 h-px bg-primary"></span>
                         Le Verdict
                     </h2>
-                    <div class="font-body text-on-surface/90 space-y-6">
+                    <div class="font-body text-white/90 space-y-6">
                         <p><?= htmlspecialchars($article['critic']) ?></p>
                     </div>
                 </div>
             </article>
         </section>
+
+        <section class="bg-tertiary-black py-24">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="flex items-center justify-between mb-16">
+                    <h2 class="font-headline text-4xl font-black uppercase ">Commentaires</h2> 
+                </div>
+            <?php if (isset($_SESSION['user']) && !$hasCommented): ?>
+                <div class="mb-20 bg-secondary-black p-8 border-b-2 border-primary">
+                    <h3 class="font-headline text-sm font-bold uppercase mb-8 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm">edit_note</span>
+                        Ajouter un commentaire
+                    </h3>
+                    <form class="space-y-6" action="index.php?route=article&id=<?= $article['id_article'] ?>" method="post" >
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-1">
+                                <label
+                                    class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest" for="note">Note (0-10)</label>
+                                <input
+                                    class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none"
+                                    max="10" min="0" type="number" step="0.1" name="note" id="note" required/>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label
+                                class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest" for="comment">Commentaire</label>
+                            <textarea
+                                class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none resize-none"
+                                rows="4" name="comment" id="comment" required></textarea>
+                        </div>
+                        <button type="submit" name="bComment"
+                            class="bg-primary text-dark-primary px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all">
+                            Publier
+                        </button>
+                    </form>
+                </div>
+                  <?php endif; ?>
+                <div class="space-y-12">
+                    <?php foreach ($comments as $comment): ?>
+                    <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>
+                    <form class="space-y-6" action="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>" method="post">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-1">
+                                <label
+                                    class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest" for="note">Note (0-10)</label>
+                                <input
+                                    class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none"
+                                    max="10" min="0" type="number" step="0.1" name="note" id="note" required value="<?= htmlspecialchars($comment['note']) ?>"/>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label
+                                class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest" for="comment">Commentaire</label>
+                            <textarea
+                                class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none resize-none"
+                                rows="4" name="comment" id="comment" required><?= htmlspecialchars($comment['content']) ?></textarea>
+                        </div>
+                        <button type="submit" name="bEditComment"
+                            class="bg-primary text-dark-primary px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all inline-block">
+                            Modifier
+                        </button>
+                    </form>
+                    <?php else: ?>
+                    <div class="group relative">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-4">
+                                <div>
+                                    <h4 class="font-headline font-bold uppercase text-sm"><?= htmlspecialchars($comment['username']) ?></h4>
+                                    <span class="text-[10px] text-tertiary-white font-headline uppercase">Publié le <?= date('d/m/Y', strtotime($comment['date_add'])) ?></span>
+                                </div>
+                            </div>
+                            <div class="bg-secondary/10 px-4 py-1">
+                                <span class="font-headline font-bold text-secondary"><?= htmlspecialchars($comment['note']) ?>/10</span>
+                            </div>
+                        </div>
+                        <p class="font-body text-on-surface/70 leading-relaxed">
+                            <?= htmlspecialchars($comment['content']) ?>
+                        </p>
+                        <div
+                            class="absolute -left-4 top-0 w-1 h-0 bg-secondary transition-all duration-300 group-hover:h-full">
+                        </div>
+                            <div class="mt-6">
+                                <?php if (isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $comment['id_user']): ?>
+                                    <a href="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>"
+                                    class="bg-primary text-dark-primary px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all mr-2 inline-block">
+                                        Modifier
+                                    </a>
+                                <?php endif; ?>
+                                <?php if (isset($_SESSION['user']) && ($_SESSION['user']['id_user'] === $comment['id_user'] || $_SESSION['user']['role'] === 'admin')): ?>
+                                    <a href="index.php?route=article&id=<?= $article['id_article'] ?>&deleteComment=<?= $comment['id_comment'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')"
+                                        class="bg-error-container text-white px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block">
+                                        Supprimer
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                    </div>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="mt-24 flex justify-center">
+        <a href="index.php?route=articles" class="group flex items-center gap-4 bg-surface-variant/40 px-10 py-4 hover:bg-primary/10 transition-all border-b-2 border-primary">
+            <span class="font-label text-sm tracking-[0.3em] uppercase">
+                Retourner à la liste des articles
+            </span>
+            <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform"
+                data-icon="keyboard_double_arrow_right">
+                keyboard_double_arrow_right
+            </span>
+        </a>
+    </div>  
+        </section>                    
     </main>
-
-
-
-
-    <img src="assets/img/<?= htmlspecialchars($article['banner_img']) ?>" alt="">
-    <img src="assets/img/<?= htmlspecialchars($article['card_img']) ?>" alt="">
-    <h1><?= htmlspecialchars($article['title']) ?></h1>
-    <p><?= htmlspecialchars($article['intro']) ?></p>
-    <p><?= htmlspecialchars($article['description']) ?></p>
-    <p>Note du rédacteur : <?= htmlspecialchars($article['note']) ?>/10</p>
-    <p><?= htmlspecialchars($article['critic']) ?></p>
-    <p><?= htmlspecialchars($article['opinion']) ?></p>
-    <p>Publié le <?= htmlspecialchars(date('d/m/Y', strtotime($article['date_add']))) ?></p>
-    <p>Note moyenne des lecteurs : <?= $note !== 0.0 ? htmlspecialchars($note) . '/10' : 'Aucune note' ?></p>
-    <h2>Commentaires</h2>
-
-   
-
-    <?php if (isset($_SESSION['user']) && !$hasCommented): ?>
-        <form action="index.php?route=article&id=<?= $article['id_article'] ?>" method="post">
-            <label for="comment">Commentaire</label>
-            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
-            <label for="note">Note</label>
-            <input type="number" name="note" min="0" max="10" step="0.1" required>
-            <button type="submit" name="bComment">Commenter</button>
-        </form>
-    <?php endif; ?>
-
-    <?php foreach ($comments as $comment): ?>
-        <?php if (isset($_GET['editComment']) && $_GET['editComment'] == $comment['id_comment']): ?>
-            <form action="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>" method="post">
-                <input type="hidden" name="id_comment" value="<?= $comment['id_comment'] ?>">
-                <label for="comment_<?= $comment['id_comment'] ?>">Commentaire</label>
-                <textarea name="comment" id="comment_<?= $comment['id_comment'] ?>" cols="30" rows="5" required><?= htmlspecialchars($comment['content']) ?></textarea>
-                <label for="note_<?= $comment['id_comment'] ?>">Note</label>
-                <input type="number" name="note" id="note_<?= $comment['id_comment'] ?>" min="0" max="10" step="0.1" value="<?= htmlspecialchars($comment['note']) ?>" required>
-                <button type="submit" name="bEditComment">Confirmer l'édition</button>
-                <a href="index.php?route=article&id=<?= $article['id_article'] ?>">Annuler</a>
-            </form>
-        <?php else: ?>
-            <p><?= htmlspecialchars($comment['username']) ?>: <?= htmlspecialchars($comment['content']) ?> (<?= htmlspecialchars($comment['note']) ?>/10)</p>
-            <p>Posté le <?= htmlspecialchars($comment['date_add']) ?></p>
-            <?php if (isset($_SESSION['user']) && ($_SESSION['user']['id_user'] === $comment['id_user'] || $_SESSION['user']['role'] === 'admin')): ?>
-                <a href="index.php?route=article&id=<?= $article['id_article'] ?>&deleteComment=<?= $comment['id_comment'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">Supprimer</a>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $comment['id_user']): ?>
-                <a href="index.php?route=article&id=<?= $article['id_article'] ?>&editComment=<?= $comment['id_comment'] ?>">Modifier</a>
-            <?php endif; ?>
-        <?php endif; ?>
-    <?php endforeach; ?>
-    
-    <a href="index.php?route=articles">Retour</a>
     <?php require_once 'partials/footer.php'; ?>
 </body>
 </html>

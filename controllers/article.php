@@ -23,6 +23,7 @@ $offset = ($page - 1) * $limit;
     $totalPages = ceil($totalArticles / $limit);
     $noResults = empty($articles);
 
+
 // Ajout commentaire
 if (isset($_POST['bComment'])) {
     $id_article = $_GET['id'];
@@ -96,5 +97,6 @@ if (!isset($_GET['id'])) {
     } else {
         $hasCommented = false;
     }
+    $noComments = countCommentsByArticle($id);
     include 'views/article.php';
 }

@@ -17,6 +17,7 @@ if (isset($_POST['bRegister'])) {
         exit();
     } else {
         $_SESSION['error_message'] = $message;
+        $_SESSION['old_post'] = $_POST;
         header("Location: index.php?route=register");
         exit();
     }
@@ -31,6 +32,7 @@ if (isset($_POST['bLogin'])) {
         exit();
     } else {
         $_SESSION['error_message'] = $message;
+        $_SESSION['old_post'] = $_POST;
         header("Location: index.php?route=login");
         exit();
     }
@@ -48,6 +50,7 @@ if (isset($_POST['bReset'])) {
         exit();
     } else {
         $_SESSION['error_message'] = $message;
+        $_SESSION['old_post'] = $_POST;
         header("Location: index.php?route=forgot");
         exit();
     }

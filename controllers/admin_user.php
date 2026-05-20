@@ -67,8 +67,6 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($role)) {
         $errors[] = "Le rôle est requis.";
     }
-
-    $_SESSION['error_message'] = $errors;
     
     if (empty($errors)) {
         if ($id) {
@@ -95,6 +93,7 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             'role' => $_POST['role'] ?? '',
             'date_subscription' => $existingUser['date_subscription'] ?? date('Y-m-d H:i:s')
         ];
+        $_SESSION['error_message'] = implode('<br>', $errors);
         $comments = getCommentsByUserId($id);
         $numberComments = countCommentsByUserId($id);
         require 'views/admin/user_form.php';

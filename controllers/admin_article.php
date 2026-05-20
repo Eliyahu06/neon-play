@@ -48,11 +48,10 @@ if ($action === 'form') {
 if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $id = !empty($_POST['id_article']) ? $_POST['id_article'] : null;
-    $errors = [];
 
     // Vérification du dépassement de post_max_size
     if (empty($_POST) && empty($_FILES) && isset($_SERVER['CONTENT_LENGTH']) && $_SERVER['CONTENT_LENGTH'] > 0) {
-        $errors[] = "Le poids total des fichiers dépasse la limite autorisée par le serveur.";
+        $_SESSION['error_message'] = "Le poids total des fichiers dépasse la limite autorisée par le serveur.";
     }
 
     // upload images (retourne null si pas de fichier ou erreur)

@@ -17,6 +17,8 @@ if ($action === 'list') {
     $numberComments = countComments($search);
     $comments = getAllComments($limit, $offset, $sort, $search);
     $totalPages = ceil($numberComments / $limit);
+    $totalComments = countComments("");
+    $noResults = empty($comments);
     require 'views/admin/comments_list.php';
     exit;
 }

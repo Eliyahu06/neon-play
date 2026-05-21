@@ -69,5 +69,6 @@ require_once __DIR__ . '/../partials/head.php';?>
     </form>
     <?php endif; ?>
     </main>
+
 </body>
 </html>

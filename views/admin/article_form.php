@@ -82,5 +82,83 @@ require_once __DIR__ . '/../partials/head.php';?>
     <br><br>
     <a href="?route=admin&section=articles">Retour à la liste des articles</a>
     </main>
+
+    
+
+    <main class="ml-64 min-h-screen bg-surface flex flex-col">
+        <div class="flex-1 p-12 max-w-6xl w-full mx-auto">
+            <div class="mb-12">
+                <h1 class="text-on-surface font-headline text-5xl font-bold tracking-tighter" style=""><?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?></h1>
+            </div>
+            <form class="grid grid-cols-12 gap-12" action="?route=admin&section=article&action=update" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id_article" value="<?= htmlspecialchars($article['id_article']) ?>">
+                <div class="col-span-8 space-y-12">
+                    <div class="group relative">
+                        <label
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            style="">Titre de l'Article</label>
+                        <input
+                            class="w-full bg-light-gray border-0 border-b-2 border-outline-variant focus:border-secondary text-2xl font-light tracking-tight pb-4 transition-all text-secondary-black focus:ring-0"
+                            type="text" name="title" placeholder="Titre" value="<?= htmlspecialchars($article['title'] ?? '') ?>" required/>
+                    </div>
+                    <div class="group relative">
+                        <label
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            style="">Introduction</label>
+                        <textarea
+                            class="w-full bg-light-gray border-0 border-b-2 border-outline-variant focus:border-secondary text-lg font-light tracking-tight pb-4 transition-all text-secondary-black focus:ring-0"
+                            name="intro" placeholder="Introduction courte du jeu, se trouvera sur les cards" required
+                            rows="6"><?= htmlspecialchars($article['intro'] ?? '') ?></textarea>
+                    </div>
+                    <div class="group relative">
+                        <label
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            style="">Description</label>
+                        <textarea
+                            class="w-full bg-light-gray border-0 border-b-2 border-outline-variant focus:border-secondary text-lg font-light tracking-tight pb-4 transition-all text-secondary-black focus:ring-0"
+                            name="description" placeholder="Description" required
+                            rows="10"><?= htmlspecialchars($article['description'] ?? '') ?></textarea>
+                    </div>
+                    <div class="group relative">
+                        <label
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            style="">Critique</label>
+                        <textarea
+                            class="w-full bg-light-gray border-0 border-b-2 border-outline-variant focus:border-secondary text-lg font-light tracking-tight pb-4 transition-all text-secondary-black focus:ring-0"
+                            name="critic" placeholder="Critique de l'auteur sur le jeu" required
+                            rows="10"><?= htmlspecialchars($article['critic'] ?? '') ?></textarea>
+                    </div>
+                    
+                </div>
+                <div class="col-span-4 space-y-8">
+                    <div class="bg-light-gray p-8 border-l-2 border-primary relative overflow-hidden">
+                        <label class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            style="">Note</label>
+                        <div class="flex items-end gap-4">
+                            <input
+                                class="w-32 bg-transparent border-0 border-b-2 border-primary text-5xl font-headline font-bold text-on-surface focus:ring-0 focus:border-secondary transition-all placeholder:text-sm"
+                                type="number" name="note" placeholder="Note" value="<?= htmlspecialchars($article['note'] ?? '') ?>" min="0" max="10" step="0.1" required/>
+                            <span class="text-outline font-headline text-sm mb-2" style="">/ 10.0</span>
+                        </div>
+                        <label
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            style="">Opinion</label>
+                        <textarea
+                            class="w-full bg-light-gray border-0 border-b-2 border-outline-variant focus:border-secondary text-sm font-light tracking-tight pb-4 transition-all text-secondary-black focus:ring-0"
+                            name="opinion" placeholder="Courte phrase réusmant l'avis de l'auteur" required
+                            rows="5"><?= htmlspecialchars($article['opinion'] ?? '') ?></textarea>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <input
+                            class="bg-primary w-full text-dark-primary px-6 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all whitespace-nowrap inline-block"
+                            type="submit" name="bArticleSave" value="Enregistrer">
+                        <a
+                            class="bg-error-container text-white w-full px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block"
+                            href="?route=admin&section=articles">Retour à la liste des articles</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
 </body> 
 </html>

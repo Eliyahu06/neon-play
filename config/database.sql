@@ -246,9 +246,15 @@ ALTER TABLE `articles`
 -- Contraintes pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_comments_articles1` FOREIGN KEY (`id_article`) REFERENCES `articles` (`id_article`),
-  ADD CONSTRAINT `fk_comments_users` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
-COMMIT;
+  ADD CONSTRAINT `fk_comments_articles1`
+  FOREIGN KEY (`id_article`)
+  REFERENCES `articles` (`id_article`)
+  ON DELETE CASCADE,
+
+  ADD CONSTRAINT `fk_comments_users`
+  FOREIGN KEY (`id_user`)
+  REFERENCES `users` (`id_user`)
+  ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

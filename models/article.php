@@ -55,7 +55,8 @@ function getAllArticles($limit, $offset, $sort, $search) {
     }
 
     $stmt = $pdo->prepare("
-        SELECT * FROM articles
+        SELECT articles.*, users.username as author_name FROM articles
+        INNER JOIN users ON articles.id_author = users.id_user
         WHERE title LIKE :search
         ORDER BY $orderBy
         LIMIT :limit OFFSET :offset
@@ -74,6 +75,14 @@ function countArticles($search = '') {
 
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM articles WHERE title LIKE :search");
     $stmt->bindValue(':search', "%{$search}%", PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
+function countAllArticles() {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM articles");
     $stmt->execute();
     return $stmt->fetchColumn();
 }

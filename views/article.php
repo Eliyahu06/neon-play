@@ -146,17 +146,17 @@ require_once 'partials/head.php';
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="space-y-1">
                                 <label
-                                    class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest" for="note">Note (0-10)</label>
+                                    class="text-[10px] font-headline text-secondary-white uppercase" for="note">Note (0-10)</label>
                                 <input
-                                    class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none"
+                                    class="w-full bg-transparent border-b border-tertiary-white focus:border-primary transition-all py-2 outline-none"
                                     max="10" min="0" type="number" step="0.1" name="note" id="note" required value="<?= htmlspecialchars($comment['note']) ?>"/>
                             </div>
                         </div>
                         <div class="space-y-1">
                             <label
-                                class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest" for="comment">Commentaire</label>
+                                class="text-[10px] font-headline text-secondary-white uppercase" for="comment">Commentaire</label>
                             <textarea
-                                class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-all py-2 outline-none resize-none"
+                                class="w-full bg-transparent border-b border-tertiary-white focus:border-primary transition-all py-2 outline-none resize-none"
                                 rows="4" name="comment" id="comment" required><?= htmlspecialchars($comment['content']) ?></textarea>
                         </div>
                         <button type="submit" name="bEditComment"

@@ -23,7 +23,7 @@ require_once 'partials/head.php';
             <input type="hidden" name="route" value="articles">
 
             <select name="sort"
-                class="w-full bg-black border border-white/10 px-4 py-2 font-headline text-xs text-primary uppercase" name="sort" onchange="this.form.submit()">
+                class="w-full bg-black border border-gray px-4 py-2 font-headline text-xs text-primary uppercase" name="sort" onchange="this.form.submit()">
                 
                 <option value="">-- Sélectionnez --</option>
 

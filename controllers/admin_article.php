@@ -13,13 +13,14 @@ if ($action === 'list') {
     $limit = 8;
     $offset = ($page - 1) * $limit;
 
-    $sort = $_GET['sort'] ?? 'id_desc';
+    $sort = $_GET['sort'] ?? 'date_desc';
     $search = $_GET['search'] ?? '';
     
     $numberArticles = countArticles($search);
     $articles = getAllArticles($limit, $offset, $sort, $search);
     $totalPages = ceil($numberArticles / $limit);
-
+    $totalArticlesPublished = countAllArticles();
+    
     require 'views/admin/articles_list.php';
     exit;
 }

@@ -170,7 +170,7 @@ function getAllUsers($limit, $offset, $sort, $search) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function countUsers($search = '') {
+function countUsers($search) {
     global $pdo;
     $sql = "SELECT COUNT(*) FROM users";
     $params = [];
@@ -189,3 +189,4 @@ function countUsers($search = '') {
     $stmt->execute();
     return $stmt->fetchColumn();
 }
+

@@ -87,11 +87,12 @@ require_once __DIR__ . '/../partials/head.php';?>
                                 class="bg-primary text-dark-primary px-6 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all whitespace-nowrap">Rechercher</button>
                         </form>
                         <?php if (!empty($search)): ?>
-                        <a href="index.php?route=admin&section=articles">Réinitialiser la recherche</a>
+                        <a href="index.php?route=admin&section=articles"  class="text-dark-primary hover:text-primary/80 uppercase text-xs font-bold pt-4">Réinitialiser la recherche</a>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
+            <!-- Liste des articles -->
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-light-gray">
@@ -105,7 +106,14 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-tertiary-white">
-                    <!-- Row 1 -->
+                    <?php if ($noResults): ?>
+                    <tr>
+                        <td colspan="5" class="text-center py-12 text-gray text-sm font-label">
+                            Aucun article trouvé.
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                    <!-- boucle sur les articles -->
                     <?php foreach ($articles as $article): ?>
                     <tr class="group hover:bg-tertiary-black hover:text-primary transition-colors">
                         <td class="p-6 font-label text-[10px] font-bold">
@@ -148,7 +156,8 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <!-- Table Pagination -->
+            <!-- Pagination -->
+            <?php if (!$noResults): ?>
             <div class="p-6 border-t border-tertiary-white flex justify-between items-center bg-gray-50">
                 <div class="flex gap-1">
                     <?php if ($page > 1): ?>
@@ -180,6 +189,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <?php endif; ?>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
     </main>
 </body>

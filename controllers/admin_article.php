@@ -20,6 +20,7 @@ if ($action === 'list') {
     $articles = getAllArticles($limit, $offset, $sort, $search);
     $totalPages = ceil($numberArticles / $limit);
     $totalArticlesPublished = countAllArticles();
+    $noResults = empty($articles);
     
     require 'views/admin/articles_list.php';
     exit;

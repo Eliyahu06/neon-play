@@ -19,6 +19,8 @@ if ($action === 'list') {
     $numberUsers = countUsers($search);
     $users = getAllUsers($limit, $offset, $sort, $search);
     $totalPages = ceil($numberUsers / $limit);
+    $totalUsers = countUsers("");
+    $noResults = empty($users);
 
     require 'views/admin/users_list.php';
     exit;

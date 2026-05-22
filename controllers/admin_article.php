@@ -80,8 +80,21 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             die('article introuvable');
         }
 
-        // garder anciennes images si aucune nouvelle
+        // garder anciennes images si aucune nouvelle, sinon supprimer les anciennes sur le disque
+        if ($new_banner && !empty($article_db['banner_img'])) {
+            $old_banner_path = 'assets/img/' . $article_db['banner_img'];
+            if (file_exists($old_banner_path)) {
+                unlink($old_banner_path);
+            }
+        }
         $banner_img = $new_banner ?? $article_db['banner_img'];
+
+        if ($new_card && !empty($article_db['card_img'])) {
+            $old_card_path = 'assets/img/' . $article_db['card_img'];
+            if (file_exists($old_card_path)) {
+                unlink($old_card_path);
+            }
+        }
         $card_img = $new_card ?? $article_db['card_img'];
     }
 

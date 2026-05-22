@@ -138,7 +138,7 @@ require_once __DIR__ . '/../partials/head.php';?>
             </table>
             <!-- Pagination -->
             <?php if (!$noResults): ?>
-            <div class="p-6 border-t border-tertiary-white flex justify-between items-center bg-gray-50">
+            <div class="p-6 border-t border-tertiary-white flex justify-between items-center bg-light-gray">
                 <div class="flex gap-1">
                     <?php if ($page > 1): ?>
                     <a href="index.php?route=admin&section=comments&page=<?= $page - 1 ?>&sort=<?= $_GET['sort'] ?? '' ?>&search=<?= urlencode($_GET['search'] ?? '') ?>"

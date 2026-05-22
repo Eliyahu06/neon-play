@@ -24,7 +24,7 @@
                     "secondary-white": "#d0d0d0ff",
                     "tertiary-white": "#ADAAAA",
                     "gray": "#64748b",
-                    "light-gray": "#F8FAFC",
+                    "light-gray": "#efefefff",
                     "error-text": "#d7383b",
                     "error-container": "#ff716c",
                     "success-text": "#006a71",

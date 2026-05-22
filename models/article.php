@@ -163,14 +163,9 @@ function uploadImage($file, $articleTitle, $type) {
 
     $slug = slugify($articleTitle);
 
-    $newName = $slug . '-' . $type . '.' . $extension;
+    $newName = $slug . '-' . $type . '-' . time() . '.' . $extension;
 
     $target_file = $target_dir . $newName;
-
-    // supprimer ancien fichier si existe
-    if (file_exists($target_file)) {
-        unlink($target_file);
-    }
 
     if (move_uploaded_file($file['tmp_name'], $target_file)) {
         return $newName;

@@ -40,6 +40,7 @@ if ($action === 'form') {
 
         $comments = getCommentsByArticle($id);
         $numberComments = countCommentsByArticle($id);
+        $note = getArticleNote($id);
     }
 
     require 'views/admin/article_form.php';

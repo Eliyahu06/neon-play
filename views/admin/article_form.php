@@ -21,7 +21,7 @@ require_once __DIR__ . '/../partials/head.php';?>
 
 
     
-    <div class="flex-1 p-12 max-w-6xl w-full mx-auto">
+    <div class="flex-1 p-12 w-full mx-auto">
             <div class="mb-12">
                 <h1 class="text-on-surface font-headline text-5xl font-bold tracking-tighter" style="">
                     <?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?>
@@ -29,7 +29,9 @@ require_once __DIR__ . '/../partials/head.php';?>
             </div>
             <form class="grid grid-cols-12 gap-12" action="?route=admin&section=article&action=update" method="POST"
                 enctype="multipart/form-data">
+                <?php if (isset($article['id_article'])): ?>
                 <input type="hidden" name="id_article" value="<?= htmlspecialchars($article['id_article']) ?>">
+                <?php endif; ?>
                 <div class="col-span-8 space-y-12">
                     <div class="group relative">
                         <label
@@ -172,6 +174,7 @@ require_once __DIR__ . '/../partials/head.php';?>
             name="bArticleSave"
             value="Enregistrer">
 
+            <?php if (isset($article['id_article'])): ?>
         <a
             class="inline-flex items-center justify-center bg-primary text-dark-primary px-6 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all text-center"
             href="?route=article&id=<?= htmlspecialchars($article['id_article']) ?>"
@@ -179,16 +182,18 @@ require_once __DIR__ . '/../partials/head.php';?>
             Voir l'article
         </a>
 
+        <?php endif; ?>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-4 mt-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
 
         <a
-            class="flex-1 bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center"
+            class="bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center"
             href="?route=admin&section=articles">
             Retour à la liste
         </a>
 
+        <?php if (isset($article['id_article'])): ?>
         <a
             href="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>"
             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')"
@@ -196,6 +201,7 @@ require_once __DIR__ . '/../partials/head.php';?>
             Supprimer l'article
         </a>
 
+        <?php endif; ?>
     </div>
 
 </div>
@@ -213,6 +219,10 @@ require_once __DIR__ . '/../partials/head.php';?>
                         <p class="text-sm uppercase tracking-widest text-outline mt-2">
                             <?= $numberComments ?> commentaire<?= $numberComments > 1 ? 's' : '' ?>
                         </p>
+                    </div>
+                    <div>
+                        <p class="text-sm uppercase tracking-widest text-outline mt-2">Moyenne des notes des utilisateurs : 
+                            <span class="font-bold"><?= htmlspecialchars($note) ?>/10</span></p>
                     </div>
                 </div>
 

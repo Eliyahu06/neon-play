@@ -220,10 +220,12 @@ require_once __DIR__ . '/../partials/head.php';?>
                             <?= $numberComments ?> commentaire<?= $numberComments > 1 ? 's' : '' ?>
                         </p>
                     </div>
+                    <?php if ($numberComments > 0): ?>
                     <div>
                         <p class="text-sm uppercase tracking-widest text-outline mt-2">Moyenne des notes des utilisateurs : 
                             <span class="font-bold"><?= htmlspecialchars($note) ?>/10</span></p>
                     </div>
+                    <?php endif; ?>
                 </div>
 
                 <?php if ($numberComments > 0): ?>
@@ -266,7 +268,7 @@ require_once __DIR__ . '/../partials/head.php';?>
 
                             <div
                             class="absolute -left-0 top-0 w-1 h-0 bg-secondary transition-all duration-300 group-hover:h-full">
-                        </div>
+                            </div>
 
                             <div class="mt-8 flex justify-end">
 
@@ -275,7 +277,6 @@ require_once __DIR__ . '/../partials/head.php';?>
                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')"
                                     class="bg-error-container text-white px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block"
                                 >
-
                                     Supprimer
                                 </a>
 
@@ -289,9 +290,10 @@ require_once __DIR__ . '/../partials/head.php';?>
 
                 <?php else: ?>
 
-                    <div class="bg-light-gray border border-primary/10 p-12 text-center">
+                    <div class="bg-light-gray p-12 text-center">
                         
-                        <span class="material-symbols-outlined text-6xl text-primary/40 mb-4">
+                        <span class="material-symbols-outlined text-6xl text-primary mb-4">
+
                             chat_bubble
                         </span>
 

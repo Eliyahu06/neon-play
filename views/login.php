@@ -13,14 +13,14 @@ require_once 'partials/head.php';
     unset($_SESSION['old_post']); 
 ?>
     <?php if (isset($_SESSION['error_message'])): ?>
-        <div class="message error text-error-text bg-error-container">
+        <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
             <?= htmlspecialchars($_SESSION['error_message']) ?>
         </div>
         <?php unset($_SESSION['error_message']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['success_message'])): ?>
-        <div class="message success text-success-text bg-success-container">
+        <div class="message success text-success-text bg-success-container px-4 py-2 my-4 font-bold border-l-4 border-success">
             <?= htmlspecialchars($_SESSION['success_message']) ?>
         </div>
         <?php unset($_SESSION['success_message']); ?>

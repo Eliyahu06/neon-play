@@ -35,7 +35,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                 <div class="col-span-8 space-y-12">
                     <div class="group relative">
                         <label
-                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
                             for="title">Titre de l'Article</label>
                         <input
                             class="w-full bg-light-gray border-0 border-b-2 border-dark-primary focus:border-secondary text-2xl font-light pb-4 transition-all text-secondary-black focus:ring-0"
@@ -44,7 +44,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </div>
                     <div class="group relative">
                         <label
-                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
                             for="intro">Introduction</label>
                         <textarea
                             class="w-full bg-light-gray border-0 border-b-2 border-dark-primary focus:border-secondary text-lg font-light pb-4 transition-all text-secondary-black focus:ring-0"
@@ -53,7 +53,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </div>
                     <div class="group relative">
                         <label
-                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
                             for="description">Description</label>
                         <textarea
                             class="w-full bg-light-gray border-0 border-b-2 border-dark-primary focus:border-secondary text-lg font-light pb-4 transition-all text-secondary-black focus:ring-0"
@@ -62,7 +62,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </div>
                     <div class="group relative">
                         <label
-                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
                             for="critic">Critique</label>
                         <textarea
                             class="w-full bg-light-gray border-0 border-b-2 border-dark-primary focus:border-secondary text-lg font-light pb-4 transition-all text-secondary-black focus:ring-0"
@@ -75,18 +75,18 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <div
                         class="bg-light-gray p-8 border-l-4 border-primary relative overflow-hidden group-focus-within:border-secondary transition-all">
                         <label
-                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
                             style="">Note</label>
                         <div class="flex items-end gap-4">
                             <input
-                                class="w-32 bg-transparent border-0 border-b-2 border-primary text-5xl font-headline font-bold text-on-surface focus:ring-0 focus:border-secondary transition-all placeholder:text-sm"
+                                class="w-32 bg-transparent border-0 border-b-2 border-primary text-5xl font-headline font-bold text-on-surface focus:ring-0 focus:border-secondary transition-all placeholder:text-sm mb-4"
                                 type="number" name="note" placeholder="Note"
                                 value="<?= htmlspecialchars($article['note'] ?? '') ?>" min="0" max="10" step="0.1"
                                 required />
                             <span class="text-outline font-headline text-sm mb-2" style="">/ 10.0</span>
                         </div>
                         <label
-                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary"
+                            class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
                             style="">Opinion</label>
                         <textarea
                             class="w-full bg-light-gray border-0 border-b-2 border-dark-primary focus:border-secondary text-sm font-light pb-4 transition-all text-secondary-black focus:ring-0"
@@ -210,7 +210,7 @@ require_once __DIR__ . '/../partials/head.php';?>
             <?php if (isset($article['id_article'])): ?>
             <section class="mt-24">
                 
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 border-b border-primary/20 pb-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 pb-6">
                     <div>
                         <h2 class="font-headline text-4xl uppercase tracking-tight text-on-surface">
                             Commentaires
@@ -242,7 +242,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                                     <div>
                                         <a 
                                             href="?route=admin&section=users&action=form&id=<?= htmlspecialchars($comment['id_user']) ?>"
-                                            class="font-headline font-bold uppercase text-sm"
+                                            class="relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-secondary after:scale-x-0 after:origin-left after:transition-transform after:duration-300 after:hover:scale-x-100 hover:text-secondary transition-colors mb-2 font-headline font-bold uppercase text-sm"
                                         >
                                             <?= htmlspecialchars($comment['username']) ?>
                                         </a>

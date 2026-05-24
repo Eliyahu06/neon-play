@@ -3,72 +3,212 @@
 <?php
 $title = "Neon Play Admin - " . $user['username'];
 require_once __DIR__ . '/../partials/head.php';?>
+
 <body class="overflow-x-hidden bg-white">
     <?php require_once 'partials/header.php'; ?>
-    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
-    <h1><?= htmlspecialchars($user['username']) ?></h1>
-
-    <?php if (isset($_SESSION['error_message'])): ?>
-        <div style="color: red; margin-bottom: 20px;">
-            <ul>
-                <?php foreach ($_SESSION['error_message'] as $error): ?>
-                    <li><?= htmlspecialchars($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php unset($_SESSION['error_message']); ?>
-    <?php endif; ?>
-
-    <form action="?route=admin&section=users&action=update" method="POST">
-        <input type="hidden" name="id_user" value="<?= htmlspecialchars($user['id_user'] ?? '') ?>">
-        <label for="username">Pseudo : </label>
-        <input type="text" name="username" placeholder="Pseudo" value="<?= htmlspecialchars($user['username'] ?? '') ?>" required>
-        <br>
-        <label for="email">Email : </label>
-        <input type="text" name="email" placeholder="Email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" required>
-        <br>
-        <label for="answer">Question secrète : </label>
-        <input type="text" name="answer" placeholder="Réponse secrète" value="<?= htmlspecialchars($user['answer'] ?? '') ?>" required>
-        <br>
-        <label for="password">Assigner un nouveau mot de passe : </label>
-        <input type="password" name="password" placeholder="Nouveau mot de passe" >
-        <br>
-        <label for="role">Rôle : </label>
-        <select name="role" id="role">
-            <option value="user" <?= $user['role'] === 'user' ? 'selected' : '' ?>>Utilisateur</option>
-            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Administrateur</option>
-        </select>
-        <br>
-        <input type="submit" name="bUserSave" value="Enregistrer les modifications">
-    </form>
-    <h2>Compte crée le : <?= date('d/m/Y H:i', strtotime($user['date_subscription'])) ?></h2>
-    <?php if ($numberComments > 0): ?>
-    <p>Nombre de commentaires : <?= $numberComments ?></p>
-        <?php foreach ($comments as $comment): ?>
-            <div>
-                <strong><?= htmlspecialchars($comment['title']) ?></strong><br>
-                <strong><?= htmlspecialchars($comment['note']) ?>/10</strong>
-                <p><?= htmlspecialchars($comment['content']) ?></p>
+   <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
+    <div class="flex-1 p-12 w-full mx-auto">
+            <div class="mb-12">
+                <h1 class="text-5xl font-headline font-bold text-black uppercase"> <?= htmlspecialchars($user['username']) ?></h1>
             </div>
-            <p><?= htmlspecialchars($comment['date_add']) ?></p>
-            <a href="?route=admin&section=comments&action=delete&id=<?= htmlspecialchars($comment['id_comment']) ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">
-                Supprimer le commentaire
-            </a>
-            <br>
-            <hr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>Aucun commentaire</p>
-    <?php endif; ?>
-    <a href="?route=admin&section=users">Retour à la liste des utilisateurs</a>
-    <br><br>
-    <?php if (isset($user['id_user'])): ?>
-    <h2>Supprimer l'utilisateur</h2>
-    <form action="?route=admin&section=users&action=delete&id=<?= htmlspecialchars($user['id_user']) ?>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
-        <input type="submit" name="bUserDelete" value="Supprimer l'utilisateur">
-    </form>
-    <?php endif; ?>
-    </main>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 space-y-8">
+                    <form class="flex gap-10 flex-col" action="?route=admin&section=users&action=update" method="POST">
+                        <input type="hidden" name="id_user" value="<?= htmlspecialchars($user['id_user'] ?? '') ?>">
+                        <div class="group relative mt-0">
+                            <label
+                                class="block text-lg font-headline text-dark-primary group-focus-within:text-secondary uppercase tracking-[0.2em] mb-2 transition-colors font-bold">Pseudo</label>
+                            <input
+                                class="w-full bg-light-gray border-0 border-b-2 border-outline focus:ring-0 focus:border-secondary text-xl font-medium text-secondary-black pb-3 transition-all"
+                                type="text" value="<?= htmlspecialchars($user['username'] ?? '') ?>" name="username" required/>
+                            <span
+                                class="absolute right-0 bottom-3 text-outline group-focus-within:text-secondary transition-colors">
+                                <span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+                            </span>
+                        </div>
+                        <div class="group relative">
+                            <label
+                                class="block text-lg font-headline text-dark-primary group-focus-within:text-secondary uppercase tracking-[0.2em] mb-2 transition-colors font-bold">Email</label>
+                            <input
+                                class="w-full bg-light-gray border-0 border-b-2 border-outline focus:ring-0 focus:border-secondary text-xl font-medium text-secondary-black pb-3 transition-all"
+                                type="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" name="email" required/>
+                            <span
+                                class="absolute right-0 bottom-3 text-outline group-focus-within:text-secondary transition-colors">
+                                <span class="material-symbols-outlined text-sm"
+                                    data-icon="alternate_email">alternate_email</span>
+                            </span>
+                        </div>
+                        <div class="group relative">
+                            <label
+                                class="block text-lg font-headline text-dark-primary group-focus-within:text-secondary uppercase tracking-[0.2em] mb-2 transition-colors font-bold">Assigner un nouveau mot de passe</label>
+                            <input
+                                class="w-full bg-light-gray border-0 border-b-2 border-outline focus:ring-0 focus:border-secondary text-xl font-medium text-secondary-black pb-3 transition-all"
+                                type="text" name="password" placeholder="Nouveau mot de passe">
+                            <span
+                                class="absolute right-0 bottom-3 text-outline group-focus-within:text-secondary transition-colors">
+                                <span class="material-symbols-outlined text-sm"
+                                    data-icon="lock">lock</span>
+                            </span>
+                        </div>
+                        <div class="group relative">
+                            <label
+                                class="block text-lg font-headline text-dark-primary group-focus-within:text-secondary uppercase tracking-[0.2em] mb-2 transition-colors font-bold">Réponse à la question secrète</label>
+                            <input
+                                class="w-full bg-light-gray border-0 border-b-2 border-outline focus:ring-0 focus:border-secondary text-xl font-medium text-secondary-black pb-3 transition-all"
+                                type="text" name="answer" placeholder="Réponse secrète"
+                                value="<?= htmlspecialchars($user['answer'] ?? '') ?>" required>
+                            <span
+                                class="absolute right-0 bottom-3 text-outline group-focus-within:text-secondary transition-colors">
+                                <span class="material-symbols-outlined text-sm"
+                                    data-icon="lock">key</span>
+                            </span>
+                        </div>
+                        <div class="group relative">
+                            <label
+                                class="block text-lg font-headline text-dark-primary group-focus-within:text-secondary uppercase tracking-[0.2em] mb-2 transition-colors font-bold">Role</label>
+                            <select name="role" id="role"
+                                class="w-full bg-light-gray border-0 border-b-2 border-outline focus:ring-0 focus:border-secondary text-xl font-medium text-secondary-black pb-3 transition-all">
+                                <option value="user" <?=$user['role']==='user' ? 'selected' : '' ?>>Utilisateur</option>
+                                <option value="admin" <?=$user['role']==='admin' ? 'selected' : '' ?>>Administrateur</option>
+                            </select>
+                            <span
+                                class="absolute right-0 bottom-3 text-outline group-focus-within:text-secondary transition-colors">
+                                <span class="material-symbols-outlined text-sm"
+                                    data-icon="group">group</span>
+                            </span>
+                        </div>
+                        <div class="pt-6 flex justify-start gap-6">
+                            <input type="submit" name="bUserSave"
+                                class="items-center justify-center bg-primary text-dark-primary px-6 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all text-center" value="Enregistrer les modifications">
+                        </div>
+                    </form>
+                
+            </div>
+            <div class="space-y-6">
+                <div class="bg-light-gray p-8 border-l-4 border-primary">
+                    <span
+                        class="text-xl font-headline text-dark-primary uppercase tracking-widest font-bold">Informations utilistateur</span>
+                    <div class="mt-6 space-y-6">
+                        <div>
+                            <p class="text-secondary-black text-lg mb-1 font-medium">Nombre de commentaires : </p>
+                            <p class="text-xl font-headline font-bold text-secondary">
+                            <?php if ($numberComments > 0): ?>
+                                <?= $numberComments ?>
+                            <?php else: ?>
+                                Aucun commentaire
+                            <?php endif; ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-secondary-black text-lg mb-1 font-medium">Date création du comte : </p>
+                            <p class="text-xl font-headline font-bold text-secondary uppercase tracking-widest"><?= date('d/m/Y H:i', strtotime($user['date_subscription'])) ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-start">
+                    <a class="bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center" href="?route=admin&section=users&action=delete&id=<?= htmlspecialchars($user['id_user']) ?>">
+                        Supprimer l'utilisateur
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- User Comments List -->
+        <section class="mt-24">
+                
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 pb-6">
+                    <div>
+                        <h2 class="font-headline text-4xl uppercase tracking-tight text-on-surface">
+                            Commentaires de l'utilisateur
+                        </h2>
+
+                        <p class="text-sm uppercase tracking-widest text-outline mt-2">
+                            <?= $numberComments ?> commentaire<?= $numberComments > 1 ? 's' : '' ?>
+                        </p>
+                    </div>
+                </div>
+
+                <?php if ($numberComments > 0): ?>
+                    <div class="space-y-6 bg-black p-8">
+
+                        <?php foreach ($comments as $comment): ?>
+
+                        <article class="bg-secondary-black p-8 group text-white relative overflow-hidden group">
+
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+                                <div class="flex items-center gap-4">
+                                    <div>
+                                        <a 
+                                            href="/index.php?route=admin&section=article&action=form&id=<?= htmlspecialchars($comment['id_article']) ?>"
+                                             class="relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-secondary after:scale-x-0 after:origin-left after:transition-transform after:duration-300 after:hover:scale-x-100 hover:text-secondary transition-colors mb-2 font-headline font-bold uppercase text-sm"
+                                        >
+                                            <?= htmlspecialchars($comment['title']) ?>
+                                        </a>
+
+                                        <p class="text-[10px] text-tertiary-white font-headline uppercase">
+                                            <?= htmlspecialchars($comment['date_add']) ?>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="bg-secondary/10 px-4 py-1">
+                                    <span class="font-headline font-bold text-secondary"><?= htmlspecialchars($comment['note']) ?>/10</span>
+                                </div>
+
+                            </div>
+
+                            <div class="border-l-2 border-primary pl-2">
+                                <p class="font-body text-on-surface/70 leading-relaxed">
+                                    <?= htmlspecialchars($comment['content']) ?>
+                                </p>
+                            </div>
+
+                            <div
+                            class="absolute -left-0 top-0 w-1 h-0 bg-secondary transition-all duration-300 group-hover:h-full">
+                            </div>
+
+                            <div class="mt-8 flex justify-end">
+
+                                <a 
+                                    href="?route=admin&section=comments&action=delete&id=<?= htmlspecialchars($comment['id_comment']) ?>"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')"
+                                    class="bg-error-container text-white px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block"
+                                >
+                                    Supprimer
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+                <?php else: ?>
+
+                    <div class="bg-light-gray p-12 text-center">
+                        
+                        <span class="material-symbols-outlined text-6xl text-primary mb-4">
+
+                            chat_bubble
+                        </span>
+
+                        <p class="font-headline uppercase tracking-widest text-outline">
+                            Aucun commentaire pour cet article
+                        </p>
+
+                    </div>
+
+                <?php endif; ?>
+
+            </section>
+    </div>
+</main>
+
+
 
 </body>
+
 </html>

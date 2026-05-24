@@ -31,6 +31,10 @@ if ($action === 'delete') {
     } else {
         $_SESSION['error_message'] = $message;
     }
-    header('Location: index.php?route=admin&section=comments');
+    $referrer = 'index.php?route=admin&section=comments';
+    if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) !== false) {
+        $referrer = $_SERVER['HTTP_REFERER'];
+    }
+    header('Location: ' . $referrer);
     exit;
 }

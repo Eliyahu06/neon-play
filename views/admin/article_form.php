@@ -160,61 +160,142 @@ require_once __DIR__ . '/../partials/head.php';?>
                                 class="hidden" <?=empty($article['card_img']) ? 'required' : '' ?>
                             >
                         </div>
-                        <div class="space-y-4 pt-8">
-                            <input
-                                class="inline-block bg-primary w-full text-dark-primary px-6 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all whitespace-nowrap"
-                                type="submit" name="bArticleSave" value="Enregistrer">
-                                <a class="inline-block bg-primary w-full text-dark-primary px-6 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all whitespace-nowrap text-center"
-                                href="?route=article&id=<?= htmlspecialchars($article['id_article']) ?>" target="_blank">
-                                    Voir l'article
-                                </a>
-                                <a href="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>"
-                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')"
-                                    class="bg-error-container text-white w-full px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block text-center"
-                                    >
-                                    Supprimer l'article
-                                </a>
-                            <a class="bg-error-container text-white w-full px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block"
-                                href="?route=admin&section=articles">Retour à la liste des articles</a>
-                    </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="col-span-12 pt-12 border-t border-primary/10">
 
-        <?php if (isset($article['id_article'])): ?>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+        <input
+            class="inline-flex items-center justify-center bg-primary text-dark-primary px-6 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all text-center cursor-pointer"
+            type="submit"
+            name="bArticleSave"
+            value="Enregistrer">
 
-        <h2>Commentaires</h2>
-        <?php if ($numberComments > 0): ?>
-        <p>Nombre de commentaires :
-            <?= $numberComments ?>
-        </p>
-        <?php foreach ($comments as $comment): ?>
-        <div>
-            <strong><a href="?route=admin&section=users&action=form&id=<?= htmlspecialchars($comment['id_user']) ?>">
-                    <?= htmlspecialchars($comment['username']) ?>
-                </a></strong> - <strong>
-                <?= htmlspecialchars($comment['note']) ?>/10
-            </strong>
-            <p>
-                <?= htmlspecialchars($comment['content']) ?>
-            </p>
-        </div>
-        <p>
-            <?= htmlspecialchars($comment['date_add']) ?>
-        </p>
-        <a href="?route=admin&section=comments&action=delete&id=<?= htmlspecialchars($comment['id_comment']) ?>"
-            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">
-            Supprimer le commentaire
+        <a
+            class="inline-flex items-center justify-center bg-primary text-dark-primary px-6 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all text-center"
+            href="?route=article&id=<?= htmlspecialchars($article['id_article']) ?>"
+            target="_blank">
+            Voir l'article
         </a>
-        <br>
-        <hr>
-        <?php endforeach; ?>
-        <?php else: ?>
-        <p>Aucun commentaire</p>
-        <?php endif; ?>
-        <?php endif; ?>
+
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-4 mt-6">
+
+        <a
+            class="flex-1 bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center"
+            href="?route=admin&section=articles">
+            Retour à la liste
+        </a>
+
+        <a
+            href="?route=admin&section=article&action=delete&id=<?= htmlspecialchars($article['id_article']) ?>"
+            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')"
+            class="flex-1 bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center">
+            Supprimer l'article
+        </a>
+
+    </div>
+
+</div>
+            </form>
+            <!-- liste des commentaires liés a l'article -->
+            <?php if (isset($article['id_article'])): ?>
+            <section class="mt-24">
+                
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 border-b border-primary/20 pb-6">
+                    <div>
+                        <h2 class="font-headline text-4xl uppercase tracking-tight text-on-surface">
+                            Commentaires
+                        </h2>
+
+                        <p class="text-sm uppercase tracking-widest text-outline mt-2">
+                            <?= $numberComments ?> commentaire<?= $numberComments > 1 ? 's' : '' ?>
+                        </p>
+                    </div>
+                </div>
+
+                <?php if ($numberComments > 0): ?>
+
+                    <div class="space-y-6 bg-black p-8">
+
+                        <?php foreach ($comments as $comment): ?>
+
+                        <article class="bg-secondary-black p-8 group text-white relative overflow-hidden group">
+
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+                                <div class="flex items-center gap-4">
+                                    <div>
+                                        <a 
+                                            href="?route=admin&section=users&action=form&id=<?= htmlspecialchars($comment['id_user']) ?>"
+                                            class="font-headline font-bold uppercase text-sm"
+                                        >
+                                            <?= htmlspecialchars($comment['username']) ?>
+                                        </a>
+
+                                        <p class="text-[10px] text-tertiary-white font-headline uppercase">
+                                            <?= htmlspecialchars($comment['date_add']) ?>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="bg-secondary/10 px-4 py-1">
+                                    <span class="font-headline font-bold text-secondary"><?= htmlspecialchars($comment['note']) ?>/10</span>
+                                </div>
+
+                            </div>
+
+                            <div class="border-l-2 border-primary pl-2">
+                                <p class="font-body text-on-surface/70 leading-relaxed">
+                                    <?= htmlspecialchars($comment['content']) ?>
+                                </p>
+                            </div>
+
+                            <div
+                            class="absolute -left-0 top-0 w-1 h-0 bg-secondary transition-all duration-300 group-hover:h-full">
+                        </div>
+
+                            <div class="mt-8 flex justify-end">
+
+                                <a 
+                                    href="?route=admin&section=comments&action=delete&id=<?= htmlspecialchars($comment['id_comment']) ?>"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')"
+                                    class="bg-error-container text-white px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all inline-block"
+                                >
+
+                                    Supprimer
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+                <?php else: ?>
+
+                    <div class="bg-light-gray border border-primary/10 p-12 text-center">
+                        
+                        <span class="material-symbols-outlined text-6xl text-primary/40 mb-4">
+                            chat_bubble
+                        </span>
+
+                        <p class="font-headline uppercase tracking-widest text-outline">
+                            Aucun commentaire pour cet article
+                        </p>
+
+                    </div>
+
+                <?php endif; ?>
+
+            </section>
+            <?php endif; ?>
+        </div>
     </main>
 </body>
 

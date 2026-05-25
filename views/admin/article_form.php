@@ -11,13 +11,21 @@ require_once __DIR__ . '/../partials/head.php';?>
 
 
 
-        <?php if (!empty($_SESSION['error_message'])): ?>
-        <div class="message error text-error-text bg-error-container">
-            <?= htmlspecialchars($_SESSION['error_message']) ?>
-        </div>
-        <?php 
-    unset($_SESSION['error_message']);
-    endif; ?>
+    <div>
+        <?php if (isset($_SESSION['error_message'])): ?>
+            <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
+                <?= htmlspecialchars($_SESSION['error_message']) ?>
+            </div>
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="message success text-success-text bg-success-container px-4 py-2 my-4 font-bold border-l-4 border-success">
+                <?= htmlspecialchars($_SESSION['success_message']) ?>
+            </div>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+    </div>
 
 
     

@@ -7,6 +7,21 @@ require_once __DIR__ . '/../partials/head.php';?>
 <body class="overflow-x-hidden bg-white">
     <?php require_once 'partials/header.php'; ?>
    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
+    <div>
+        <?php if (isset($_SESSION['error_message'])): ?>
+            <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
+                <?= htmlspecialchars($_SESSION['error_message']) ?>
+            </div>
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="message success text-success-text bg-success-container px-4 py-2 my-4 font-bold border-l-4 border-success">
+                <?= htmlspecialchars($_SESSION['success_message']) ?>
+            </div>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+    </div>
     <div class="flex-1 p-12 w-full mx-auto">
             <div class="mb-12">
                 <h1 class="text-5xl font-headline font-bold text-black uppercase"> <?= htmlspecialchars($user['username']) ?></h1>

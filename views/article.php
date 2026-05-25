@@ -27,25 +27,6 @@ require_once 'partials/head.php';
             </div>
     </header>
     <main class="container mx-auto px-6 py-12">
-
-
-
-     <?php if (isset($_SESSION['comment_error'])): ?>
-        <div class="message error text-error-text bg-error-container">
-            <?= htmlspecialchars($_SESSION['comment_error']) ?>
-        </div>
-        <?php unset($_SESSION['comment_error']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['comment_success'])): ?>
-        <div class="message success text-success-text bg-success-container">
-            <?= htmlspecialchars($_SESSION['comment_success']) ?>
-        </div>
-        <?php unset($_SESSION['comment_success']); ?>
-    <?php endif; ?>
-
-
-
     <section class="mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
             <aside class="lg:col-span-4 order-2 lg:order-1">
                 <div class="bg-secondary-black p-8 space-y-8 relative border-l-4 border-secondary">
@@ -106,6 +87,20 @@ require_once 'partials/head.php';
                 <div class="flex items-center justify-between mb-16">
                     <h2 class="font-headline text-4xl font-black uppercase ">Commentaires</h2> 
                 </div>
+                <?php if (isset($_SESSION['comment_error'])): ?>
+                    <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
+                        <?= htmlspecialchars($_SESSION['comment_error']) ?>
+                    </div>
+                    <?php unset($_SESSION['comment_error']); ?>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['comment_success'])): ?>
+                    <div class="message success text-success-text bg-success-container px-4 py-2 my-4 font-bold border-l-4 border-success">
+                        <?= htmlspecialchars($_SESSION['comment_success']) ?>
+                    </div>
+                    <?php unset($_SESSION['comment_success']); ?>
+                <?php endif; ?>
+
             <?php if (isset($_SESSION['user']) && !$hasCommented): ?>
                 <div class="mb-20 bg-secondary-black p-8 border-b-2 border-primary">
                     <h3 class="font-headline text-sm font-bold uppercase mb-8 flex items-center gap-2">

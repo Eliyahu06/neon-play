@@ -6,7 +6,7 @@ require_once __DIR__ . '/../partials/head.php';?>
 
 <body class="overflow-x-hidden bg-white">
     <?php require_once 'partials/header.php'; ?>
-    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
+    <main class="md:ml-64 mt-16 p-8 md:pt-8 pt-8 min-h-screen bg-white">
             <div>
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
@@ -108,16 +108,15 @@ require_once __DIR__ . '/../partials/head.php';?>
                 </div>
             </div>
             <!-- Liste des articles -->
+            <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-light-gray">
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">ID</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Titre</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Date de publication
-                        </th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Auteur</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase text-right">Actions
-                        </th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">ID</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Titre</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Date de publication</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Auteur</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-tertiary-white">
@@ -131,36 +130,36 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <!-- boucle sur les articles -->
                     <?php foreach ($articles as $article): ?>
                     <tr class="group hover:bg-tertiary-black hover:text-primary transition-colors">
-                        <td class="p-6 font-label text-[10px] font-bold">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-[10px] font-bold">
                             <?= htmlspecialchars($article['id_article']) ?>
                         </td>
-                        <td class="p-6">
-                            <div class="text-sm font-headline font-medium transition-colors">
+                        <td class="p-3 md:p-6">
+                            <div class="text-[8px] md:text-sm font-headline font-medium transition-colors">
                                 <?= htmlspecialchars($article['title']) ?>
                             </div>
                         </td>
-                        <td class="p-6 font-label text-xs">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-xs">
                             <?= htmlspecialchars($article['date_add']) ?>
                         </td>
-                        <td class="p-6 font-label text-xs">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-xs">
                             <?= htmlspecialchars($article['author_name']) ?>
                         </td>
-                        <td class="p-6 text-right">
-                            <div class="flex justify-end items-center gap-4">
+                        <td class="p-3 md:p-6 text-right">
+                            <div class="flex justify-end items-center gap-2 md:gap-4">
                                 <button
-                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[10px] font-bold">
+                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[8px] md:text-[10px] font-bold">
                                     <a href="?route=admin&section=article&action=form&id=<?= $article['id_article'] ?>"
                                         class="material-symbols-outlined text-sm">edit</a>
 
                                 </button>
                                 <button
-                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[10px] font-bold">
+                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[8px] md:text-[10px] font-bold">
                                     <a href="?route=admin&section=article&action=delete&id=<?= $article['id_article'] ?>"
                                         class="material-symbols-outlined text-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">delete</a>
 
                                 </button>
                                 <button
-                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[10px] font-bold">
+                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[8px] md:text-[10px] font-bold">
                                     <a href="?route=article&id=<?= $article['id_article'] ?>" target="_blank"
                                         class="material-symbols-outlined text-sm">visibility</a>
 
@@ -171,6 +170,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
             <!-- Pagination -->
             <?php if (!$noResults): ?>
             <div class="p-6 border-t border-tertiary-white bg-light-gray flex justify-between items-center">

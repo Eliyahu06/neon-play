@@ -5,7 +5,7 @@ $title = "Neon Play Admin - Listes des commentaires";
 require_once __DIR__ . '/../partials/head.php';?>
 <body class="overflow-x-hidden bg-white">
     <?php require_once 'partials/header.php'; ?>
-    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
+    <main class="md:ml-64 md:mt-16 mt-12 p-8 md:pt-8 pt-8 min-h-screen bg-white">
         <div>
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
@@ -86,19 +86,17 @@ require_once __DIR__ . '/../partials/head.php';?>
                 </div>
             </div>
             <!-- Liste des commentaires -->
+            <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-light-gray">
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">ID</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Auteur</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Commentaire
-                        </th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Jeu</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Note</th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase">Date de publication
-                        </th>
-                        <th class="p-6 font-label text-[10px] tracking-[0.2em] text-gray uppercase text-right">Actions
-                        </th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">ID</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Auteur</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Commentaire</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Jeu</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Note</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase">Date de publication</th>
+                        <th class="p-3 md:p-6 font-label text-[8px] md:text-[10px] tracking-[0.2em] text-gray uppercase text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-tertiary-white">
@@ -112,35 +110,35 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <!-- boucle sur les articles -->
                     <?php foreach ($comments as $comment): ?>
                     <tr class="group hover:bg-tertiary-black hover:text-primary transition-colors">
-                        <td class="p-6 font-label text-[10px] font-bold">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-[10px] font-bold">
                             <?= htmlspecialchars($comment['id_comment']) ?>
                         </td>
-                        <td class="p-6">
-                            <div class="text-sm font-headline font-medium transition-colors">
+                        <td class="p-3 md:p-6">
+                            <div class="text-[8px] md:text-sm font-headline font-medium transition-colors">
                                 <a href="?route=admin&section=users&action=form&id=<?= htmlspecialchars($comment['id_user']) ?>" class="relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-secondary after:scale-x-0 after:origin-left after:transition-transform after:duration-300 after:hover:scale-x-100 hover:text-secondary transition-colors">
                                     <?= htmlspecialchars($comment['username']) ?>
                                 </a>
                             </div>
                         </td>
-                        <td class="p-6 font-label text-xs">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-xs">
                             <?= htmlspecialchars($comment['content']) ?>
                         </td>
-                        <td class="p-6 font-label text-xs">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-xs">
                             <a href="?route=admin&section=articles&action=form&id=<?= htmlspecialchars($comment['id_article']) ?>"
                                 class="relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-secondary after:scale-x-0 after:origin-left after:transition-transform after:duration-300 after:hover:scale-x-100 hover:text-secondary transition-colors">
                                 <?= htmlspecialchars($comment['title']) ?>
                             </a>
                         </td>
-                        <td class="p-6 font-label text-xs">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-xs">
                             <?= htmlspecialchars($comment['note']) ?>
                         </td>
-                        <td class="p-6 font-label text-xs">
+                        <td class="p-3 md:p-6 font-label text-[8px] md:text-xs">
                             <?= htmlspecialchars($comment['date_add']) ?>
                         </td>
-                        <td class="p-6 text-right">
+                        <td class="p-3 md:p-6 text-right">
                             <div class="flex justify-end items-center">
                                 <button
-                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[10px] font-bold">
+                                    class="text-gray group-hover:text-secondary transition-colors flex items-center gap-1 font-label text-[8px] md:text-[10px] font-bold">
                                     <a href="?route=admin&section=comments&action=delete&id=<?= $comment['id_comment'] ?>"
                                         class="material-symbols-outlined text-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">delete</a>
 
@@ -151,6 +149,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
             <!-- Pagination -->
             <?php if (!$noResults): ?>
             <div class="p-6 border-t border-tertiary-white flex justify-between items-center bg-light-gray">

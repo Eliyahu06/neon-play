@@ -7,7 +7,7 @@ require_once __DIR__ . '/../partials/head.php';?>
 
 <body class="overflow-x-hidden bg-white text-gray-900">
     <?php require_once 'partials/header.php';?>
-    <main class="ml-64 mt-16 p-8 min-h-screen bg-white">
+    <main class="md:ml-64 md:mt-16 mt-12 p-8 md:pt-8 pt-8 min-h-screen bg-white">
 
 
 
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../partials/head.php';?>
 
 
     
-    <div class="flex-1 p-12 w-full mx-auto">
+    <div class="flex-1 lg:p-6 p-4 w-full mx-auto">
             <div class="mb-12">
                 <h1 class="text-on-surface font-headline text-5xl font-bold tracking-tighter" style="">
                     <?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?>
@@ -40,7 +40,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                 <?php if (isset($article['id_article'])): ?>
                 <input type="hidden" name="id_article" value="<?= htmlspecialchars($article['id_article']) ?>">
                 <?php endif; ?>
-                <div class="col-span-8 space-y-12">
+                <div class="col-span-12 lg:col-span-8 space-y-12">
                     <div class="group relative">
                         <label
                             class="block text-dark-primary font-headline text-lg uppercase mb-4 transition-all group-focus-within:text-secondary font-bold"
@@ -79,7 +79,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </div>
 
                 </div>
-                <div class="col-span-4 space-y-8 group">
+                <div class="col-span-12 lg:col-span-4 space-y-8 group">
                     <div
                         class="bg-light-gray p-8 border-l-4 border-primary relative overflow-hidden group-focus-within:border-secondary transition-all">
                         <label

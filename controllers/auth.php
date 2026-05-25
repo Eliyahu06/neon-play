@@ -44,8 +44,8 @@ if (isset($_POST['bReset'])) {
     $password_confirm = trim($_POST['password_confirm']);
     $message = forgotPassword($email, $answer, $password, $password_confirm);
 
-    if ($message == true) {
-        $_SESSION['success_message'] = "Si les infos sont correcte, votre mot de passe a été réinitialisé";
+    if ($message === true) {
+        $_SESSION['success_message'] = "Si les informations sont correcte, votre mot de passe a été réinitialisé";
         header("Location: index.php?route=login");
         exit();
     } else {

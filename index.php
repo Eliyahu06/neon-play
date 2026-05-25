@@ -30,6 +30,13 @@ switch ($route) {
     case 'admin':
         require_once 'controllers/admin.php';
         break;
+    case 'check-username':
+        require_once 'models/user.php';
+        header('Content-Type: application/json');
+        $username = trim($_GET['username'] ?? '');
+        $exists = isUsernameTaken($username);
+        echo json_encode(['exists' => $exists]);
+        exit();
     default:
         require_once 'controllers/home.php';
         break;

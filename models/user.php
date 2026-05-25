@@ -1,11 +1,38 @@
 <?php
 require_once 'config/database.php';
 
+function isPasswordSecure($password) {
+    if (strlen($password) < 8) {
+        return false;
+    }
+    if (!preg_match('/[a-z]/', $password)) {
+        return false;
+    }
+    if (!preg_match('/[A-Z]/', $password)) {
+        return false;
+    }
+    if (!preg_match('/[0-9]/', $password)) {
+        return false;
+    }
+    if (!preg_match('/[^a-zA-Z0-9]/', $password)) {
+        return false;
+    }
+    return true;
+}
+
 function registerUser($username, $email, $password, $password_confirm, $answer) {
     global $pdo;
 
     if (empty($username) || empty($email) || empty($password) || empty($password_confirm) || empty($answer)) {
         return "Tous les champs sont requis.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "L'adresse email n'est pas valide.";
+    }
+
+    if (!isPasswordSecure($password)) {
+        return "Le mot de passe doit faire au moins 8 caratère de long et contenir au moins une minuscule, majuscule, un chiffre et un caractère spécial";
     }
 
     // Vérification si l'email existe déjà
@@ -49,6 +76,10 @@ function loginUser($email, $password) {
         return "L'email et le mot de passe sont requis.";
     }
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "L'adresse email n'est pas valide.";
+    }
+
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
     $stmt->bindValue(':email', $email);
     $stmt->execute();
@@ -66,25 +97,32 @@ function loginUser($email, $password) {
 function forgotPassword($email, $answer, $password, $password_confirm){
     global $pdo;
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "L'adresse email n'est pas valide.";
+    }
+
+    if (!isPasswordSecure($password)) {
+        return "Le mot de passe doit faire au moins 8 caratère de long et contenir au moins une minuscule, majuscule, un chiffre et un caractère spécial";
+    }
+
     if ($password !== $password_confirm) {
         return "Les mots de passe ne correspondent pas";
     }
-    else {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->bindValue(':email', $email);
+    $stmt->execute();
+    $user = $stmt->fetch();
+
+    if ($user && $answer == strtolower($user['answer'])) {
+        $sql = "UPDATE users SET password = :password WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
         $stmt->bindValue(':email', $email);
         $stmt->execute();
-        $user = $stmt->fetch();
-
-        if ($user && $answer == strtolower($user['answer'])) {
-            $sql = "UPDATE users SET password = :password WHERE email = :email";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
-            $stmt->bindValue(':email', $email);
-            $stmt->execute();
-            return true;
-        } 
     }
-    return false;
+
+    return true;
 } 
 
 function getUserById($id) {
@@ -101,7 +139,14 @@ function updateUser($id, $username, $email, $answer, $role, $password = '') {
         return "Tous les champs sont requis.";
     }
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "L'adresse email n'est pas valide.";
+    }
+
     if (!empty($password)) {
+        if (!isPasswordSecure($password)) {
+            return "Le mot de passe doit faire au moins 8 caratère de long et contenir au moins une minuscule, majuscule, un chiffre et un caractère spécial";
+        }
         $stmt = $pdo->prepare("UPDATE users SET username = :username, email = :email, answer = :answer, role = :role, password = :password WHERE id_user = :id");
         $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
     } else {
@@ -188,5 +233,13 @@ function countUsers($search) {
     
     $stmt->execute();
     return $stmt->fetchColumn();
+}
+
+function isUsernameTaken($username) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT id_user FROM users WHERE username = :username");
+    $stmt->bindValue(':username', $username);
+    $stmt->execute();
+    return $stmt->fetch() ? true : false;
 }
 

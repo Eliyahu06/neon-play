@@ -21,6 +21,9 @@ switch ($route) {
     case 'article':
         require_once 'controllers/article.php';
         break;
+    case 'profile':
+        require_once 'controllers/user.php';
+        break;
     case 'editComment':
         require_once 'controllers/article.php';
         break;

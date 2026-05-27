@@ -29,6 +29,7 @@ require_once 'partials/head.php';
         </div>
     </header>
     <main class="container mx-auto px-6 py-24">
+        
     <h1>Bienvenue sur Neon Play</h1>
     
     <?php if (isset($_SESSION['error_message'])): ?>

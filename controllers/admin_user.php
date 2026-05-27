@@ -73,17 +73,21 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         if ($id) {
             $message = updateUser($id, $username, $email, $answer, $role, $password);
-            if ($message) {
+            if ($message == "Utilisateur mis à jour avec succès") {
                 $_SESSION['success_message'] = $message;
+                header('Location: index.php?route=admin&section=users');
+                exit;
             } else {
-                $_SESSION['error_message'] = "Erreur lors de la modification de l'utilisateur.";
+                $_SESSION['error_message'] = $message;
+                header('Location: index.php?route=admin&section=users&action=form&id=' . $id);
+                exit;
             }
         } else {
             $_SESSION['error_message'] = "Erreur : l'utilisateur n'a pas été trouvé.";
+            header('Location: index.php?route=admin&section=users&action=form&id=' . $id);
+            exit;
         }
 
-        header('Location: index.php?route=admin&section=users');
-        exit;
     } else {
         // En cas d'erreur, on prépare les données pour réafficher le formulaire
         $existingUser = getUserById($id);

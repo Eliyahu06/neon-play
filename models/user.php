@@ -35,24 +35,14 @@ function registerUser($username, $email, $password, $password_confirm, $answer) 
         return "Le mot de passe doit faire au moins 8 caratère de long et contenir au moins une minuscule, majuscule, un chiffre et un caractère spécial";
     }
 
-    // Vérification si l'email existe déjà
-    $checkEmail = $pdo->prepare("SELECT id_user FROM users WHERE email = :email");
-    $checkEmail->bindValue(':email', $email);
-    $checkEmail->execute();
-
-    // Vérification si le pseudo existe déjà
-    $checkUsername = $pdo->prepare("SELECT id_user FROM users WHERE username = :username");
-    $checkUsername->bindValue(':username', $username);
-    $checkUsername->execute();
-
-    if ($checkEmail->fetch()) {
+    if (isEmailTaken($email)) {
         return "Email déjà utilisé";
     }
-    elseif ($checkUsername->fetch()) {
+    if (isUsernameTaken($username)) {
         return "Ce nom d'utilisateur est déjà pris";
     }
     //vérification si le mot de passe correspond 
-    else if ($password !== $password_confirm) {
+    if ($password !== $password_confirm) {
         return "Les mots de passe ne correspondent pas";
     }
     else {
@@ -135,8 +125,13 @@ function getUserById($id) {
 
 function updateUser($id, $username, $email, $answer, $role, $password = '') {
     global $pdo;
-    if (empty($username) || empty($email) || empty($answer) || empty($role)) {
+    if (empty($username) || empty($email) || empty($answer)) {
         return "Tous les champs sont requis.";
+    }
+
+    $currentUser = getUserById($id);
+    if (!$currentUser) {
+        return "Utilisateur introuvable.";
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -151,6 +146,17 @@ function updateUser($id, $username, $email, $answer, $role, $password = '') {
         $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
     } else {
         $stmt = $pdo->prepare("UPDATE users SET username = :username, email = :email, answer = :answer, role = :role WHERE id_user = :id");
+    }
+    
+    if ($username !== $currentUser['username']) {
+        if(isUsernameTaken($username)) {
+            return "Ce nom d'utilisateur est déjà pris";
+        }
+    }
+    if ($email !== $currentUser['email']) {
+        if(isEmailTaken($email)) {
+            return "Cet email est déjà utilisé";
+        }
     }
 
     $stmt->bindValue(':username', $username);
@@ -239,6 +245,14 @@ function isUsernameTaken($username) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT id_user FROM users WHERE username = :username");
     $stmt->bindValue(':username', $username);
+    $stmt->execute();
+    return $stmt->fetch() ? true : false;
+}
+
+function isEmailTaken($email){
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT id_user FROM users WHERE email = :email");
+    $stmt->bindValue(':email', $email);
     $stmt->execute();
     return $stmt->fetch() ? true : false;
 }

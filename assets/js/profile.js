@@ -4,14 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const passwordInput = document.getElementById('password');
     const confirmInput = document.getElementById('password_confirm');
     const answerInput = document.getElementById('answer');
-    const submitBtn = document.getElementById('register-btn');
+    const submitBtn = document.getElementById('profile-btn');
 
     const usernameError = document.getElementById('username-error');
     const emailError = document.getElementById('email-error');
     const passwordError = document.getElementById('password-error');
     const confirmError = document.getElementById('confirm-error');
 
-    let isUsernameAvailable = false;
+    const initialUsername = usernameInput ? usernameInput.value.trim() : '';
+    const initialEmail = emailInput ? emailInput.value.trim() : '';
+
+    let isUsernameAvailable = true; // Initially true since it's the current username
     let usernameTimeout = null;
 
     function checkUsername() {
@@ -22,6 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
             usernameError.textContent = '';
             usernameError.classList.add('hidden');
             isUsernameAvailable = false;
+            validateForm();
+            return;
+        }
+
+        // If the user entered their original username, it's always available
+        if (username === initialUsername) {
+            usernameError.textContent = '';
+            usernameError.classList.add('hidden');
+            isUsernameAvailable = true;
             validateForm();
             return;
         }
@@ -66,16 +78,27 @@ document.addEventListener('DOMContentLoaded', function () {
         const answer = answerInput.value.trim();
 
         const isEmailValid = isValidEmail(email);
-        const isPasswordSecure = checkPasswordSecure(pwd);
-        const isConfirmMatching = pwd === confirm;
         const isAnswerFilled = answer.length > 0;
 
-        // Visual validations using toggleError helper
-        toggleError(emailError, email.length > 0 && !isEmailValid);
-        toggleError(passwordError, pwd.length > 0 && !isPasswordSecure);
-        toggleError(confirmError, confirm.length > 0 && !isConfirmMatching);
+        let isPasswordValid = true;
+        let isConfirmMatching = true;
 
-        const formIsValid = isUsernameAvailable && isEmailValid && isPasswordSecure && isConfirmMatching && isAnswerFilled;
+        // Email validation
+        toggleError(emailError, email.length > 0 && !isEmailValid);
+
+        // Password validation (optional on profile page, only validated if not empty)
+        if (pwd.length > 0) {
+            isPasswordValid = checkPasswordSecure(pwd);
+            isConfirmMatching = pwd === confirm;
+
+            toggleError(passwordError, !isPasswordValid);
+            toggleError(confirmError, confirm.length > 0 && !isConfirmMatching);
+        } else {
+            toggleError(passwordError, false);
+            toggleError(confirmError, false);
+        }
+
+        const formIsValid = isUsernameAvailable && isEmailValid && isPasswordValid && isConfirmMatching && isAnswerFilled;
         submitBtn.disabled = !formIsValid;
     }
 
@@ -86,12 +109,8 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmInput.addEventListener('input', validateForm);
         answerInput.addEventListener('input', validateForm);
 
-        // Run initial check if values exist on page load
-        if (usernameInput.value.trim().length > 0) {
-            checkUsername();
-        } else {
-            validateForm();
-        }
+        // Run initial validation
+        validateForm();
     }
 
     // Initialize password visibility togglers

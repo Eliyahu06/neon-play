@@ -73,7 +73,7 @@ require_once 'partials/head.php';
                                 class="w-full bg-transparent border-none text-white font-body placeholder:text-zinc-700 pb-2"
                                 placeholder="example@neon.com" type="email" id="email" name="email" value="<?= htmlspecialchars($old['email'] ?? '') ?>" required/>
                         </div>
-                        <span id="email-error" class="text-xs font-bold text-error-text mt-3 mb-3 block hidden"></span>
+                        <span id="email-error" class="text-xs font-bold text-error-text mt-3 mb-3 block hidden">L'adresse email n'est pas valide.</span>
                     </div>
                     <!-- Champ mot de passe -->
                     <div class="relative group">
@@ -147,6 +147,7 @@ require_once 'partials/head.php';
     </main>
     <?php require_once 'partials/footer.php'; ?>
 
+    <script src="assets/js/validation-utils.js"></script>
     <script src="assets/js/register.js"></script>
 </body>
 </html>

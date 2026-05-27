@@ -34,18 +34,23 @@
                     Inscription
                 </a>
             <?php else: ?>
+                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                <a href="index.php?route=admin"
+                   class="material-symbols-outlined text-primary text-2xl focus:outline-none">
+                    admin_panel_settings
+                </a>
+            <?php endif; ?>
                 <a href="index.php?route=logout"
-                   class="bg-primary text-dark-primary px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all">
-                    Déconnexion
+                   class="material-symbols-outlined text-primary text-2xl focus:outline-none">
+                    logout
+                </a>
+                <a href="index.php?route=profile"
+                   class="material-symbols-outlined text-primary text-2xl focus:outline-none">
+                   person
                 </a>
             <?php endif; ?>
 
-            <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
-                <a href="index.php?route=admin"
-                   class="bg-primary text-dark-primary px-8 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all">
-                    Admin
-                </a>
-            <?php endif; ?>
+           
         </div>
     </div>
 
@@ -69,18 +74,25 @@
                     Inscription
                 </a>
             <?php else: ?>
-                <a href="index.php?route=logout"
-                   class="block bg-primary text-dark-primary px-4 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all text-center">
-                    Déconnexion
+                <div class="flex items-center gap-4">
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                <a href="index.php?route=admin"
+                   class="material-symbols-outlined text-primary text-2xl focus:outline-none">
+                    admin_panel_settings
                 </a>
+            <?php endif; ?>
+                <a href="index.php?route=logout"
+                   class="material-symbols-outlined text-primary text-2xl focus:outline-none">
+                    logout
+                </a>
+                <a href="index.php?route=profile"
+                   class="material-symbols-outlined text-primary text-2xl focus:outline-none">
+                   person   
+                </a>
+                </div>
             <?php endif; ?>
 
-            <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
-                <a href="index.php?route=admin"
-                   class="block bg-primary text-dark-primary px-4 py-3 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all text-center">
-                    Admin
-                </a>
-            <?php endif; ?>
+            
         </div>
     </div>
 </nav>

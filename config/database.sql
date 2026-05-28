@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 18 mai 2026 à 19:30
--- Version du serveur : 9.1.0
--- Version de PHP : 8.3.14
+-- Généré le : jeu. 28 mai 2026 à 18:56
+-- Version du serveur : 8.4.7
+-- Version de PHP : 8.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -187,14 +187,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id_user`, `username`, `email`, `password`, `role`, `answer`, `date_subscription`) VALUES
-(1, 'Eliyahu06', 'elinevermeulen06@gmail.com', '$2y$10$56QTVMBvTgRv.9qa3B9YKO0/Od8oFsPBKA92yb7KxFmiQtqa8y.Mq', 'admin', 'kangoo', '2026-04-25 15:55:33'),
+(1, 'Eliyahu06', 'elinevermeulen06@gmail.com', '$2y$10$56QTVMBvTgRv.9qa3B9YKO0/Od8oFsPBKA92yb7KxFmiQtqa8y.Mq', 'admin', 'Korra', '2026-04-25 15:55:33'),
 (2, 'GeaiMoqueur18', 'wimmer.lau@gmail.com', '$2y$10$CiIf2JDJFO.pBYwJ1kKPR.IcOxKhrpd18H7jjj7AsWYfKbu091Afa', 'user', 'korra', '2026-04-25 16:33:52'),
 (4, 'Eliyahu', 'eline@gmail.com', '$2y$10$4ihX1KCpEAtCkBlUCIX.y.6fo6AklD5E3dKfwkwYnp4dGaoSLnNM.', 'user', 'kangoo', '2026-05-14 17:23:40'),
 (5, 'alex92', 'alex92@mail.com', '$2y$10$56QTVMBvTgRv.9qa3B9YKO0/Od8oFsPBKA92yb7KxFmiQtqa8y.Mq', 'user', 'Rex Luthor', '2026-05-14 19:42:05'),
@@ -230,7 +230,8 @@ INSERT INTO `users` (`id_user`, `username`, `email`, `password`, `role`, `answer
 (38, 'midnightxp', 'midnightxp@mail.com', '$2y$10$56QTVMBvTgRv.9qa3B9YKO0/Od8oFsPBKA92yb7KxFmiQtqa8y.Mq', 'user', 'Pepito', '2026-05-17 14:56:39'),
 (39, 'auroragame', 'auroragame@mail.com', '$2y$10$56QTVMBvTgRv.9qa3B9YKO0/Od8oFsPBKA92yb7KxFmiQtqa8y.Mq', 'user', 'Bounty', '2026-05-17 14:56:39'),
 (40, 'bytehunter', 'bytehunter@mail.com', '$2y$10$56QTVMBvTgRv.9qa3B9YKO0/Od8oFsPBKA92yb7KxFmiQtqa8y.Mq', 'user', 'Shadow', '2026-05-17 14:56:39'),
-(82, 'JeanClaude', 'jc@gmail.com', '$2y$10$oH59sSv.AYzgOExuf4d2iOYLC1It6ETFN7AXltxXFwAuqYFRFrelC', 'user', 'kiki', '2026-05-18 18:30:05');
+(82, 'JeanClaude', 'jc@gmail.com', '$2y$10$oH59sSv.AYzgOExuf4d2iOYLC1It6ETFN7AXltxXFwAuqYFRFrelC', 'user', 'kiki', '2026-05-18 18:30:05'),
+(83, 'admin', 'admin@admin.com', '$2y$10$VcG3Nhb0acBP44x2MtogGO/nepQejrnmje2kZ9qwxsZKeURwbDAvu', 'admin', 'chien', '2026-05-28 18:47:53');
 
 --
 -- Contraintes pour les tables déchargées
@@ -246,15 +247,9 @@ ALTER TABLE `articles`
 -- Contraintes pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_comments_articles1`
-  FOREIGN KEY (`id_article`)
-  REFERENCES `articles` (`id_article`)
-  ON DELETE CASCADE,
-
-  ADD CONSTRAINT `fk_comments_users`
-  FOREIGN KEY (`id_user`)
-  REFERENCES `users` (`id_user`)
-  ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_comments_articles1` FOREIGN KEY (`id_article`) REFERENCES `articles` (`id_article`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_comments_users` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

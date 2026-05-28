@@ -47,17 +47,17 @@ if ($action === 'form') {
     exit;
 }
 
-// Sauvegarde (Ajout/Modification)
+// Ajout ou modification d'un article
 if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $id = !empty($_POST['id_article']) ? $_POST['id_article'] : null;
 
-    // Vérification du dépassement de post_max_size
+    // Vérification du dépassement de poids des fichiers uploadés
     if (empty($_POST) && empty($_FILES) && isset($_SERVER['CONTENT_LENGTH']) && $_SERVER['CONTENT_LENGTH'] > 0) {
         $_SESSION['error_message'] = "Le poids total des fichiers dépasse la limite autorisée par le serveur.";
     }
 
-    // upload images (retourne null si pas de fichier ou erreur)
+    // upload images
     $new_banner = uploadImage(
         $_FILES['banniere'] ?? null,
         $_POST['title'] ?? '',
@@ -121,7 +121,7 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: index.php?route=admin&section=articles');
         exit;
     } else {
-        // En cas d'erreur, on prépare les données pour réafficher le formulaire
+        // Réaficher le formulaire remplis en cas d'erreur
         $article = [
             'id_article' => $id,
             'title' => $_POST['title'] ?? '',
@@ -138,7 +138,7 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Suppression
+// Suppression d'article
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
     $id = (int)$_GET['id'];
     $message = deleteArticle($id);

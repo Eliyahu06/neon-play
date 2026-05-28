@@ -6,6 +6,7 @@ require_once 'partials/head.php';
 ?>
 <body class="bg-black text-white">
     <?php require_once 'partials/header.php'; ?>
+        <!-- section hero article -->
     <header class="relative w-full h-[819px] flex items-center justify-center overflow-hidden">
         <img alt="Vue cinématographique d'une rue futuriste cyberpunk néon la nuit avec de la pluie reflétant des publicités holographiques bleues et roses"
                 class="w-full h-full object-cover opacity-60"
@@ -27,6 +28,7 @@ require_once 'partials/head.php';
             </div>
     </header>
     <main class="container mx-auto px-6 py-12">
+        <!-- contenu de l'article -->
     <section class="mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
             <aside class="lg:col-span-4 order-2 lg:order-1">
                 <div class="bg-secondary-black p-8 space-y-8 relative border-l-4 border-secondary">
@@ -81,7 +83,7 @@ require_once 'partials/head.php';
                 </div>
             </article>
         </section>
-
+            <!-- section commentaires -->
         <section class="bg-tertiary-black py-24">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="flex items-center justify-between mb-16">

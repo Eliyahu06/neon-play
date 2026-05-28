@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   removeMessages();
-//   BurgerMenu();
 //   BackToTop();
-//   ImagePreview();
 });
 
 function removeMessages() {

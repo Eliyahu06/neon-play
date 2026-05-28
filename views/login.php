@@ -13,6 +13,7 @@ require_once 'partials/head.php';
     unset($_SESSION['old_post']); 
 ?>
     <div class="w-full max-w-6xl mx-6">
+        <!-- message d'erreur ou de succès -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
                 <?= htmlspecialchars($_SESSION['error_message']) ?>
@@ -40,7 +41,7 @@ require_once 'partials/head.php';
                     </p>
                 </div>
             </div>
-            <!-- Right Side: Login Form -->
+            <!-- formulaire de connexion -->
             <div
                 class="p-8 md:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-r border-white/10 relative 
                 bg-secondary-black ">
@@ -50,7 +51,7 @@ require_once 'partials/head.php';
                     <div class="w-12 h-1 bg-primary mb-6"></div>
                 </div>
                 <form class="space-y-8" action="index.php?route=login" method="post">
-                    <!-- Email Field -->
+                    <!-- champs email -->
                     <div class="relative group">
                         <label
                             class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="email">Adresse email</label>
@@ -63,7 +64,7 @@ require_once 'partials/head.php';
                                 placeholder="example@neon.com" type="email" id="email" name="email" value="<?= htmlspecialchars($old['email'] ?? '') ?>" required/>
                         </div>
                     </div>
-                    <!-- Password Field -->
+                    <!-- champs mot de passe -->
                     <div class="relative group">
                         <label
                             class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="password">Mot

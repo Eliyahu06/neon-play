@@ -9,10 +9,8 @@ if (!isset($_SESSION['user'])) {
 
 $user = $_SESSION['user'];
 
-
+//Modification du profile par l'utilisateur
 if (isset($_POST['bUpdateProfile'])) {
-
-    
     $username = htmlspecialchars(trim($_POST['username'])) ?? $user['username'];
     $email = htmlspecialchars(strtolower(trim($_POST['email']))) ?? $user['email'];
     $answer = htmlspecialchars(strtolower(trim($_POST['answer']))) ?? $user['answer'];

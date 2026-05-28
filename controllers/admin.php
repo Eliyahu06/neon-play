@@ -5,7 +5,7 @@ $section = $_GET['section'] ?? 'articles';
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     die('accès refusé');
 }
-
+// routeur séparé pour les parties admin
 switch ($section) {
 
     case 'articles':

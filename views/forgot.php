@@ -8,6 +8,7 @@ require_once 'partials/head.php';
     <?php require_once 'partials/header.php'; ?>
    <main class="min-h-screen pt-20 flex flex-col items-center justify-center ">
      <div class="w-full max-w-6xl mx-6">
+        <!-- message d'erreur ou de succès -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
                 <?= htmlspecialchars($_SESSION['error_message']) ?>
@@ -33,7 +34,7 @@ require_once 'partials/head.php';
                     </p>
                 </div>
             </div>
-            <!-- Right Side: Login Form -->
+            <!-- formulaire de réinitialisation du mot de passe -->
             <div
                 class="p-8 md:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-r border-white/10 relative 
                 bg-secondary-black ">

@@ -2,6 +2,7 @@
 
 require_once 'config/database.php';
 
+// Récupère les derniers articles pour la page d'accueil
 function getLatestArticles($limit){
     global $pdo;
 
@@ -15,6 +16,7 @@ function getLatestArticles($limit){
     return $stmt->fetchAll();
 }
 
+// Récipère tout les articles
 function getAllArticles($limit, $offset, $sort, $search) {
     global $pdo;
 
@@ -70,6 +72,7 @@ function getAllArticles($limit, $offset, $sort, $search) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//Compte les articles pour la recherche
 function countArticles($search = '') {
     global $pdo;
 
@@ -79,6 +82,7 @@ function countArticles($search = '') {
     return $stmt->fetchColumn();
 }
 
+//Compte tous les articles 
 function countAllArticles() {
     global $pdo;
 
@@ -87,6 +91,7 @@ function countAllArticles() {
     return $stmt->fetchColumn();
 }
 
+//²Récupère un article par son ID
 function getArticleById($id) {
     global $pdo;
 
@@ -95,7 +100,7 @@ function getArticleById($id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
+//Récupère la note moyenne d'un article
 function getArticleNote($id_article) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT AVG(note) FROM comments WHERE id_article = :id_article");
@@ -104,7 +109,7 @@ function getArticleNote($id_article) {
     $note = $stmt->fetchColumn();
     return $note !== null ? round((float)$note, 2) : 0.0;
 }
-
+//Création d'article
 function createArticle($title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img, $id_author) {
     global $pdo;
     $stmt = $pdo->prepare("INSERT INTO articles (title, intro, description, critic, note, opinion, banner_img, card_img, id_author) VALUES (:title, :intro, :description, :critic, :note, :opinion, :banner_img, :card_img, :id_author)");
@@ -120,7 +125,7 @@ function createArticle($title, $intro, $description, $critic, $note, $opinion, $
     $stmt->execute();
     return "Article créé avec succès";
 }
-
+//Modification d'article
 function updateArticle($id, $title, $intro, $description, $critic, $note, $opinion, $banner_img, $card_img) {
     global $pdo;
     $stmt = $pdo->prepare("UPDATE articles SET title = :title, intro = :intro, description = :description, critic = :critic, note = :note, opinion = :opinion, banner_img = :banner_img, card_img = :card_img WHERE id_article = :id");
@@ -136,7 +141,7 @@ function updateArticle($id, $title, $intro, $description, $critic, $note, $opini
     $stmt->execute();
     return "Article modifié avec succès";
 }
-
+//Suppression d'article
 function deleteArticle($id) {
     global $pdo;
     $stmt = $pdo->prepare("DELETE FROM articles WHERE id_article = :id");
@@ -144,7 +149,7 @@ function deleteArticle($id) {
     $stmt->execute();
     return "Article supprimé avec succès";
 }
-
+//Fonction d'upload d'image pour les articles
 function uploadImage($file, $articleTitle, $type) {
 
     if (empty($file['name'])) {
@@ -173,7 +178,7 @@ function uploadImage($file, $articleTitle, $type) {
 
     return null;
 }
-
+// Fonction pour créer un slug à partir du titre de l'article pour les noms d'images
 function slugify($text) {
 
     $text = strtolower($text);

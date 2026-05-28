@@ -7,6 +7,7 @@ require_once __DIR__ . '/../partials/head.php';?>
     <?php require_once 'partials/header.php'; ?>
     <main class="md:ml-64 mt-16 p-8 md:pt-8 pt-8 min-h-screen bg-white">
         <div>
+            <!-- Messages d'erreur et de succès -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
                 <?= htmlspecialchars($_SESSION['error_message']) ?>

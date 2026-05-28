@@ -7,6 +7,7 @@ require_once __DIR__ . '/../partials/head.php';?>
     <?php require_once 'partials/header.php'; ?>
     <main class="md:ml-64 md:mt-16 mt-12 p-8 md:pt-8 pt-8 min-h-screen bg-white">
         <div>
+            <!-- message d'erreur et de succès -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
                 <?= htmlspecialchars($_SESSION['error_message']) ?>
@@ -21,7 +22,7 @@ require_once __DIR__ . '/../partials/head.php';?>
             <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
     </div>
-        <!-- Header liste des commentaires -->
+        <!-- en-tête liste des commentaires -->
         <div class="flex justify-between items-end mb-12">
             <div>
                 <h1 class="text-4xl font-headline font-bold uppercase mb-2">

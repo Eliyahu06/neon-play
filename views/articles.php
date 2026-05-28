@@ -14,7 +14,7 @@ require_once 'partials/head.php';
         <div class="flex flex-col xl:flex-row justify-between gap-8 mb-16 border-y border-white/5 py-8">
 
     <div class="w-full xl:w-auto flex items-center gap-4 border-l border-white/10 pl-6 min-w-0">
-
+        <!-- Tri et filtres -->
         <span class="font-headline text-[10px] tracking-widest text-on-surface-variant uppercase whitespace-nowrap">
             Trier par :
         </span>
@@ -97,6 +97,7 @@ require_once 'partials/head.php';
         <?php if ($noResults): ?>
         <p>Aucun résultat trouvé.</p>
     <?php endif; ?>
+    <!-- Boucle d'affichage des articles -->
     <?php foreach ($articles as $article): ?>
         <article class="article-card group bg-tertiary-black">
                 <div class="h-64 overflow-hidden relative">
@@ -124,9 +125,8 @@ require_once 'partials/head.php';
             </article>
     <?php endforeach; ?>
     </div>
-
+    <!-- pagination -->
     <div class="pagination mt-12 flex justify-center items-center gap-4">
-    <!-- Chevron précédent -->
     <?php if ($page > 1): ?>
         <a href="index.php?route=articles&page=<?= $page - 1 ?>&sort=<?= $_GET['sort'] ?? '' ?>&search=<?= urlencode($_GET['search'] ?? '') ?>"
            class="text-white hover:text-primary material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">
@@ -134,7 +134,6 @@ require_once 'partials/head.php';
         </a>
     <?php endif; ?>
 
-    <!-- Numéros -->
     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
         <?php if ($i == $page): ?>
             <span class="font-bold text-primary px-2">
@@ -147,7 +146,6 @@ require_once 'partials/head.php';
             </a>
         <?php endif; ?>
     <?php endfor; ?>
-    <!-- Chevron suivant -->
     <?php if ($page < $totalPages): ?>
         <a href="index.php?route=articles&page=<?= $page + 1 ?>&sort=<?= $_GET['sort'] ?? '' ?>&search=<?= urlencode($_GET['search'] ?? '') ?>"
            class="text-white hover:text-primary material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">

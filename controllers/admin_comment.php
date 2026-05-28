@@ -5,7 +5,7 @@ require_once 'models/article.php';
 require_once 'models/user.php';
 
 $action = $_GET['action'] ?? 'list';
-
+// Liste des commentaires
 if ($action === 'list') {
     $page = $_GET['page'] ?? 1;
     $limit = 8;
@@ -22,7 +22,7 @@ if ($action === 'list') {
     require 'views/admin/comments_list.php';
     exit;
 }
-
+// Suppression de commentaire
 if ($action === 'delete') {
     $id = (int)$_GET['id'];
     $message = deleteComment($id);

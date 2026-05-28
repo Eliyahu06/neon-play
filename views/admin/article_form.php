@@ -10,7 +10,7 @@ require_once __DIR__ . '/../partials/head.php';?>
     <main class="md:ml-64 md:mt-16 mt-12 p-8 md:pt-8 pt-8 min-h-screen bg-white">
 
 
-
+    <!-- message d'erreur et de succès -->
     <div>
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
@@ -35,6 +35,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     <?= htmlspecialchars($article['title'] ?? 'Nouvel article') ?>
                 </h1>
             </div>
+            <!-- Formulaire de création/modification d'article -->
             <form class="grid grid-cols-12 gap-12" action="?route=admin&section=article&action=update" method="POST"
                 enctype="multipart/form-data">
                 <?php if (isset($article['id_article'])): ?>
@@ -103,7 +104,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </div>
                     <div class="space-y-6 pt-8">
 
-                        <!-- BANNIERE -->
+                        <!-- Bannière -->
                         <div class="group/banner">
                             <label
                                 class="block text-dark-primary font-headline text-lg uppercase mb-4 group-focus-within/banner:text-secondary transition-all">
@@ -137,7 +138,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                             >
                         </div>
 
-                        <!-- MINIATURE -->
+                        <!-- Miniature -->
                         <div class="group/miniature">
                             <label
                                 class="block text-dark-primary font-headline text-lg uppercase mb-4 group-focus-within/miniature:text-secondary transition-all">
@@ -172,7 +173,8 @@ require_once __DIR__ . '/../partials/head.php';?>
                         </div>
                     </div>
                 </div>
-                <div class="col-span-12 pt-12 border-t border-primary/10">
+    <!-- Boutons d'action -->
+    <div class="col-span-12 pt-12 border-t border-primary/10">
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -239,7 +241,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                 <?php if ($numberComments > 0): ?>
 
                     <div class="space-y-6 bg-black p-8">
-
+                        <!-- Boucle sur les commentaires de l'article -->
                         <?php foreach ($comments as $comment): ?>
 
                         <article class="bg-secondary-black p-8 group text-white relative overflow-hidden group">

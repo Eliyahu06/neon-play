@@ -26,7 +26,7 @@ if ($action === 'list') {
     exit;
 }
 
-// Formulaire (Modification)
+// Affichage du formulaire de modification
 if ($action === 'form') {
 
     $user = null;
@@ -45,7 +45,7 @@ if ($action === 'form') {
     exit;
 }
 
-// Sauvegarde (Modification)
+// Sauvegarde des modifications
 if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $id = !empty($_POST['id_user']) ? $_POST['id_user'] : null;
@@ -89,7 +89,7 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
     } else {
-        // En cas d'erreur, on prépare les données pour réafficher le formulaire
+        // Réafficher le formulaire remplis en cas d'erreur
         $existingUser = getUserById($id);
         $user = [
             'id_user' => $id,
@@ -107,7 +107,7 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Suppression
+// Suppression d'utilisateur
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
     $id = (int)$_GET['id'];
     $message = deleteUser($id);

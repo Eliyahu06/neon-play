@@ -1,6 +1,6 @@
 <?php
 require_once 'config/database.php';
-
+// Vérifie la sécurité du mot de passe
 function isPasswordSecure($password) {
     if (strlen($password) < 8) {
         return false;
@@ -19,7 +19,7 @@ function isPasswordSecure($password) {
     }
     return true;
 }
-
+// Inscription d'un utilisateur
 function registerUser($username, $email, $password, $password_confirm, $answer) {
     global $pdo;
 
@@ -58,7 +58,7 @@ function registerUser($username, $email, $password, $password_confirm, $answer) 
     }
     return "Inscription reussie";
 }
-
+// Connexion d'un utilisateur
 function loginUser($email, $password) {
     global $pdo;
 
@@ -83,7 +83,7 @@ function loginUser($email, $password) {
         return "Email ou mot de passe incorrect";
     }
 }  
-
+// Réinitialisation du mot de passe
 function forgotPassword($email, $answer, $password, $password_confirm){
     global $pdo;
 
@@ -114,7 +114,7 @@ function forgotPassword($email, $answer, $password, $password_confirm){
 
     return true;
 } 
-
+// Récupère un utilisateur par son ID
 function getUserById($id) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id_user = :id");
@@ -122,7 +122,7 @@ function getUserById($id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
+// Modifie un utilisateur
 function updateUser($id, $username, $email, $answer, $role, $password = '') {
     global $pdo;
     if (empty($username) || empty($email) || empty($answer)) {
@@ -167,7 +167,7 @@ function updateUser($id, $username, $email, $answer, $role, $password = '') {
     $stmt->execute();
     return "Utilisateur mis à jour avec succès";
 }
-
+// Supprime un utilisateur
 function deleteUser($id) {
     global $pdo;
     // Supprimer les commentaires liés
@@ -180,7 +180,7 @@ function deleteUser($id) {
     $stmt->execute();
     return "Utilisateur supprimé avec succès";
 }
-
+// Récupère tous les utilisateurs
 function getAllUsers($limit, $offset, $sort, $search) {
     global $pdo;
 
@@ -220,7 +220,7 @@ function getAllUsers($limit, $offset, $sort, $search) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+// Compte le nombre d'utilisateurs pour la recherche
 function countUsers($search) {
     global $pdo;
     $sql = "SELECT COUNT(*) FROM users";
@@ -240,7 +240,7 @@ function countUsers($search) {
     $stmt->execute();
     return $stmt->fetchColumn();
 }
-
+// Vérifie si un nom d'utilisateur est déjà pris
 function isUsernameTaken($username) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT id_user FROM users WHERE username = :username");
@@ -248,7 +248,7 @@ function isUsernameTaken($username) {
     $stmt->execute();
     return $stmt->fetch() ? true : false;
 }
-
+// Vérifie si un email est déjà pris
 function isEmailTaken($email){
     global $pdo;
     $stmt = $pdo->prepare("SELECT id_user FROM users WHERE email = :email");

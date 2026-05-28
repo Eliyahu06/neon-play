@@ -10,6 +10,7 @@ require_once 'partials/head.php';
     <main class="min-h-screen pt-20 flex flex-col items-center justify-center ">
 
     <div class="w-full max-w-6xl mx-6">
+        <!-- message d'erreur ou de succès -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
                 <?= htmlspecialchars($_SESSION['error_message']) ?>
@@ -26,7 +27,6 @@ require_once 'partials/head.php';
     </div>
 
     <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-0 relative z-10 mx-6 my-12">
-        <!-- Left Side: Profile Intro -->
         <div class="lg:flex flex-col justify-center p-12 bg-tertiary-black border-l-4 border-secondary">
             <div class="mb-8">
                 <h1 class="font-headline text-3xl md:text-6xl font-black text-white uppercase mb-6">
@@ -38,14 +38,14 @@ require_once 'partials/head.php';
             </div>
         </div>
         
-        <!-- Right Side: Edit Form -->
+        <!-- Formulaire de modification de profile -->
         <div class="p-8 md:p-16 flex flex-col justify-center border-t lg:border-t-0 lg:border-r border-white/10 relative bg-secondary-black ">
             <div class="mb-10">
                 <h2 class="font-body text-3xl font-bold text-white uppercase tracking-tight mb-2">Détails du compte</h2>
                 <div class="w-12 h-1 bg-primary mb-6"></div>
             </div>
             <form class="space-y-8" action="index.php?route=profile" method="post">
-                <!-- Username Field -->
+                <!-- Champs pseudo -->
                 <div class="relative group">
                     <label class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="username">Nom d'utilisateur</label>
                     <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">
@@ -55,7 +55,7 @@ require_once 'partials/head.php';
                     <span id="username-error" class="text-xs font-bold mt-3 mb-3 block hidden"></span>
                 </div>
                 
-                <!-- Email Field -->
+                <!-- Champs email-->
                 <div class="relative group">
                     <label class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="email">Adresse email</label>
                     <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">
@@ -65,7 +65,7 @@ require_once 'partials/head.php';
                     <span id="email-error" class="text-xs font-bold text-error-text mt-3 mb-3 block hidden">L'adresse email n'est pas valide.</span>
                 </div>
 
-                <!-- Answer Field -->
+                <!-- Champs réponse de sécurité -->
                 <div class="relative group">
                     <label class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="answer">Quel est le nom de votre premier animal de compagnie ?</label>
                     <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">
@@ -74,7 +74,7 @@ require_once 'partials/head.php';
                     </div>
                 </div>
                 
-                <!-- Password Field -->
+                <!-- Champs mot de passe -->
                 <div class="relative group">
                     <label class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="password">Nouveau mot de passe</label>
                     <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">
@@ -87,7 +87,7 @@ require_once 'partials/head.php';
                     <span id="password-error" class="text-xs font-bold text-error-text mt-3 mb-3 block hidden">Le mot de passe doit faire au moins 8 caractères de long et contenir au moins une minuscule, majuscule, un chiffre et un caractère spécial</span>
                 </div>
 
-                <!-- Password Confirm Field -->
+                <!-- Champs confirmation mot de passe -->
                 <div class="relative group">
                     <label class="block font-body text-[10px] uppercase tracking-widest text-tertiary-white group-focus-within:text-primary transition-colors mb-2" for="password_confirm">Confirmer le nouveau mot de passe</label>
                     <div class="flex items-center border-b border-outline-variant group-focus-within:border-primary transition-all duration-300">

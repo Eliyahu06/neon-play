@@ -1,7 +1,7 @@
 <?php
 
 require_once 'models/user.php';
-
+// Inscription
 if (isset($_POST['bRegister'])) {
     $username = trim($_POST['username'] ?? '');
     $email = strtolower(trim($_POST['email'] ?? ''));
@@ -22,6 +22,7 @@ if (isset($_POST['bRegister'])) {
         exit();
     }
 }
+// Connexion
 if (isset($_POST['bLogin'])) {
     $email = strtolower(trim($_POST['email'] ?? ''));
     $password = trim($_POST['password'] ?? '');
@@ -37,6 +38,7 @@ if (isset($_POST['bLogin'])) {
         exit();
     }
 }
+// Réinitialisation de mot de passe
 if (isset($_POST['bReset'])) {
     $email = strtolower(trim($_POST['email']));
     $answer = strtolower(trim($_POST['answer']));
@@ -56,6 +58,7 @@ if (isset($_POST['bReset'])) {
     }
 }
 
+//ajout des views
 if ($route == 'register') {
     require_once 'views/register.php';
 } elseif ($route == 'login') {

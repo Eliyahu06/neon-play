@@ -1,6 +1,6 @@
 <?php $section = $_GET['section'] ?? 'articles'; ?>
 
-<!-- TOP BAR (mobile) -->
+<!-- Top bar mobile -->
 <div class="md:hidden fixed top-0 left-0 right-0 h-20 bg-black border-b border-tertiary-white/10 z-50 flex items-center px-6">
     <button id="sidebar-menu-btn" class="text-primary text-2xl focus:outline-none" aria-label="Toggle sidebar">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<!-- SIDEBAR (desktop: fixed, mobile: hidden by default) -->
+<!-- Sidebar destop -->
 <aside id="admin-sidebar" class="hidden md:flex fixed left-0 top-0 h-full flex-col py-8 w-64 bg-black border-r border-tertiary-white/10 z-50 font-headline md:w-64 w-full md:pt-8 pt-24">
         <div class="px-6 mb-12 text-white hidden md:block">
             <div class="text-xl font-bold text-primary uppercase mb-1">NEON PLAY</div>
@@ -26,13 +26,13 @@
                 <span class="material-symbols-outlined">article</span>
                 <span class="text-sm font-medium uppercase tracking-widest">Articles</span>
             </a>
-            <!-- Users -->
+            <!-- Utilisateurs -->
             <a class="flex items-center gap-4 px-6 py-4 hover:text-primary hover:bg-tertiary-black transition-all duration-300 <?= $section === 'users' ? 'text-primary bg-tertiary-black' : 'text-tertiary-white' ?>"
                 href="?route=admin&section=users">
                 <span class="material-symbols-outlined">group</span>
                 <span class="text-sm font-medium uppercase tracking-widest">Utilisateurs</span>
             </a>
-            <!-- Comments -->
+            <!-- Commentaires -->
             <a class="flex items-center gap-4 px-6 py-4 hover:text-primary hover:bg-tertiary-black transition-all duration-300 <?= $section === 'comments' ? 'text-primary bg-tertiary-black' : 'text-tertiary-white' ?>"
                 href="?route=admin&section=comments">
                 <span class="material-symbols-outlined">comment</span>
@@ -48,11 +48,11 @@
         </div>
     </aside>
 
-<!-- Mobile overlay (backdrop) -->
+<!-- Overlay pour quitter le menu en mobile -->
 <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-30 md:hidden" style="top: 80px;"></div>
 
 <script>
-    // Mobile sidebar toggle
+    // ouverture et fermeture du menu mobile
     const sidebarBtn = document.getElementById('sidebar-menu-btn');
     const adminSidebar = document.getElementById('admin-sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
@@ -63,13 +63,13 @@
             sidebarOverlay.classList.toggle('hidden');
         });
 
-        // Close sidebar when clicking on overlay
+        // ferme la sidebar quand on clique en dehors
         sidebarOverlay.addEventListener('click', () => {
             adminSidebar.classList.add('hidden');
             sidebarOverlay.classList.add('hidden');
         });
 
-        // Close sidebar when clicking on a link
+        // ferme la sidebar quand on clique sur un lien
         adminSidebar.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 adminSidebar.classList.add('hidden');

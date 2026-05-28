@@ -12,11 +12,8 @@ require_once 'partials/head.php';
                 data-alt="Cinematic wide shot of a futuristic cyberpunk mega-city at night with heavy rain, glowing neon signs in cyan and magenta, and dark metallic skyscrapers."
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9y9VwFBWAv8uz58KZMCt1Mp2Tqvd33A0WIT_yYHfCMXPSjr83DH75MwyiSlFVGdVQ5yUdNF7lYhr0H9b16va6OwzMeI3nWerWMDBLeWteluwyP7EpuL7CoOZQA_umFomwpjM_DkXXtYW-QGlPz5-0Obsqq5hSrpAwKgw_4Bczy7Yy9KgwUly8_I758Jm6YH-ZInZ0xPbd6Zn_vAYRaZxAIjRFAtPDJczl9kFPaITwJX4T4VxxS9sIBG7I0kbCZ2pkZNcR82en8Ao_" />
         </div>
+        <!-- section hero -->
         <div class="relative z-10 text-center px-4">
-            <span
-                class="font-label text-secondary uppercase text-xl font-bold mb-4 inline-block animate-pulse px-8 py-3 bg-primary/20 border border-primary/50">
-                Explore le gaming
-            </span>
             <h1
                 class="font-headline text-7xl md:text-9xl font-extrabold text-white uppercase">
                 Neon Play
@@ -29,9 +26,7 @@ require_once 'partials/head.php';
         </div>
     </header>
     <main class="container mx-auto px-6 py-24">
-        
-    <h1>Bienvenue sur Neon Play</h1>
-    
+    <!-- message d'erreur ou de succès -->
     <?php if (isset($_SESSION['error_message'])): ?>
         <div class="message error text-error-text bg-error-container">
             <?= htmlspecialchars($_SESSION['error_message']) ?>
@@ -49,7 +44,7 @@ require_once 'partials/head.php';
 
     <h2 class="font-headline text-4xl font-bold uppercase mb-16">Dernières actualités</h2>
     <div class="articles-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
+        <!-- boucle d'affichage des articles -->
         <?php foreach ($latestArticles as $article): ?>
             <article class="article-card group bg-tertiary-black">
                 <div class="h-64 overflow-hidden relative">

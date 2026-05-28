@@ -1,7 +1,7 @@
 <?php
 
 require_once 'config/database.php';
-
+// Récupère les commentaires d'un article
 function getCommentsByArticle($id) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT c.*, u.username FROM comments c JOIN users u ON c.id_user = u.id_user WHERE c.id_article = :id ORDER BY c.date_add DESC");
@@ -9,7 +9,7 @@ function getCommentsByArticle($id) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+// Compte le nombre de commentaires d'un article
 function countCommentsByArticle($id) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE id_article = :id");
@@ -17,7 +17,7 @@ function countCommentsByArticle($id) {
     $stmt->execute();
     return $stmt->fetchColumn();
 }
-
+// Ajoute un commentaire à un article
 function addComment($id_article, $id_user, $comment, $note) {
     global $pdo;
     $stmt = $pdo->prepare("INSERT INTO comments (id_article, id_user, content, note) VALUES (:id_article, :id_user, :content, :note)");
@@ -28,7 +28,7 @@ function addComment($id_article, $id_user, $comment, $note) {
     $stmt->execute();
     return "Commentaire ajouté avec succès";
 }
-
+// Vérifie si un utilisateur a déjà commenté un article
 function hasUserCommented($id_article, $id_user) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE id_article = :id_article AND id_user = :id_user");
@@ -42,7 +42,7 @@ function hasUserCommented($id_article, $id_user) {
         return false;
     }
 }
-
+// Modifie un commentaire
 function editComment($id, $comment, $note) {
     global $pdo;
     $stmt = $pdo->prepare("UPDATE comments SET content = :content, note = :note WHERE id_comment = :id");
@@ -52,7 +52,7 @@ function editComment($id, $comment, $note) {
     $stmt->execute();
     return "Commentaire modifié avec succès";
 }
-
+// Supprime un commentaire
 function deleteComment($id) {
     global $pdo;
     $stmt = $pdo->prepare("DELETE FROM comments WHERE id_comment = :id");
@@ -60,7 +60,7 @@ function deleteComment($id) {
     $stmt->execute();
     return "Commentaire supprimé avec succès";
 }
-
+// Récupère un commentaire par son ID
 function getAllComments($limit, $offset, $sort, $search) {
     global $pdo;
 
@@ -106,7 +106,7 @@ function getAllComments($limit, $offset, $sort, $search) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+// Compte le nombre de commentaires pour la recherche
 function countComments($search = '') {
     global $pdo;
     $sql = "SELECT COUNT(*) FROM comments c JOIN users u ON c.id_user = u.id_user JOIN articles a ON c.id_article = a.id_article";
@@ -127,8 +127,7 @@ function countComments($search = '') {
     return $stmt->fetchColumn();
 }
 
-
-
+// Récupère les commentaires d'un utilisateur
 function getCommentsByUserId($id_user) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT c.*, a.title FROM comments c JOIN articles a ON c.id_article = a.id_article WHERE c.id_user = :id_user ORDER BY c.date_add DESC");
@@ -136,7 +135,7 @@ function getCommentsByUserId($id_user) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+// Compte le nombre de commentaires d'un utilisateur
 function countCommentsByUserId($id_user) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE id_user = :id_user");

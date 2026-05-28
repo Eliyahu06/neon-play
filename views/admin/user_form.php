@@ -8,6 +8,7 @@ require_once __DIR__ . '/../partials/head.php';?>
     <?php require_once 'partials/header.php'; ?>
    <main class="md:ml-64 mt-16 p-8 md:pt-8 pt-8 min-h-screen bg-white">
     <div>
+        <!-- message d'erreur et de succès -->
         <?php if (isset($_SESSION['error_message'])): ?>
             <div class="message error text-error-text bg-error-container px-4 py-2 my-4 font-bold border-l-4 border-error">
                 <?= htmlspecialchars($_SESSION['error_message']) ?>
@@ -28,6 +29,7 @@ require_once __DIR__ . '/../partials/head.php';?>
             </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div class="lg:col-span-2 space-y-8">
+                <!-- Formulaire de modification de l'utilisateur -->
                     <form class="flex gap-10 flex-col" action="?route=admin&section=users&action=update" method="POST">
                         <input type="hidden" name="id_user" value="<?= htmlspecialchars($user['id_user'] ?? '') ?>">
                         <div class="group relative mt-0">
@@ -99,6 +101,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </form>
                 
             </div>
+            <!-- Section commentaires -->
             <div class="space-y-6">
                 <div class="bg-light-gray p-8 border-l-4 border-primary">
                     <span
@@ -127,7 +130,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                 </div>
             </div>
         </div>
-        <!-- User Comments List -->
+        <!-- liste des commentaires -->
         <section class="mt-24">
                 
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 pb-6">
@@ -144,7 +147,7 @@ require_once __DIR__ . '/../partials/head.php';?>
 
                 <?php if ($numberComments > 0): ?>
                     <div class="space-y-6 bg-black p-8">
-
+                        <!-- boucle sur les commentaires de l'utilisateur -->
                         <?php foreach ($comments as $comment): ?>
 
                         <article class="bg-secondary-black p-8 group text-white relative overflow-hidden group">

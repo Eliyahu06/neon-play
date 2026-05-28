@@ -124,7 +124,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                     </div>
                 </div>
                 <div class="flex justify-start">
-                    <a class="bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center" href="?route=admin&section=users&action=delete&id=<?= htmlspecialchars($user['id_user']) ?>">
+                    <a class="bg-error-container text-white px-8 py-4 font-headline font-bold uppercase hover:shadow-[0_0_20px_rgba(255,113,108,0.4)] transition-all text-center" href="?route=admin&section=users&action=delete&id=<?= htmlspecialchars($user['id_user']) ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">
                         Supprimer l'utilisateur
                     </a>
                 </div>

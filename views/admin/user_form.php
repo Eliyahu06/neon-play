@@ -118,7 +118,7 @@ require_once __DIR__ . '/../partials/head.php';?>
                             </p>
                         </div>
                         <div>
-                            <p class="text-secondary-black text-lg mb-1 font-medium">Date création du comte : </p>
+                            <p class="text-secondary-black text-lg mb-1 font-medium">Date création du compte : </p>
                             <p class="text-xl font-headline font-bold text-secondary uppercase tracking-widest"><?= date('d/m/Y H:i', strtotime($user['date_subscription'])) ?></p>
                         </div>
                     </div>

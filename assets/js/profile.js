@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const initialUsername = usernameInput ? usernameInput.value.trim() : '';
     const initialEmail = emailInput ? emailInput.value.trim() : '';
 
-    let isUsernameAvailable = true; // Initially true since it's the current username
+    let isUsernameAvailable = true; // vrai au cxxhargement, on suppose que le nom d'utilisateur actuel est valide
     let usernameTimeout = null;
 
     function checkUsername() {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // If the user entered their original username, it's always available
+        // Si l'utilisateur n'a pas changé son nom d'utilisateur, on considère qu'il est disponible sans faire de requête
         if (username === initialUsername) {
             usernameError.textContent = '';
             usernameError.classList.add('hidden');
@@ -83,10 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let isPasswordValid = true;
         let isConfirmMatching = true;
 
-        // Email validation
         toggleError(emailError, email.length > 0 && !isEmailValid);
 
-        // Password validation (optional on profile page, only validated if not empty)
+        // Validation du mot de passe uniquement si l'utilisateur a saisi quelque chose (pour permettre de laisser le mot de passe vide s'il ne veut pas le changer)
         if (pwd.length > 0) {
             isPasswordValid = checkPasswordSecure(pwd);
             isConfirmMatching = pwd === confirm;
@@ -109,10 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmInput.addEventListener('input', validateForm);
         answerInput.addEventListener('input', validateForm);
 
-        // Run initial validation
         validateForm();
     }
 
-    // Initialize password visibility togglers
     initPasswordToggles();
 });

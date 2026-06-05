@@ -1,11 +1,6 @@
-/**
- * Reusable Validation Utilities for Neon Play
- */
-
-// Toggle password visibility helper
+// Voir le mot de passe
 function initPasswordToggles() {
     document.querySelectorAll('.toggle-password').forEach(button => {
-        // Prevent duplicate listener attachments if loaded multiple times
         if (button.dataset.initialized) return;
         button.dataset.initialized = 'true';
         
@@ -26,7 +21,7 @@ function initPasswordToggles() {
     });
 }
 
-// Check if a password is secure (8+ chars, lower, upper, digit, special)
+//vérifier la sécurité du mot de passe
 function checkPasswordSecure(pwd) {
     if (pwd.length < 8) return false;
     if (!/[a-z]/.test(pwd)) return false;
@@ -36,12 +31,12 @@ function checkPasswordSecure(pwd) {
     return true;
 }
 
-// Check if email format is valid
+// Vérifier si le format de l'email est valide
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
-// Helper to show/hide validation message elements
+// Montre ou cache un message d'erreur
 function toggleError(element, show) {
     if (!element) return;
     if (show) {
